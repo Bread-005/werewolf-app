@@ -1,0 +1,26 @@
+[
+  {
+    "id": "werewolf1",
+    "name": "Werewolf"
+  },
+  {
+    "id": "werewolf2",
+    "name": "Werewolf"
+  },
+  {
+    "id": "seer",
+    "name": "Seer"
+  },
+  {
+    "id": "villager1",
+    "name": "Villager"
+  },
+  {
+    "id": "villager2",
+    "name": "Villager"
+  },
+  {
+    "id": "villager3",
+    "name": "Villager"
+  }
+]

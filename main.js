@@ -1,34 +1,9 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
     // alle Werewolf Cards: https://boardgamegeek.com/thread/2111933/all-roles-tile-images
 
     const roleGrid = document.querySelector(".roles-grid");
-    const roles = [
-        {
-            "id": "werewolf1",
-            "name": "Werewolf"
-        },
-        {
-            "id": "werewolf2",
-            "name": "Werewolf"
-        },
-        {
-            "id": "seer",
-            "name": "Seer"
-        },
-        {
-            "id": "villager1",
-            "name": "Villager"
-        },
-        {
-            "id": "villager2",
-            "name": "Villager"
-        },
-        {
-            "id": "villager3",
-            "name": "Villager"
-        }
-    ]
+    const roles = await fetch("./roles.json").then(res => res.json());
     let activatedRoles = [];
 
     for (const role of roles) {
@@ -42,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         roleGrid.append(div);
 
         div.addEventListener("click", () => {
-            console.log(div.style.border);
             if (!div.style.border || div.style.border === "none") {
                 div.style.border = "white 5px solid";
                 activatedRoles.push(role);
@@ -50,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 div.style.border = "none";
                 activatedRoles = activatedRoles.filter(role1 => role1 !== role);
             }
-            console.log(activatedRoles);
         });
     }
 });

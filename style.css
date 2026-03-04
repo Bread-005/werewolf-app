@@ -88,7 +88,7 @@ body {
             }
         }
 
-        .timer-button {
+        .start-button {
             padding: 20px 80px;
             border-radius: 40px;
             border: 3px solid rgba(255,255,255,0.9);
@@ -101,7 +101,7 @@ body {
             transition: all 0.15s ease;
         }
 
-        .timer-button:hover {
+        .start-button:hover {
             transform: scale(1.05);
             background: rgba(255,255,255,0.2);
         }
