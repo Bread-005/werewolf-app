@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         gameIsRunning = true;
         let nightOrderRoles = Object.values(Object.fromEntries(activatedRoles.map(role => [role.name, role])));
         nightOrderRoles = nightOrderRoles.filter(role => role.nightOrder);
-        nightOrderRoles.push({name: "Villager", text: "Schließt nun alle eure Augen", nightOrder: 0.01});
+        nightOrderRoles.push({name: "Villager", text: "Schließt nun alle eure Augen.", nightOrder: 0.01});
         nightOrderRoles.sort((a, b) => a.nightOrder - b.nightOrder);
-        nightOrderRoles.push({name: "Villager", text: "Wacht nun alle auf", nightOrder: 100});
+        nightOrderRoles.push({name: "Villager", text: "Wacht nun alle auf.", nightOrder: 100});
 
         roleGrid.style.display = "none";
         document.querySelector(".bottom-bar").style.display = "none";
@@ -46,19 +46,28 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.querySelector(".image").src = "./images/" + role.name.toLowerCase() + ".png";
             const nightPhaseText = document.getElementById("night-phase-text");
             nightPhaseText.textContent = role.text;
-            speak(role);
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            for (let i = 5; i > 0; i--) {
+            await speak(role.text);
+            if (role.name === "Villager") continue;
+            for (let i = 5; i >= 0; i--) {
                 if (!gameIsRunning) return;
-                nightPhaseText.textContent = "(Pause: 5 Sekunden) \n 00:" + (i < 10 ? "0" : "") + i.toString();
+                nightPhaseText.textContent = "(Pause: 5 Sekunden)";
+                const div = document.createElement("div");
+                div.textContent = "00:" + (i < 10 ? "0" : "") + i.toString();
+                nightPhaseText.append(div);
                 await new Promise(resolve => setTimeout(resolve, 1000));
+                nightPhaseText.removeChild(div);
             }
+            nightPhaseText.textContent = role.endingText;
+            await speak(role.endingText);
         }
     });
 
-    function speak(role) {
-        // speak logic for role with AI voice
-        console.log("speaking ..." + role.name + ": " + role.text);
+    async function speak(text) {
+        return new Promise(resolve => {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.onend = resolve;
+            speechSynthesis.speak(utterance);
+        });
     }
 
     document.getElementById("pause-button").addEventListener("click", () => {

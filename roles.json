@@ -3,19 +3,22 @@
     "id": "werewolf1",
     "name": "Werewolf",
     "nightOrder": 2,
-    "text": "Seht euch nach anderen Werwölfen um. Du siehst keinen anderen Werwolf, dann sehe dir eine Karte aus der Mitte an."
+    "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um. Du siehst keinen anderen Werwolf, dann sehe dir eine Karte aus der Mitte an.",
+    "endingText": "Werwölfe schließt eure Augen."
   },
   {
     "id": "werewolf2",
     "name": "Werewolf",
     "nightOrder": 2,
-    "text": "Seht euch nach anderen Werwölfen um. Du siehst keinen anderen Werwolf, dann sehe dir eine Karte aus der Mitte an."
+    "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um. Du siehst keinen anderen Werwolf, dann sehe dir eine Karte aus der Mitte an.",
+    "endingText": "Werwölfe schließt eure Augen."
   },
   {
     "id": "seer",
     "name": "Seer",
     "nightOrder": 5,
-    "text": "Sehe dir eine Karte eines Spielers an oder zwei Karten aus der Mitte."
+    "text": "Seher wach auf. Sehe dir eine Karte eines Spielers an oder zwei Karten aus der Mitte.",
+    "endingText": "Seher schließ deine Augen."
   },
   {
     "id": "villager1",
