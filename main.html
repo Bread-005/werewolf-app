@@ -13,24 +13,25 @@
 <div class="app">
     <div class="roles-grid"></div>
 
-    <!-- Bottom Bar -->
     <div class="bottom-bar">
-
         <div class="timer-box">
             <div class="timer-label">Timer (Spiel)</div>
             <div class="timer-time">05:00</div>
         </div>
-
-        <button class="start-button">
-            Start
-        </button>
-
-        <button class="settings-button">
-            ⚙️
-        </button>
-
+        <button class="start-button">Start</button>
+        <button class="settings-button">⚙️</button>
     </div>
 
+    <div class="night-phase">
+        <div class="night-content">
+            <img class="image" alt="role image" src="./images/villager.png">
+            <div id="night-phase-text"></div>
+        </div>
+        <div class="buttons">
+            <button id="pause-button">Pause</button>
+            <button id="stop-button">Stop</button>
+        </div>
+    </div>
 </div>
 
 <script src="main.js" type="module" defer></script>

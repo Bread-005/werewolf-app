@@ -1,15 +1,21 @@
 [
   {
     "id": "werewolf1",
-    "name": "Werewolf"
+    "name": "Werewolf",
+    "nightOrder": 2,
+    "text": "Seht euch nach anderen Werwölfen um. Du siehst keinen anderen Werwolf, dann sehe dir eine Karte aus der Mitte an."
   },
   {
     "id": "werewolf2",
-    "name": "Werewolf"
+    "name": "Werewolf",
+    "nightOrder": 2,
+    "text": "Seht euch nach anderen Werwölfen um. Du siehst keinen anderen Werwolf, dann sehe dir eine Karte aus der Mitte an."
   },
   {
     "id": "seer",
-    "name": "Seer"
+    "name": "Seer",
+    "nightOrder": 5,
+    "text": "Sehe dir eine Karte eines Spielers an oder zwei Karten aus der Mitte."
   },
   {
     "id": "villager1",
