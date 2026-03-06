@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // alle Werewolf Cards: https://boardgamegeek.com/thread/2111933/all-roles-tile-images
 
-    let gameIsRunning = false;
     const roleGrid = document.querySelector(".roles-grid");
     const roles = await fetch("./roles.json").then(res => res.json());
     let activatedRoles = [];
@@ -32,7 +31,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.querySelector(".start-button").addEventListener("click", async () => {
         if (activatedRoles.length === 0) return;
-        gameIsRunning = true;
         let phases = await fetch("./phases.json").then(res => res.json());
         if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "werewolves");
 
@@ -44,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const nightPhaseText = document.getElementById("night-phase-text");
 
         for (const phase of phases) {
-            if (!gameIsRunning) return;
+            if (!activatedRoles.find(role => role.name.toLowerCase() === phase.name) && phase.name !== "all_sleep" && phase.name !== "all_wake_up" && phase.name !== "move_card") continue;
             if (roles.find(role => role.name.toLowerCase() === phase.name)) {
                 nightPhaseImage.src = "./images/" + roles.find(role => role.name.toLowerCase() === phase.name).name.toLowerCase() + ".png";
             } else {
@@ -55,6 +53,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             nightPhaseText.textContent = phase.text;
             await speak("./voices/" + phase.name + ".mp3");
+            if (phase.name === "doppelganger" && activatedRoles.filter(role => role.nightOrder).length > 1) {
+                await sleep(1);
+                let text = "Wenn du die, ";
+                const nightRoles = activatedRoles.filter(role => role.nightOrder && role.name !== "Doppelganger");
+                for (let i = 0; i < nightRoles.length; i++) {
+                    if (i === nightRoles.length - 1 && nightRoles.length > 1) text += "oder ";
+                    text += nightRoles[i].germanName + ", ";
+                }
+                text += "Karte angesehen hast führe die Aktion jetzt durch";
+                nightPhaseText.textContent = text;
+                await speak2(text);
+            }
             if (phase.secondText) {
                 await sleep(1);
                 nightPhaseText.textContent = phase.secondText;
@@ -62,9 +72,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             if (phase.name === "move_card") await sleep(2);
             if (!phase.endingText) continue;
-            for (let i = 5; i >= 0; i--) {
-                if (!gameIsRunning) return;
-                nightPhaseText.textContent = "(Pause: 5 Sekunden)";
+            const pauseTime = (phase.name === "doppelganger" ? 10 : 5);
+            for (let i = pauseTime; i >= 0; i--) {
+                nightPhaseText.textContent = "(Pause: " + pauseTime + " Sekunden)";
                 const div = document.createElement("div");
                 div.textContent = "00:" + (i < 10 ? "0" : "") + i.toString();
                 nightPhaseText.append(div);
@@ -112,5 +122,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     async function sleep(seconds) {
         return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+    }
+
+    async function speak2(text) {
+        return new Promise((resolve) => {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = "de-DE";
+            utterance.rate = 1;
+            utterance.pitch = 1.2;
+
+            utterance.onend = resolve;
+
+            speechSynthesis.speak(utterance);
+        });
     }
 });

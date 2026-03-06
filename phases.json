@@ -4,6 +4,11 @@
     "text": "Schließt nun alle eure Augen."
   },
   {
+    "name": "doppelganger",
+    "text": "Doppelgänger wach auf. Sehe dir die Karte eines anderen Spielers an. Du übernimmst nun seine Rolle.",
+    "endingText": "Doppelgänger schließ deine Augen."
+  },
+  {
     "name": "werewolves",
     "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
     "secondText": "Du bist alleine Werwolf? Dann sehe dir eine Karte aus der Mitte an.",

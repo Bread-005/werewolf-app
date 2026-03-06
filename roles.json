@@ -1,26 +1,39 @@
 [
   {
+    "id": "doppelganger",
+    "name": "Doppelganger",
+    "germanName": "Doppelgänger",
+    "nightOrder": 1
+  },
+  {
     "id": "werewolf1",
-    "name": "Werewolf"
+    "name": "Werewolf",
+    "germanName": "Werwolf"
   },
   {
     "id": "werewolf2",
-    "name": "Werewolf"
+    "name": "Werewolf",
+    "germanName": "Werwolf"
   },
   {
     "id": "seer",
-    "name": "Seer"
+    "name": "Seer",
+    "germanName": "Seher",
+    "nightOrder": 5
   },
   {
     "id": "villager1",
-    "name": "Villager"
+    "name": "Villager",
+    "germanName": "Dorfbewohner"
   },
   {
     "id": "villager2",
-    "name": "Villager"
+    "name": "Villager",
+    "germanName": "Dorfbewohner"
   },
   {
     "id": "villager3",
-    "name": "Villager"
+    "name": "Villager",
+    "germanName": "Dorfbewohner"
   }
 ]
