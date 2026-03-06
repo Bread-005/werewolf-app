@@ -1,0 +1,25 @@
+[
+  {
+    "name": "all_sleep",
+    "text": "Schließt nun alle eure Augen."
+  },
+  {
+    "name": "werewolves",
+    "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
+    "secondText": "Du bist alleine Werwolf? Dann sehe dir eine Karte aus der Mitte an.",
+    "endingText": "Werwölfe schließt eure Augen."
+  },
+  {
+    "name": "seer",
+    "text": "Seher wach auf. Sehe dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte an.",
+    "endingText": "Seher schließ deine Augen."
+  },
+  {
+    "name": "move_card",
+    "text": "Haltet eure Augen geschlossen und bewegt eure Karte ein wenig."
+  },
+  {
+    "name": "all_wake_up",
+    "text": "Wacht nun alle auf."
+  }
+]

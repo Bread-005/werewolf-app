@@ -28,45 +28,77 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+    window.scrollTo(0, 0);
+
     document.querySelector(".start-button").addEventListener("click", async () => {
         if (activatedRoles.length === 0) return;
         gameIsRunning = true;
-        let nightOrderRoles = Object.values(Object.fromEntries(activatedRoles.map(role => [role.name, role])));
-        nightOrderRoles = nightOrderRoles.filter(role => role.nightOrder);
-        nightOrderRoles.push({name: "Villager", text: "Schließt nun alle eure Augen.", nightOrder: 0.01});
-        nightOrderRoles.sort((a, b) => a.nightOrder - b.nightOrder);
-        nightOrderRoles.push({name: "Villager", text: "Wacht nun alle auf.", nightOrder: 100});
+        let phases = await fetch("./phases.json").then(res => res.json());
+        if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "werewolves");
 
         roleGrid.style.display = "none";
         document.querySelector(".bottom-bar").style.display = "none";
         document.querySelector(".night-phase").style.visibility = "visible";
 
-        for (const role of nightOrderRoles) {
+        const nightPhaseImage = document.querySelector(".image");
+        const nightPhaseText = document.getElementById("night-phase-text");
+
+        for (const phase of phases) {
             if (!gameIsRunning) return;
-            document.querySelector(".image").src = "./images/" + role.name.toLowerCase() + ".png";
-            const nightPhaseText = document.getElementById("night-phase-text");
-            nightPhaseText.textContent = role.text;
-            await speak(role.text);
-            if (role.name === "Villager") continue;
+            if (roles.find(role => role.name.toLowerCase() === phase.name)) {
+                nightPhaseImage.src = "./images/" + roles.find(role => role.name.toLowerCase() === phase.name).name.toLowerCase() + ".png";
+            } else {
+                nightPhaseImage.src = "./images/villager.png";
+            }
+            if (phase.name === "werewolves") {
+                nightPhaseImage.src = "./images/werewolf.png";
+            }
+            nightPhaseText.textContent = phase.text;
+            await speak("./voices/" + phase.name + ".mp3");
+            if (phase.secondText) {
+                await sleep(1);
+                nightPhaseText.textContent = phase.secondText;
+                await speak("./voices/" + phase.name + "_second.mp3");
+            }
+            if (phase.name === "move_card") await sleep(2);
+            if (!phase.endingText) continue;
             for (let i = 5; i >= 0; i--) {
                 if (!gameIsRunning) return;
                 nightPhaseText.textContent = "(Pause: 5 Sekunden)";
                 const div = document.createElement("div");
                 div.textContent = "00:" + (i < 10 ? "0" : "") + i.toString();
                 nightPhaseText.append(div);
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                await sleep(1);
                 nightPhaseText.removeChild(div);
             }
-            nightPhaseText.textContent = role.endingText;
-            await speak(role.endingText);
+            nightPhaseText.textContent = phase.endingText;
+            await speak("./voices/" + phase.name + "_ending.mp3");
+        }
+
+        document.querySelector(".night-content").removeChild(nightPhaseImage);
+        document.querySelector(".night-content").removeChild(nightPhaseText);
+        const voteTimer = document.createElement("h2");
+        document.querySelector(".app").append(voteTimer);
+        voteTimer.setAttribute("class", "vote-timer");
+        voteTimer.textContent = "05:00";
+        const maxSeconds = 23;
+
+        for (let i = maxSeconds; i >= 0; i--) {
+            voteTimer.textContent = Math.floor(i / 60) + ":" + (i % 60 < 10 ? "0" : "") + (i % 60);
+            await sleep(1);
+            if (i === 0) {
+                voteTimer.textContent = "Stimmt nun alle ab. 3 2 1 zeigen";
+                await speak("Stimmt nun alle ab. 3 2 1 zeigen");
+                window.location.reload();
+            }
         }
     });
 
-    async function speak(text) {
+    async function speak(filePath) {
         return new Promise(resolve => {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.onend = resolve;
-            speechSynthesis.speak(utterance);
+            const audio = new Audio(filePath);
+            audio.onended = resolve;
+            audio.play();
         });
     }
 
@@ -75,8 +107,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     document.getElementById("stop-button").addEventListener("click", () => {
-        roleGrid.style.display = "grid";
-        document.querySelector(".bottom-bar").style.display = "flex";
-        document.querySelector(".night-phase").style.visibility = "hidden";
+        window.location.reload();
     });
+
+    async function sleep(seconds) {
+        return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+    }
 });
