@@ -97,8 +97,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             voteTimer.textContent = Math.floor(i / 60) + ":" + (i % 60 < 10 ? "0" : "") + (i % 60);
             await sleep(1);
             if (i === 0) {
-                voteTimer.textContent = "Stimmt nun alle ab. 3 2 1 zeigen";
-                await speak("Stimmt nun alle ab. 3 2 1 zeigen");
+                const voting = ["ready_for_vote:Macht euch bereit für die Abstimmung", "three:3", "two:2", "one:1", "vote:abstimmen"];
+
+                for (const vote of voting) {
+                    voteTimer.textContent = vote.split(":")[1];
+                    await speak("./voices/" + vote.split(":")[0] + ".mp3");
+                    await sleep(0.5);
+                }
                 window.location.reload();
             }
         }
