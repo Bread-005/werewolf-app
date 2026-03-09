@@ -100,8 +100,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await speak("./voices/doppelganger/later_action/last_part.mp3");
                 await speak("./voices/" + phase.name + "/text.mp3");
                 await waitCycle(phase);
-                nightPhaseText.textContent = phase.doppelganger.endingText;
-                await speak("./voices/" + phase.name + "/ending.mp3");
+                if (phase.name === "minion") nightPhaseImage.textContent += "Werwölfe senkt eure Daumen wieder. ";
+                nightPhaseText.textContent += "Doppelgänger schließ deine Augen.";
+                if (phase.name === "minion") await speak("./voices/" + phase.name + "/ending.mp3");
                 await speak("./voices/doppelganger/doppelganger.mp3");
                 await speak("./voices/close_your_eyes.mp3");
             }
@@ -149,6 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             await sleep(1);
             nightPhaseText.removeChild(div);
         }
+        nightPhaseText.textContent = "";
     }
 });
 

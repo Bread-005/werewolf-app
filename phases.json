@@ -20,7 +20,7 @@
     "nameGerman": "Günstling",
     "text": "Werwölfe hebt eure Daumen.",
     "doppelganger": {
-      "text": "Doppelgänger wenn du die Günstling Karte angesehen hast, wach auf. Werwölfe hebt eure Daumen.",
+      "text": "Doppelgänger, wenn du die Günstling Karte angesehen hast, wach auf. Werwölfe hebt eure Daumen.",
       "endingText": "Werwölfe senkt eure Daumen wieder. Doppelgänger schließ deine Augen."
     }
   },
@@ -39,6 +39,25 @@
     "name": "robber",
     "nameGerman": "Räuber",
     "text": "Vertausche deine Karte mit der eines anderen Spielers. Sehe dir dann deine Karte an."
+  },
+  {
+    "name": "troublemaker",
+    "nameGerman": "Unruhestifterin",
+    "text": "Vertausche zwei Karten von zwei anderen Spielern."
+  },
+  {
+    "name": "drunk",
+    "nameGerman": "Betrunkener",
+    "text": "Vertausche deine Karte mit einer aus der Mitte."
+  },
+  {
+    "name": "insomniac",
+    "nameGerman": "Schlaflose",
+    "text": "Schaue dir deine Karte an.",
+    "doppelganger": {
+      "text": "Doppelgänger, wenn du die Schlaflosen Karte angesehen hast, wach auf. Schaue dir deine Karte an.",
+      "endingText": "Doppelgänger schließ deine Augen."
+    }
   },
   {
     "name": "move_card",

@@ -41,6 +41,21 @@
     "germanName": "Räuber"
   },
   {
+    "id": "troublemaker",
+    "name": "Troublemaker",
+    "germanName": "Unruhestifterin"
+  },
+  {
+    "id": "drunk",
+    "name": "Drunk",
+    "germanName": "Betrunkener"
+  },
+  {
+    "id": "insomniac",
+    "name": "Insomniac",
+    "germanName": "Schlaflose"
+  },
+  {
     "id": "villager1",
     "name": "Villager",
     "germanName": "Dorfbewohner"
@@ -54,5 +69,15 @@
     "id": "villager3",
     "name": "Villager",
     "germanName": "Dorfbewohner"
+  },
+  {
+    "id": "hunter",
+    "name": "Hunter",
+    "germanName": "Jäger"
+  },
+  {
+    "id": "tanner",
+    "name": "Tanner",
+    "germanName": "Gerber"
   }
 ]
