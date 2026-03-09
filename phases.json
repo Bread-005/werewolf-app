@@ -6,7 +6,7 @@
   {
     "name": "doppelganger",
     "nameGerman": "Doppelgänger",
-    "text": "Sehe dir die Karte eines anderen Spielers an. Du übernimmst nun seine Rolle.",
+    "text": "Schau dir die Karte eines anderen Spielers an. Du nimmst nun diese Rolle an.",
     "endingText": "Doppelgänger schließ deine Augen."
   },
   {
@@ -16,6 +16,16 @@
     "secondText": "Du bist alleine Werwolf? Dann sehe dir eine Karte aus der Mitte an.",
     "endingText": "Werwölfe schließt eure Augen.",
     "isMultiple": true
+  },
+  {
+    "name": "minion",
+    "nameGerman": "Günstling",
+    "text": "Werwölfe hebt eure Daumen.",
+    "endingText": "Werwölfe senkt eure Daumen wieder. Günstling schließ deine Augen.",
+    "doppelganger": {
+      "text": "Doppelgänger wenn du die Günstling Karte angesehen hast, wach auf. Werwölfe hebt eure Daumen.",
+      "endingText": "Werwölfe senkt eure Daumen wieder. Doppelgänger schließ deine Augen."
+    }
   },
   {
     "name": "mason",

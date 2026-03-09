@@ -16,6 +16,11 @@
     "germanName": "Werwolf"
   },
   {
+    "id": "minion",
+    "name": "Minion",
+    "germanName": "Günstling"
+  },
+  {
     "id": "mason1",
     "name": "Mason",
     "germanName": "Freimaurer"

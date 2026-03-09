@@ -33,17 +33,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     window.scrollTo(0, 0);
 
+    const nightPhaseImage = document.querySelector(".image");
+    const nightPhaseText = document.getElementById("night-phase-text");
+
     document.querySelector(".start-button").addEventListener("click", async () => {
         if (activatedRoles.length === 0) return;
         let phases = await fetch("./phases.json").then(res => res.json());
         if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "werewolf");
+        if (!phases.find(phase => phase.name === "werewolf")) phases = phases.filter(phase => phase.name !== "minion");
 
         roleGrid.style.display = "none";
         document.querySelector(".bottom-bar").style.display = "none";
         document.querySelector(".night-phase").style.visibility = "visible";
-
-        const nightPhaseImage = document.querySelector(".image");
-        const nightPhaseText = document.getElementById("night-phase-text");
 
         for (const phase of phases) {
             if (phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up") {
@@ -76,22 +77,26 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await speak("./voices/" + phase.name + "/second_text.mp3");
             }
             if (!phase.endingText) continue;
-            const pauseTime = (phase.name === "doppelganger" ? 10 : 5);
-            for (let i = pauseTime; i >= 0; i--) {
-                nightPhaseText.textContent = "(Pause: " + pauseTime + " Sekunden)";
-                const div = document.createElement("div");
-                div.textContent = "00:" + (i < 10 ? "0" : "") + i.toString();
-                nightPhaseText.append(div);
-                await sleep(1);
-                nightPhaseText.removeChild(div);
-            }
+            await waitCycle(phase);
             nightPhaseText.textContent = phase.endingText;
+            if (phase.name === "minion") {
+                await speak("./voices/" + phase.name + "/ending.mp3");
+            }
             await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
             if (!phase.isMultiple) {
                 await speak("./voices/close_your_eyes.mp3");
             }
             if (phase.isMultiple) {
                 await speak("./voices/close_your_eyes_multiple.mp3");
+            }
+            if (phase.doppelganger) {
+                nightPhaseText.textContent = phase.doppelganger.text;
+                await speak("./voices/doppelganger/later_action/first_part.mp3");
+                await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
+                await speak("./voices/doppelganger/later_action/last_part.mp3");
+                await waitCycle(phase);
+                nightPhaseText.textContent = phase.doppelganger.endingText;
+                await speak("./voices/" + phase.name + "/ending.mp3");
             }
         }
 
@@ -126,6 +131,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("stop-button").addEventListener("click", () => {
         window.location.reload();
     });
+
+    async function waitCycle(phase) {
+        const pauseTime = (phase.name === "doppelganger" ? 10 : 5);
+        for (let i = pauseTime; i >= 0; i--) {
+            nightPhaseText.textContent = "(Pause: " + pauseTime + " Sekunden)";
+            const div = document.createElement("div");
+            div.textContent = "00:" + (i < 10 ? "0" : "") + i.toString();
+            nightPhaseText.append(div);
+            await sleep(1);
+            nightPhaseText.removeChild(div);
+        }
+    }
 });
 
 async function speak(filePath) {
