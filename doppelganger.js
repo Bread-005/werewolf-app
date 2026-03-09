@@ -2,7 +2,7 @@ import {sleep, speak} from "./main.js";
 
 async function doppelgangerVerboseText(activatedRoles, nightPhaseText) {
     await sleep(2);
-    nightPhaseText.textContent = "Wenn du die, ";
+    nightPhaseText.textContent = "Wenn du die ";
     await speak("./voices/doppelganger/verbose/first_part.mp3");
     const nightRoles = activatedRoles.filter(role => activatedRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name));
     for (let i = 0; i < nightRoles.length; i++) {

@@ -6,22 +6,19 @@
   {
     "name": "doppelganger",
     "nameGerman": "Doppelgänger",
-    "text": "Schau dir die Karte eines anderen Spielers an. Du nimmst nun diese Rolle an.",
-    "endingText": "Doppelgänger schließ deine Augen."
+    "text": "Schau dir die Karte eines anderen Spielers an. Du nimmst nun diese Rolle an."
   },
   {
     "name": "werewolf",
     "nameGerman": "Werwölfe",
     "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
     "secondText": "Du bist alleine Werwolf? Dann sehe dir eine Karte aus der Mitte an.",
-    "endingText": "Werwölfe schließt eure Augen.",
     "isMultiple": true
   },
   {
     "name": "minion",
     "nameGerman": "Günstling",
     "text": "Werwölfe hebt eure Daumen.",
-    "endingText": "Werwölfe senkt eure Daumen wieder. Günstling schließ deine Augen.",
     "doppelganger": {
       "text": "Doppelgänger wenn du die Günstling Karte angesehen hast, wach auf. Werwölfe hebt eure Daumen.",
       "endingText": "Werwölfe senkt eure Daumen wieder. Doppelgänger schließ deine Augen."
@@ -31,14 +28,17 @@
     "name": "mason",
     "nameGerman": "Freimaurer",
     "text": "Freimaurer wacht auf und seht euch nach dem anderen Freimaurer um.",
-    "endingText": "Freimaurer schließt eure Augen.",
     "isMultiple": true
   },
   {
     "name": "seer",
     "nameGerman": "Seher",
-    "text": "Sehe dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte an.",
-    "endingText": "Seher schließ deine Augen."
+    "text": "Sehe dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte an."
+  },
+  {
+    "name": "robber",
+    "nameGerman": "Räuber",
+    "text": "Vertausche deine Karte mit der eines anderen Spielers. Sehe dir dann deine Karte an."
   },
   {
     "name": "move_card",

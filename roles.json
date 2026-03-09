@@ -3,7 +3,7 @@
     "id": "doppelganger",
     "name": "Doppelganger",
     "germanName": "Doppelgänger",
-    "verboseRoles": ["Seer"]
+    "verboseRoles": ["Seer", "Robber"]
   },
   {
     "id": "werewolf1",
@@ -34,6 +34,11 @@
     "id": "seer",
     "name": "Seer",
     "germanName": "Seher"
+  },
+  {
+    "id": "robber",
+    "name": "Robber",
+    "germanName": "Räuber"
   },
   {
     "id": "villager1",

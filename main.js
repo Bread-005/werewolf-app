@@ -14,8 +14,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         const img = document.createElement("img");
         img.src = "./images/" + role.name.toLowerCase() + ".png";
         img.alt = role.name;
+        const span = document.createElement("span");
+        span.textContent = role.germanName;
 
         div.append(img);
+        div.append(span);
         roleGrid.append(div);
 
         div.addEventListener("click", () => {
@@ -58,7 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!activatedRoles.find(role => role.name.toLowerCase() === phase.name) && phase.name !== "werewolf") continue;
             nightPhaseImage.src = "./images/" + activatedRoles.find(role => role.name.toLowerCase() === phase.name).name.toLowerCase() + ".png";
             nightPhaseText.textContent = phase.nameGerman + " wach auf.";
-            if (phase.name === "werewolf") nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
+            if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
             await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
             if (!phase.isMultiple) {
                 await speak("./voices/wake_up.mp3");
@@ -76,12 +79,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = phase.secondText;
                 await speak("./voices/" + phase.name + "/second_text.mp3");
             }
-            if (!phase.endingText) continue;
             await waitCycle(phase);
-            nightPhaseText.textContent = phase.endingText;
             if (phase.name === "minion") {
+                nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
+            nightPhaseText.textContent = phase.nameGerman + (phase.isMultiple ? " schließt eure" : " schließ deine") + " Augen.";
             await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
             if (!phase.isMultiple) {
                 await speak("./voices/close_your_eyes.mp3");
@@ -89,14 +92,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.isMultiple) {
                 await speak("./voices/close_your_eyes_multiple.mp3");
             }
-            if (phase.doppelganger) {
+            if (phase.doppelganger && activatedRoles.find(role => role.name === "Doppelganger")) {
+                nightPhaseImage.src = "./images/doppelganger.png";
                 nightPhaseText.textContent = phase.doppelganger.text;
                 await speak("./voices/doppelganger/later_action/first_part.mp3");
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
                 await speak("./voices/doppelganger/later_action/last_part.mp3");
+                await speak("./voices/" + phase.name + "/text.mp3");
                 await waitCycle(phase);
                 nightPhaseText.textContent = phase.doppelganger.endingText;
                 await speak("./voices/" + phase.name + "/ending.mp3");
+                await speak("./voices/doppelganger/doppelganger.mp3");
+                await speak("./voices/close_your_eyes.mp3");
             }
         }
 
