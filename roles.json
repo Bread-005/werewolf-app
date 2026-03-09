@@ -3,7 +3,7 @@
     "id": "doppelganger",
     "name": "Doppelganger",
     "germanName": "Doppelgänger",
-    "verboseRoles": ["Seer", "Robber"]
+    "verboseRoles": ["Seer", "Robber", "Troublemaker", "Drunk"]
   },
   {
     "id": "werewolf1",

@@ -1,8 +1,17 @@
 import {doppelgangerVerboseText} from "./doppelganger.js";
 
+const storage = JSON.parse(localStorage.getItem("werewolf-app"));
+
 document.addEventListener("DOMContentLoaded", async () => {
 
-    // alle Werewolf Cards: https://boardgamegeek.com/thread/2111933/all-roles-tile-images
+    if (!storage) {
+        const storage1 = {
+            actionTime: 5
+        }
+        localStorage.setItem("werewolf-app", JSON.stringify(storage1));
+        window.location.reload();
+    }
+
 
     const roleGrid = document.querySelector(".roles-grid");
     const roles = await fetch("./roles.json").then(res => res.json());
@@ -45,9 +54,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "werewolf");
         if (!phases.find(phase => phase.name === "werewolf")) phases = phases.filter(phase => phase.name !== "minion");
 
-        roleGrid.style.display = "none";
-        document.querySelector(".bottom-bar").style.display = "none";
-        document.querySelector(".night-phase").style.visibility = "visible";
+        activatedRoles.sort((a, b) => roles.indexOf(a) - roles.indexOf(b));
+        switchPage(document.querySelector(".night-phase"));
 
         for (const phase of phases) {
             if (phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up") {
@@ -132,6 +140,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
+    document.querySelector(".settings-button").addEventListener("click", () => {
+        window.location = "settings.html";
+    });
+
     document.getElementById("pause-button").addEventListener("click", () => {
         console.log("Hier passiert noch nichts");
     });
@@ -141,7 +153,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     async function waitCycle(phase) {
-        const pauseTime = (phase.name === "doppelganger" ? 10 : 5);
+        const pauseTime = (phase.name === "doppelganger" ? storage.actionTime * 2 : storage.actionTime);
         for (let i = pauseTime; i >= 0; i--) {
             nightPhaseText.textContent = "(Pause: " + pauseTime + " Sekunden)";
             const div = document.createElement("div");
@@ -151,6 +163,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             nightPhaseText.removeChild(div);
         }
         nightPhaseText.textContent = "";
+    }
+
+    function switchPage(element) {
+        roleGrid.style.display = "none";
+        document.querySelector(".bottom-bar").style.display = "none";
+        document.querySelector(".night-phase").style.visibility = "hidden";
+
+        element.style.visibility = "visible";
     }
 });
 
@@ -166,4 +186,8 @@ async function sleep(seconds) {
     return new Promise(resolve => setTimeout(resolve, seconds * 1000));
 }
 
-export {speak, sleep};
+function saveLocalStorage() {
+    localStorage.setItem("werewolf-app", JSON.stringify(storage));
+}
+
+export {speak, sleep, storage, saveLocalStorage};
