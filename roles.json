@@ -16,6 +16,16 @@
     "germanName": "Werwolf"
   },
   {
+    "id": "mason1",
+    "name": "Mason",
+    "germanName": "Freimaurer"
+  },
+  {
+    "id": "mason2",
+    "name": "Mason",
+    "germanName": "Freimaurer"
+  },
+  {
     "id": "seer",
     "name": "Seer",
     "germanName": "Seher"

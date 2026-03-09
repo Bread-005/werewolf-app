@@ -18,6 +18,13 @@
     "isMultiple": true
   },
   {
+    "name": "mason",
+    "nameGerman": "Freimaurer",
+    "text": "Freimaurer wacht auf und seht euch nach dem anderen Freimaurer um.",
+    "endingText": "Freimaurer schließt eure Augen.",
+    "isMultiple": true
+  },
+  {
     "name": "seer",
     "nameGerman": "Seher",
     "text": "Sehe dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte an.",
