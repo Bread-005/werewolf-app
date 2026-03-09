@@ -3,7 +3,7 @@
     "id": "doppelganger",
     "name": "Doppelganger",
     "germanName": "Doppelgänger",
-    "nightOrder": 1
+    "verboseRoles": ["Seer"]
   },
   {
     "id": "werewolf1",
@@ -18,8 +18,7 @@
   {
     "id": "seer",
     "name": "Seer",
-    "germanName": "Seher",
-    "nightOrder": 5
+    "germanName": "Seher"
   },
   {
     "id": "villager1",

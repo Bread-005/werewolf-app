@@ -5,18 +5,22 @@
   },
   {
     "name": "doppelganger",
-    "text": "Doppelgänger wach auf. Sehe dir die Karte eines anderen Spielers an. Du übernimmst nun seine Rolle.",
+    "nameGerman": "Doppelgänger",
+    "text": "Sehe dir die Karte eines anderen Spielers an. Du übernimmst nun seine Rolle.",
     "endingText": "Doppelgänger schließ deine Augen."
   },
   {
-    "name": "werewolves",
+    "name": "werewolf",
+    "nameGerman": "Werwölfe",
     "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
     "secondText": "Du bist alleine Werwolf? Dann sehe dir eine Karte aus der Mitte an.",
-    "endingText": "Werwölfe schließt eure Augen."
+    "endingText": "Werwölfe schließt eure Augen.",
+    "isMultiple": true
   },
   {
     "name": "seer",
-    "text": "Seher wach auf. Sehe dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte an.",
+    "nameGerman": "Seher",
+    "text": "Sehe dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte an.",
     "endingText": "Seher schließ deine Augen."
   },
   {
