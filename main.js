@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         roleGrid.append(div);
 
         div.addEventListener("click", () => {
-            const clickSound = new Audio("./voices/click_sound.wav");
-            clickSound.play();
+            // const clickSound = new Audio("./voices/click_sound.wav");
+            // clickSound.play();
             if (!div.style.border || div.style.border === "none") {
                 div.style.border = "white 5px solid";
                 activatedRoles.push(role);

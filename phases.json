@@ -12,7 +12,7 @@
     "name": "werewolf",
     "nameGerman": "Werwölfe",
     "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
-    "secondText": "Du bist alleine Werwolf? Dann sehe dir eine Karte aus der Mitte an.",
+    "secondText": "Du bist alleine Werwolf? Dann darfst du dir eine Karte aus der Mitte ansehen.",
     "isMultiple": true
   },
   {
@@ -33,17 +33,17 @@
   {
     "name": "seer",
     "nameGerman": "Seher",
-    "text": "Sehe dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte an."
+    "text": "Du darfst dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte ansehen."
   },
   {
     "name": "robber",
     "nameGerman": "Räuber",
-    "text": "Vertausche deine Karte mit der eines anderen Spielers. Sehe dir dann deine Karte an."
+    "text": "Du darfst deine Karte mit der eines anderen Spielers vertauschen. Sehe dir dann deine Karte an."
   },
   {
     "name": "troublemaker",
     "nameGerman": "Unruhestifterin",
-    "text": "Vertausche zwei Karten von zwei anderen Spielern."
+    "text": "Du darfst die Karten von zwei anderen Spielern vertauschen."
   },
   {
     "name": "drunk",
