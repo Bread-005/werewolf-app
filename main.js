@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!storage) {
         const storage1 = {
-            actionTime: 5
+            actionTime: 5,
+            votingTime: 300
         }
         localStorage.setItem("werewolf-app", JSON.stringify(storage1));
         window.location.reload();
     }
-
 
     const roleGrid = document.querySelector(".roles-grid");
     const roles = await fetch("./roles.json").then(res => res.json());
@@ -20,14 +20,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     for (const role of roles) {
         const div = document.createElement("div");
         div.classList.add("role-card");
+        const span = document.createElement("span");
+        span.textContent = role.germanName;
         const img = document.createElement("img");
         img.src = "./images/" + role.name.toLowerCase() + ".png";
         img.alt = role.name;
-        const span = document.createElement("span");
-        span.textContent = role.germanName;
 
-        div.append(img);
         div.append(span);
+        div.append(img);
         roleGrid.append(div);
 
         div.addEventListener("click", () => {
@@ -62,11 +62,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseImage.src = "./images/villager.png";
                 nightPhaseText.textContent = phase.text;
                 await speak("./voices/" + phase.name + ".mp3");
-                if (phase.name === "move_card") await sleep(2);
+                await sleep(2);
                 continue;
             }
 
-            if (!activatedRoles.find(role => role.name.toLowerCase() === phase.name) && phase.name !== "werewolf") continue;
+            if (!activatedRoles.find(role => role.name.toLowerCase() === phase.name)) continue;
             nightPhaseImage.src = "./images/" + activatedRoles.find(role => role.name.toLowerCase() === phase.name).name.toLowerCase() + ".png";
             nightPhaseText.textContent = phase.nameGerman + " wach auf.";
             if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector(".app").append(voteTimer);
         voteTimer.setAttribute("class", "vote-timer");
         voteTimer.textContent = "05:00";
-        const maxSeconds = 23;
+        const maxSeconds = storage.votingTime;
 
         for (let i = maxSeconds; i >= 0; i--) {
             voteTimer.textContent = Math.floor(i / 60) + ":" + (i % 60 < 10 ? "0" : "") + (i % 60);
