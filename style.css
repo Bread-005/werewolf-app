@@ -18,19 +18,18 @@ button {
 .app {
     max-width: 900px;
     margin: 0 auto;
-    padding: 24px;
+    padding: 10px;
 
     .roles-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
+        gap: 12px;
         margin: 30px 0 80px 0;
 
         .role-card {
             position: relative;
             text-align: center;
-            width: 105px;
-            height: 140px;
+            width: 75px;
             overflow: hidden;
             backdrop-filter: blur(4px);
             transition: transform 0.15s ease;
@@ -41,16 +40,17 @@ button {
                 height: 100%;
                 object-fit: contain;
                 display: block;
+                aspect-ratio: 2 / 3;
             }
 
             span {
                 position: absolute;
-                top: -3px;
+                top: 0;
                 left: 50%;
                 transform: translateX(-50%);
-                font-weight: 700;
                 text-shadow: 0 2px 6px rgba(0,0,0,0.8);
                 z-index: 100;
+                font-size: 12px;
             }
         }
 
@@ -60,7 +60,7 @@ button {
             top: 0;
             left: 0;
             width: 100%;
-            height: 15px;
+            height: 16px;
             background: #6f8f9b;
             z-index: 50;
         }
@@ -88,23 +88,23 @@ button {
             backdrop-filter: blur(6px);
 
             .timer-label {
-                font-size: 14px;
+                font-size: 10px;
                 opacity: 0.9;
             }
 
             .timer-time {
-                font-size: 26px;
+                font-size: 16px;
                 font-weight: 800;
             }
         }
 
         .start-button {
-            padding: 20px 80px;
+            padding: 20px 50px;
             border-radius: 40px;
             border: 3px solid rgba(255,255,255,0.9);
             background: rgba(255,255,255,0.1);
             color: white;
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 800;
             cursor: pointer;
             backdrop-filter: blur(6px);
@@ -183,7 +183,7 @@ button {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        font-size: 100px;
+        font-size: 50px;
     }
 }
 
