@@ -33,6 +33,11 @@
     "text": "Du darfst dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte ansehen."
   },
   {
+    "name": "apprentice_seer",
+    "nameGerman": "Junger Seher",
+    "text": "Du darfst dir eine Karte aus der Mitte ansehen."
+  },
+  {
     "name": "psychic",
     "nameGerman": "Hellseher",
     "text": "Du darfst dir eine Karte ansehen von ",

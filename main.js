@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 continue;
             }
 
-            if (!activatedRoles.find(role => role.name.toLowerCase() === phase.name)) continue;
-            nightPhaseImage.src = "./images/" + activatedRoles.find(role => role.name.toLowerCase() === phase.name).name.toLowerCase() + ".png";
+            if (!activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name)) continue;
+            nightPhaseImage.src = "./images/" + activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name).name.toLowerCase().replaceAll(" ","_") + ".png";
             nightPhaseText.textContent = phase.nameGerman + " wach auf.";
             if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
             await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const span = document.createElement("span");
             span.textContent = role.germanName;
             const img = document.createElement("img");
-            img.src = "./images/" + role.name.toLowerCase() + ".png";
+            img.src = "./images/" + role.name.toLowerCase().replaceAll(" ","_") + ".png";
             img.alt = role.name;
 
             div.append(span);

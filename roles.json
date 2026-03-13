@@ -4,7 +4,7 @@
     "name": "Doppelganger",
     "germanName": "Doppelgänger",
     "edition": "Werewolves",
-    "verboseRoles": ["Seer", "Robber", "Troublemaker", "Drunk"]
+    "verboseRoles": ["Seer", "Apprentice Seer", "Robber", "Troublemaker", "Drunk"]
   },
   {
     "id": "werewolf1",
@@ -41,6 +41,12 @@
     "name": "Seer",
     "germanName": "Seher",
     "edition": "Werewolves"
+  },
+  {
+    "id": "apprentice_seer",
+    "name": "Apprentice Seer",
+    "germanName": "Junger Seher",
+    "edition": "Daybreak"
   },
   {
     "id": "psychic",
