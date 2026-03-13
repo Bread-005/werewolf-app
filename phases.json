@@ -33,6 +33,13 @@
     "text": "Du darfst dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte ansehen."
   },
   {
+    "name": "psychic",
+    "nameGerman": "Hellseher",
+    "text": "Du darfst dir eine Karte ansehen von ",
+    "randomActions": ["einem Nachbarn", "einem geraden Spieler", "einem ungeraden Spieler", "einem Spieler mit einer niedrigeren Nummer als du", "einem Spieler mit einer höheren Nummer als du", "einem Spieler", "der Mitte"],
+    "doppelganger": {}
+  },
+  {
     "name": "robber",
     "nameGerman": "Räuber",
     "text": "Du darfst deine Karte mit der eines anderen Spielers vertauschen. Sehe dir dann deine Karte an."

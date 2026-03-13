@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.randomActions) {
                 const randomAction = phase.randomActions.sort(() => Math.random() - 0.5)[0];
                 nightPhaseText.textContent = nightPhaseText.textContent += randomAction;
-                await speak("./voices/" + phase.name + "/" + randomAction + ".mp3");
+                await speak("./voices/random_cards/" + randomAction + ".mp3");
             }
             await waitCycle(phase);
             if (phase.name === "minion") {
@@ -107,15 +107,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             if (phase.doppelganger && activatedRoles.find(role => role.name === "Doppelganger")) {
                 nightPhaseImage.src = "./images/doppelganger.png";
-                nightPhaseText.textContent = "Doppelgänger, wenn du die " + phase.nameGerman + " Karte angesehen hast, wach auf. " + phase.text;
+                nightPhaseText.textContent = "Doppelgänger, wenn du die " + phase.nameGerman + " Karte angesehen hast, wach auf.";
                 await speak("./voices/doppelganger/later_action/first_part.mp3");
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
                 await speak("./voices/doppelganger/later_action/last_part.mp3");
+                nightPhaseText.textContent = phase.text;
                 await speak("./voices/" + phase.name + "/text.mp3");
                 if (phase.randomActions) {
                     const randomAction = phase.randomActions.sort(() => Math.random() - 0.5)[0];
                     nightPhaseText.textContent = nightPhaseText.textContent += randomAction;
-                    await speak("./voices/" + phase.name + "/" + randomAction + ".mp3");
+                    await speak("./voices/random_cards/" + randomAction + ".mp3");
                 }
                 await waitCycle(phase);
                 if (phase.name === "minion") nightPhaseImage.textContent += "Werwölfe senkt eure Daumen wieder. ";

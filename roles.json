@@ -36,6 +36,11 @@
     "germanName": "Seher"
   },
   {
+    "id": "psychic",
+    "name": "Psychic",
+    "germanName": "Hellseher"
+  },
+  {
     "id": "robber",
     "name": "Robber",
     "germanName": "Räuber"
