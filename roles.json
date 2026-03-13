@@ -3,91 +3,109 @@
     "id": "doppelganger",
     "name": "Doppelganger",
     "germanName": "Doppelgänger",
+    "edition": "Werewolves",
     "verboseRoles": ["Seer", "Robber", "Troublemaker", "Drunk"]
   },
   {
     "id": "werewolf1",
     "name": "Werewolf",
-    "germanName": "Werwolf"
+    "germanName": "Werwolf",
+    "edition": "Werewolves"
   },
   {
     "id": "werewolf2",
     "name": "Werewolf",
-    "germanName": "Werwolf"
+    "germanName": "Werwolf",
+    "edition": "Werewolves"
   },
   {
     "id": "minion",
     "name": "Minion",
-    "germanName": "Günstling"
+    "germanName": "Günstling",
+    "edition": "Werewolves"
   },
   {
     "id": "mason1",
     "name": "Mason",
-    "germanName": "Freimaurer"
+    "germanName": "Freimaurer",
+    "edition": "Werewolves"
   },
   {
     "id": "mason2",
     "name": "Mason",
-    "germanName": "Freimaurer"
+    "germanName": "Freimaurer",
+    "edition": "Werewolves"
   },
   {
     "id": "seer",
     "name": "Seer",
-    "germanName": "Seher"
+    "germanName": "Seher",
+    "edition": "Werewolves"
   },
   {
     "id": "psychic",
     "name": "Psychic",
-    "germanName": "Hellseher"
+    "germanName": "Hellseher",
+    "edition": "Aliens"
   },
   {
     "id": "robber",
     "name": "Robber",
-    "germanName": "Räuber"
+    "germanName": "Räuber",
+    "edition": "Werewolves"
   },
   {
     "id": "troublemaker",
     "name": "Troublemaker",
-    "germanName": "Unruhestifterin"
+    "germanName": "Unruhestifterin",
+    "edition": "Werewolves"
   },
   {
     "id": "drunk",
     "name": "Drunk",
-    "germanName": "Betrunkener"
+    "germanName": "Betrunkener",
+    "edition": "Werewolves"
   },
   {
     "id": "insomniac",
     "name": "Insomniac",
-    "germanName": "Schlaflose"
+    "germanName": "Schlaflose",
+    "edition": "Werewolves"
   },
   {
     "id": "mortician",
     "name": "Mortician",
-    "germanName": "Bestatter"
+    "germanName": "Bestatter",
+    "edition": "Aliens"
   },
   {
     "id": "villager1",
     "name": "Villager",
-    "germanName": "Dorfbewohner"
+    "germanName": "Dorfbewohner",
+    "edition": "Werewolves"
   },
   {
     "id": "villager2",
     "name": "Villager",
-    "germanName": "Dorfbewohner"
+    "germanName": "Dorfbewohner",
+    "edition": "Werewolves"
   },
   {
     "id": "villager3",
     "name": "Villager",
-    "germanName": "Dorfbewohner"
+    "germanName": "Dorfbewohner",
+    "edition": "Werewolves"
   },
   {
     "id": "hunter",
     "name": "Hunter",
-    "germanName": "Jäger"
+    "germanName": "Jäger",
+    "edition": "Werewolves"
   },
   {
     "id": "tanner",
     "name": "Tanner",
-    "germanName": "Gerber"
+    "germanName": "Gerber",
+    "edition": "Werewolves"
   }
 ]

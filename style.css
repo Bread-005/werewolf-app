@@ -20,6 +20,20 @@ button {
     margin: 0 auto;
     padding: 10px;
 
+    .editions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px;
+
+        * {
+            cursor: pointer;
+            border: white solid 2px;
+            padding: 4px;
+            font-size: 25px;
+        }
+    }
+
     .roles-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);

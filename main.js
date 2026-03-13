@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!storage) {
         const storage1 = {
+            enabledEditions: ["Werewolves"],
             actionTime: 5,
             votingTime: 300
         }
@@ -13,35 +14,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.reload();
     }
 
-    const roleGrid = document.querySelector(".roles-grid");
-    const roles = await fetch("./roles.json").then(res => res.json());
-    let activatedRoles = [];
+    if (!storage.enabledEditions) {
+        storage.enabledEditions = ["Werewolves"];
+        saveLocalStorage();
+    }
 
-    for (const role of roles) {
-        const div = document.createElement("div");
-        div.classList.add("role-card");
-        const span = document.createElement("span");
-        span.textContent = role.germanName;
-        const img = document.createElement("img");
-        img.src = "./images/" + role.name.toLowerCase() + ".png";
-        img.alt = role.name;
-
-        div.append(span);
-        div.append(img);
-        roleGrid.append(div);
-
-        div.addEventListener("click", () => {
-            // const clickSound = new Audio("./voices/click_sound.wav");
-            // clickSound.play();
-            if (!div.style.border || div.style.border === "none") {
-                div.style.border = "white 5px solid";
-                activatedRoles.push(role);
+    const editions = document.querySelector(".editions");
+    for (const edition of editions.children) {
+        showEdition(edition);
+        edition.addEventListener("click", () => {
+            if (storage.enabledEditions.includes(edition.className)) {
+                storage.enabledEditions = storage.enabledEditions.filter(edition1 => edition1 !== edition.className);
             } else {
-                div.style.border = "none";
-                activatedRoles = activatedRoles.filter(role1 => role1 !== role);
+                storage.enabledEditions.push(edition.className);
             }
+            saveLocalStorage();
+            showEdition(edition);
+            showRolesSelection();
         });
     }
+
+    const roleGrid = document.querySelector(".roles-grid");
+    const allRoles = await fetch("./roles.json").then(res => res.json());
+    let activatedRoles = [];
+    showRolesSelection();
 
     window.scrollTo(0, 0);
 
@@ -54,8 +50,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "werewolf");
         if (!phases.find(phase => phase.name === "werewolf")) phases = phases.filter(phase => phase.name !== "minion");
 
-        activatedRoles.sort((a, b) => roles.indexOf(a) - roles.indexOf(b));
-        switchPage(document.querySelector(".night-phase"));
+        activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
+
+        document.querySelector(".editions").style.display = "none";
+        roleGrid.style.display = "none";
+        document.querySelector(".bottom-bar").style.display = "none";
+        document.querySelector(".night-phase").style.visibility = "visible";
 
         for (const phase of phases) {
             if (phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up") {
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             nightPhaseText.textContent = phase.text;
             await speak("./voices/" + phase.name + "/" + "text.mp3");
-            if (phase.name === "doppelganger" && activatedRoles.filter(role => roles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name)).length > 0) {
+            if (phase.name === "doppelganger" && activatedRoles.filter(role => allRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name)).length > 0) {
                 await doppelgangerVerboseText(activatedRoles, nightPhaseText);
             }
             if (phase.secondText) {
@@ -176,12 +176,46 @@ document.addEventListener("DOMContentLoaded", async () => {
         nightPhaseText.textContent = "";
     }
 
-    function switchPage(element) {
-        roleGrid.style.display = "none";
-        document.querySelector(".bottom-bar").style.display = "none";
-        document.querySelector(".night-phase").style.visibility = "hidden";
+    function showEdition(edition) {
+        if (storage.enabledEditions.includes(edition.className)) {
+            edition.style.border = "blue solid 2px";
+            edition.style.background = "cornflowerblue";
+        } else {
+            edition.style.border = "white solid 2px";
+            edition.style.background = null;
+        }
+    }
 
-        element.style.visibility = "visible";
+    function showRolesSelection() {
+        let enabledRoles = allRoles.filter(role => storage.enabledEditions.includes(role.edition));
+
+        roleGrid.innerHTML = "";
+
+        for (const role of enabledRoles) {
+            const div = document.createElement("div");
+            div.classList.add("role-card");
+            const span = document.createElement("span");
+            span.textContent = role.germanName;
+            const img = document.createElement("img");
+            img.src = "./images/" + role.name.toLowerCase() + ".png";
+            img.alt = role.name;
+
+            div.append(span);
+            div.append(img);
+            roleGrid.append(div);
+
+            div.addEventListener("click", () => {
+                // const clickSound = new Audio("./voices/click_sound.wav");
+                // clickSound.play();
+                if (!div.style.border || div.style.border === "none") {
+                    div.style.border = "white 5px solid";
+                    activatedRoles.push(role);
+                } else {
+                    div.style.border = "none";
+                    activatedRoles = activatedRoles.filter(role1 => role1 !== role);
+                }
+            });
+        }
     }
 });
 
