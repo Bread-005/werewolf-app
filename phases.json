@@ -19,10 +19,7 @@
     "name": "minion",
     "nameGerman": "Günstling",
     "text": "Werwölfe hebt eure Daumen.",
-    "doppelganger": {
-      "text": "Doppelgänger, wenn du die Günstling Karte angesehen hast, wach auf. Werwölfe hebt eure Daumen.",
-      "endingText": "Werwölfe senkt eure Daumen wieder. Doppelgänger schließ deine Augen."
-    }
+    "doppelganger": {}
   },
   {
     "name": "mason",
@@ -54,10 +51,14 @@
     "name": "insomniac",
     "nameGerman": "Schlaflose",
     "text": "Schaue dir deine Karte an.",
-    "doppelganger": {
-      "text": "Doppelgänger, wenn du die Schlaflosen Karte angesehen hast, wach auf. Schaue dir deine Karte an.",
-      "endingText": "Doppelgänger schließ deine Augen."
-    }
+    "doppelganger": {}
+  },
+  {
+    "name": "mortician",
+    "nameGerman": "Bestatter",
+    "text": "Du darfst dir die Karte ansehen von ",
+    "randomActions": ["dir selbst", "deinem linken Nachbarn", "deinem rechten Nachbarn", "einem Nachbarn"],
+    "doppelganger": {}
   },
   {
     "name": "move_card",

@@ -56,6 +56,11 @@
     "germanName": "Schlaflose"
   },
   {
+    "id": "mortician",
+    "name": "Mortician",
+    "germanName": "Bestatter"
+  },
+  {
     "id": "villager1",
     "name": "Villager",
     "germanName": "Dorfbewohner"

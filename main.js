@@ -87,6 +87,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = phase.secondText;
                 await speak("./voices/" + phase.name + "/second_text.mp3");
             }
+            if (phase.randomActions) {
+                const randomAction = phase.randomActions.sort(() => Math.random() - 0.5)[0];
+                nightPhaseText.textContent = nightPhaseText.textContent += randomAction;
+                await speak("./voices/" + phase.name + "/" + randomAction + ".mp3");
+            }
             await waitCycle(phase);
             if (phase.name === "minion") {
                 nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
@@ -102,11 +107,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             if (phase.doppelganger && activatedRoles.find(role => role.name === "Doppelganger")) {
                 nightPhaseImage.src = "./images/doppelganger.png";
-                nightPhaseText.textContent = phase.doppelganger.text;
+                nightPhaseText.textContent = "Doppelgänger, wenn du die " + phase.nameGerman + " Karte angesehen hast, wach auf. " + phase.text;
                 await speak("./voices/doppelganger/later_action/first_part.mp3");
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
                 await speak("./voices/doppelganger/later_action/last_part.mp3");
                 await speak("./voices/" + phase.name + "/text.mp3");
+                if (phase.randomActions) {
+                    const randomAction = phase.randomActions.sort(() => Math.random() - 0.5)[0];
+                    nightPhaseText.textContent = nightPhaseText.textContent += randomAction;
+                    await speak("./voices/" + phase.name + "/" + randomAction + ".mp3");
+                }
                 await waitCycle(phase);
                 if (phase.name === "minion") nightPhaseImage.textContent += "Werwölfe senkt eure Daumen wieder. ";
                 nightPhaseText.textContent += "Doppelgänger schließ deine Augen.";
