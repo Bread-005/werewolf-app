@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (!activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name)) continue;
             nightPhaseImage.src = "./images/" + activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name).name.toLowerCase().replaceAll(" ","_") + ".png";
-            nightPhaseText.textContent = phase.nameGerman + " wach auf.";
+            nightPhaseText.textContent = getGermanName(phase.name) + " wach auf.";
             if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
             await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
             if (!phase.isMultiple) {
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
-            nightPhaseText.textContent = phase.nameGerman + (phase.isMultiple ? " schließt eure" : " schließ deine") + " Augen.";
+            nightPhaseText.textContent = getGermanName(phase.name) + (phase.isMultiple ? " schließt eure" : " schließ deine") + " Augen.";
             await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
             if (!phase.isMultiple) {
                 await speak("./voices/close_your_eyes.mp3");
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             if (phase.doppelganger && activatedRoles.find(role => role.name === "Doppelganger")) {
                 nightPhaseImage.src = "./images/doppelganger.png";
-                nightPhaseText.textContent = "Doppelgänger, wenn du die " + phase.nameGerman + " Karte angesehen hast, wach auf.";
+                nightPhaseText.textContent = "Doppelgänger, wenn du die " + getGermanName(phase.name) + " Karte angesehen hast, wach auf.";
                 await speak("./voices/doppelganger/later_action/first_part.mp3");
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
                 await speak("./voices/doppelganger/later_action/last_part.mp3");
@@ -216,6 +216,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             });
         }
+    }
+
+    function getGermanName(englishName) {
+        for (const role of allRoles) {
+            if (englishName.toLowerCase() === role.name.toLowerCase()) {
+                if (role.germanName === "Werwolf") return "Werwölfe";
+                return role.germanName;
+            }
+        }
+        return "";
     }
 });
 

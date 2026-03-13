@@ -5,69 +5,61 @@
   },
   {
     "name": "doppelganger",
-    "nameGerman": "Doppelgänger",
     "text": "Schau dir die Karte eines anderen Spielers an. Du nimmst nun diese Rolle an."
   },
   {
     "name": "werewolf",
-    "nameGerman": "Werwölfe",
     "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
     "secondText": "Du bist alleine Werwolf? Dann darfst du dir eine Karte aus der Mitte ansehen.",
     "isMultiple": true
   },
   {
     "name": "minion",
-    "nameGerman": "Günstling",
     "text": "Werwölfe hebt eure Daumen.",
     "doppelganger": {}
   },
   {
     "name": "mason",
-    "nameGerman": "Freimaurer",
     "text": "Freimaurer wacht auf und seht euch nach dem anderen Freimaurer um.",
     "isMultiple": true
   },
   {
     "name": "seer",
-    "nameGerman": "Seher",
     "text": "Du darfst dir entweder eine Karte eines Spielers oder zwei Karten aus der Mitte ansehen."
   },
   {
     "name": "apprentice_seer",
-    "nameGerman": "Junger Seher",
     "text": "Du darfst dir eine Karte aus der Mitte ansehen."
   },
   {
     "name": "psychic",
-    "nameGerman": "Hellseher",
     "text": "Du darfst dir eine Karte ansehen von ",
     "randomActions": ["einem Nachbarn", "einem geraden Spieler", "einem ungeraden Spieler", "einem Spieler mit einer niedrigeren Nummer als du", "einem Spieler mit einer höheren Nummer als du", "einem Spieler", "der Mitte"],
     "doppelganger": {}
   },
   {
     "name": "robber",
-    "nameGerman": "Räuber",
     "text": "Du darfst deine Karte mit der eines anderen Spielers vertauschen. Sehe dir dann deine Karte an."
   },
   {
+    "name": "witch",
+    "text": "Du darfst eine Karte aus der Mitte ansehen. Wenn du das tust musst du diese Karte mit einem Spieler vertauschen."
+  },
+  {
     "name": "troublemaker",
-    "nameGerman": "Unruhestifterin",
     "text": "Du darfst die Karten von zwei anderen Spielern vertauschen."
   },
   {
     "name": "drunk",
-    "nameGerman": "Betrunkener",
     "text": "Vertausche deine Karte mit einer aus der Mitte."
   },
   {
     "name": "insomniac",
-    "nameGerman": "Schlaflose",
     "text": "Schaue dir deine Karte an.",
     "doppelganger": {}
   },
   {
     "name": "mortician",
-    "nameGerman": "Bestatter",
     "text": "Du darfst dir die Karte ansehen von ",
     "randomActions": ["dir selbst", "deinem linken Nachbarn", "deinem rechten Nachbarn", "einem Nachbarn"],
     "doppelganger": {}
