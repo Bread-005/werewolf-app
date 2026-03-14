@@ -106,5 +106,20 @@
     "name": "Tanner",
     "germanName": "Gerber",
     "edition": "Werewolves"
+  },
+  {
+    "name": "Bodyguard",
+    "germanName": "Leibwächter",
+    "edition": "Daybreak"
+  },
+  {
+    "name": "Prince",
+    "germanName": "Prinz",
+    "edition": "Daybreak"
+  },
+  {
+    "name": "Cursed",
+    "germanName": "Verfluchter",
+    "edition": "Bonus Pack"
   }
 ]
