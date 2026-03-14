@@ -18,6 +18,11 @@
     "edition": "Werewolves"
   },
   {
+    "name": "Alpha Wolf",
+    "germanName": "Alpha Wolf",
+    "edition": "Daybreak"
+  },
+  {
     "name": "Mystic Wolf",
     "germanName": "Sehender Wolf",
     "edition": "Daybreak"

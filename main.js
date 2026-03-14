@@ -46,8 +46,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.querySelector(".start-button").addEventListener("click", async () => {
         if (activatedRoles.length === 0) return;
-        let phases = await fetch("./phases.json").then(res => res.json());
-        if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf")) phases = phases.filter(phase => phase.name !== "werewolf");
+        const allPhases = await fetch("./phases.json").then(res => res.json());
+        let phases = [];
+        for (const phase of allPhases) {
+            if (activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name) ||
+                phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up" ||
+                phase.name === "werewolf" && activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf")) {
+                phases.push(phase);
+            }
+        }
         if (!phases.find(phase => phase.name === "werewolf")) phases = phases.filter(phase => phase.name !== "minion");
 
         activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
@@ -66,8 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 continue;
             }
 
-            if (!activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name)) continue;
-            nightPhaseImage.src = "./images/" + activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name).name.toLowerCase().replaceAll(" ","_") + ".png";
+            nightPhaseImage.src = "./images/" + phase.name + ".png";
             nightPhaseText.textContent = getGermanName(phase.name) + " wach auf.";
             if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
             if (phase.name === "werewolf" && activatedRoles.find(role => role.name === "Dreamwolf")) {

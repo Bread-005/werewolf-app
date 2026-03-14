@@ -14,6 +14,10 @@
     "isMultiple": true
   },
   {
+    "name": "alpha_wolf",
+    "text": "Vertausche die Werwolf Karte aus der Mitte mit der eines Spielers."
+  },
+  {
     "name": "mystic_wolf",
     "text": "Schaue dir eine Karte eines Spielers an."
   },
