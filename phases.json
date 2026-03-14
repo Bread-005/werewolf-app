@@ -73,6 +73,11 @@
     "doppelganger": {}
   },
   {
+    "name": "revealer",
+    "text": "Du darfst die Karte eines anderen Spielers aufdecken. Wenn diese Karte nicht im Dorfbewohner Team ist, drehe sie wieder um.",
+    "doppelganger": {}
+  },
+  {
     "name": "move_card",
     "text": "Haltet eure Augen geschlossen und bewegt eure Karte ein wenig."
   },

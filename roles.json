@@ -90,6 +90,11 @@
     "edition": "Aliens"
   },
   {
+    "name": "Revealer",
+    "germanName": "Aufklärer",
+    "edition": "Daybreak"
+  },
+  {
     "id": "villager1",
     "name": "Villager",
     "germanName": "Dorfbewohner",
