@@ -3,7 +3,7 @@
     "name": "Doppelganger",
     "germanName": "Doppelgänger",
     "edition": "Werewolves",
-    "verboseRoles": ["Seer", "Apprentice Seer", "Robber", "Troublemaker", "Drunk"]
+    "verboseRoles": ["Seer", "Apprentice Seer", "Robber", "Troublemaker", "Drunk", "Mystic Wolf"]
   },
   {
     "id": "werewolf1",
@@ -16,6 +16,11 @@
     "name": "Werewolf",
     "germanName": "Werwolf",
     "edition": "Werewolves"
+  },
+  {
+    "name": "Mystic Wolf",
+    "germanName": "Sehender Wolf",
+    "edition": "Daybreak"
   },
   {
     "name": "Minion",

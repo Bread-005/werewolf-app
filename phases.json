@@ -14,6 +14,10 @@
     "isMultiple": true
   },
   {
+    "name": "mystic_wolf",
+    "text": "Schaue dir eine Karte eines Spielers an."
+  },
+  {
     "name": "minion",
     "text": "Werwölfe hebt eure Daumen.",
     "doppelganger": {}

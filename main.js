@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelector(".start-button").addEventListener("click", async () => {
         if (activatedRoles.length === 0) return;
         let phases = await fetch("./phases.json").then(res => res.json());
-        if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "werewolf");
+        if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf")) phases = phases.filter(phase => phase.name !== "werewolf");
         if (!phases.find(phase => phase.name === "werewolf")) phases = phases.filter(phase => phase.name !== "minion");
 
         activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function getGermanName(englishName) {
         for (const role of allRoles) {
-            if (englishName.toLowerCase() === role.name.toLowerCase()) {
+            if (englishName.toLowerCase() === role.name.toLowerCase().replaceAll(" ","_")) {
                 if (role.germanName === "Werwolf") return "Werwölfe";
                 return role.germanName;
             }
