@@ -70,15 +70,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             nightPhaseImage.src = "./images/" + activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name).name.toLowerCase().replaceAll(" ","_") + ".png";
             nightPhaseText.textContent = getGermanName(phase.name) + " wach auf.";
             if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
-            await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
-            if (!phase.isMultiple) {
-                await speak("./voices/wake_up.mp3");
+            if (phase.name === "werewolf" && activatedRoles.find(role => role.name === "Dreamwolf")) {
+                nightPhaseText.textContent = "Alle Werwölfe außer dem Traumwolf, wacht auf. Traumwolf heb deinen Daumen.";
+                await speak("./voices/werewolf/dreamwolf_text.mp3");
+            } else {
+                await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
+                if (!phase.isMultiple) {
+                    await speak("./voices/wake_up.mp3");
+                }
+                if (phase.isMultiple) {
+                    await speak("./voices/wake_up_multiple.mp3");
+                }
+                nightPhaseText.textContent = phase.text;
+                await speak("./voices/" + phase.name + "/" + "text.mp3");
             }
-            if (phase.isMultiple) {
-                await speak("./voices/wake_up_multiple.mp3");
-            }
-            nightPhaseText.textContent = phase.text;
-            await speak("./voices/" + phase.name + "/" + "text.mp3");
             if (phase.name === "doppelganger" && activatedRoles.filter(role => allRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name)).length > 0) {
                 await doppelgangerVerboseText(activatedRoles, nightPhaseText);
             }
@@ -93,6 +98,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await speak("./voices/random_cards/" + randomAction + ".mp3");
             }
             await waitCycle(phase);
+            if (phase.name === "werewolf" && activatedRoles.find(role => role.name === "Dreamwolf")) {
+                nightPhaseText.textContent = "Traumwolf senk deinen Daumen.";
+                await speak("./voices/werewolf/dreamwolf_ending.mp3");
+            }
             if (phase.name === "minion") {
                 nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
