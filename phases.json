@@ -4,6 +4,10 @@
     "text": "Schließt nun alle eure Augen."
   },
   {
+    "name": "sentinel",
+    "text": "Du darfst ein Schild auf die Karte eines anderen Spielers platzieren."
+  },
+  {
     "name": "doppelganger",
     "text": "Schau dir die Karte eines anderen Spielers an. Du nimmst nun diese Rolle an."
   },

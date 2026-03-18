@@ -1,5 +1,10 @@
 [
   {
+    "name": "Sentinel",
+    "germanName": "Wache",
+    "edition": "Daybreak"
+  },
+  {
     "name": "Doppelganger",
     "germanName": "Doppelgängerin",
     "edition": "Werewolves",
