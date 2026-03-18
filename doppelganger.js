@@ -7,13 +7,14 @@ async function doppelgangerVerboseText(activatedRoles, nightPhaseText) {
     const nightRoles = activatedRoles.filter(role => activatedRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name));
     for (let i = 0; i < nightRoles.length; i++) {
         if (i === nightRoles.length - 1 && nightRoles.length > 1) {
-            nightPhaseText.textContent += "oder ";
+            nightPhaseText.textContent += " oder ";
             await speak("./voices/doppelganger/verbose/or.mp3");
         }
-        nightPhaseText.textContent += nightRoles[i].germanName + ", ";
+        nightPhaseText.textContent += nightRoles[i].germanName;
+        if (i < nightRoles.length - 2) nightPhaseText.textContent += ", ";
         await speak("./voices/" + nightRoles[i].name.toLowerCase().replaceAll(" ","_") + "/" + nightRoles[i].name.toLowerCase().replaceAll(" ","_") + ".mp3");
     }
-    nightPhaseText.textContent += "Karte angesehen hast führe die Aktion jetzt durch";
+    nightPhaseText.textContent += " Karte angesehen hast führe die Aktion jetzt durch";
     await speak("./voices/doppelganger/verbose/last_part.mp3");
 }
 

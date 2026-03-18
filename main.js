@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else {
                 storage.enabledEditions.push(edition.className);
             }
+            activatedRoles = activatedRoles.filter(role => role.edition !== edition.className);
             saveLocalStorage();
             showEdition(edition);
             showRolesSelection();
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 phases.push(phase);
             }
         }
-        if (!phases.find(phase => phase.name === "werewolf")) phases = phases.filter(phase => phase.name !== "minion");
+        if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "minion");
 
         activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
 
@@ -209,6 +210,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         for (const role of enabledRoles) {
             const div = document.createElement("div");
             div.classList.add("role-card");
+            if (activatedRoles.find(role1 => role1.name === role.name)) {
+                div.style.border = "white 5px solid";
+            }
             const span = document.createElement("span");
             span.textContent = role.germanName;
             const img = document.createElement("img");

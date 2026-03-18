@@ -64,7 +64,7 @@ button {
                 transform: translateX(-50%);
                 text-shadow: 0 2px 6px rgba(0,0,0,0.8);
                 z-index: 100;
-                font-size: 12px;
+                font-size: 10px;
             }
         }
 

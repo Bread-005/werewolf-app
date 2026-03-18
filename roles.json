@@ -1,9 +1,9 @@
 [
   {
     "name": "Doppelganger",
-    "germanName": "Doppelgänger",
+    "germanName": "Doppelgängerin",
     "edition": "Werewolves",
-    "verboseRoles": ["Seer", "Apprentice Seer", "Robber", "Troublemaker", "Drunk", "Mystic Wolf"]
+    "verboseRoles": ["Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "Robber", "Witch", "Troublemaker", "Drunk"]
   },
   {
     "id": "werewolf1",
@@ -18,8 +18,8 @@
     "edition": "Werewolves"
   },
   {
-    "name": "Alpha Wolf",
-    "germanName": "Alpha Wolf",
+    "name": "Alphawolf",
+    "germanName": "Alphawolf",
     "edition": "Daybreak"
   },
   {
@@ -46,7 +46,7 @@
   },
   {
     "name": "Seer",
-    "germanName": "Seher",
+    "germanName": "Seherin",
     "edition": "Werewolves"
   },
   {
@@ -123,6 +123,11 @@
     "edition": "Werewolves"
   },
   {
+    "name": "Dreamwolf",
+    "germanName": "Traumwolf",
+    "edition": "Daybreak"
+  },
+  {
     "name": "Bodyguard",
     "germanName": "Leibwächter",
     "edition": "Daybreak"
@@ -130,11 +135,6 @@
   {
     "name": "Prince",
     "germanName": "Prinz",
-    "edition": "Daybreak"
-  },
-  {
-    "name": "Dreamwolf",
-    "germanName": "Traumwolf",
     "edition": "Daybreak"
   },
   {
