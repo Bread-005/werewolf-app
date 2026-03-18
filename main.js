@@ -88,8 +88,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (phase.isMultiple) {
                     await speak("./voices/wake_up_multiple.mp3");
                 }
-                nightPhaseText.textContent = phase.text;
-                await speak("./voices/" + phase.name + "/" + "text.mp3");
+                if (!phase.textWithMarks || !activatedRoles.find(role => role.mark)) {
+                    nightPhaseText.textContent = phase.text;
+                    await speak("./voices/" + phase.name + "/" + "text.mp3");
+                } else {
+                    nightPhaseText.textContent = phase.textWithMarks;
+                    await speak("./voices/" + phase.name + "/" + "textWithMarks.mp3");
+                }
             }
             if (phase.name === "doppelganger" && activatedRoles.filter(role => allRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name)).length > 0) {
                 await doppelgangerVerboseText(activatedRoles, nightPhaseText);
@@ -109,10 +114,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = "Traumwolf senk deinen Daumen.";
                 await speak("./voices/werewolf/dreamwolf_ending.mp3");
             }
-            if (phase.name === "minion") {
-                nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
-                await speak("./voices/" + phase.name + "/ending.mp3");
-            }
             nightPhaseText.textContent = getGermanName(phase.name) + (phase.isMultiple ? " schließt eure" : " schließ deine") + " Augen.";
             await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
             if (!phase.isMultiple) {
@@ -123,23 +124,31 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             if (phase.doppelganger && activatedRoles.find(role => role.name === "Doppelganger")) {
                 nightPhaseImage.src = "./images/doppelganger.png";
-                nightPhaseText.textContent = "Doppelgänger, wenn du die " + getGermanName(phase.name) + " Karte angesehen hast, wach auf.";
+                nightPhaseText.textContent = "Doppelgängerin, wenn du die " + getGermanName(phase.name) + " Karte angesehen hast, wach auf.";
                 await speak("./voices/doppelganger/later_action/first_part.mp3");
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
                 await speak("./voices/doppelganger/later_action/last_part.mp3");
-                nightPhaseText.textContent = phase.text;
-                await speak("./voices/" + phase.name + "/text.mp3");
+                if (phase.name !== "minion" && phase.name !== "auraseer") {
+                    nightPhaseText.textContent = phase.text;
+                    await speak("./voices/" + phase.name + "/text.mp3");
+                }
                 if (phase.randomActions) {
                     const randomAction = phase.randomActions.sort(() => Math.random() - 0.5)[0];
                     nightPhaseText.textContent = nightPhaseText.textContent += randomAction;
                     await speak("./voices/random_cards/" + randomAction + ".mp3");
                 }
                 await waitCycle(phase);
-                if (phase.name === "minion") nightPhaseImage.textContent += "Werwölfe senkt eure Daumen wieder. ";
-                nightPhaseText.textContent += "Doppelgänger schließ deine Augen.";
-                if (phase.name === "minion") await speak("./voices/" + phase.name + "/ending.mp3");
+                nightPhaseText.textContent += "Doppelgängerin schließ deine Augen.";
                 await speak("./voices/doppelganger/doppelganger.mp3");
                 await speak("./voices/close_your_eyes.mp3");
+            }
+            if (phase.name === "minion") {
+                nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
+                await speak("./voices/" + phase.name + "/ending.mp3");
+            }
+            if (phase.name === "auraseer") {
+                nightPhaseText.textContent = "Senkt alle eure Daumen wieder.";
+                await speak("./voices/" + phase.name + "/ending.mp3");
             }
         }
 

@@ -62,6 +62,13 @@
     "text": "Du darfst die Karten von zwei anderen Spielern vertauschen."
   },
   {
+    "name": "auraseer",
+    "text": "Alle Spieler, die bereits eine Karte vertauscht oder angesehen haben, hebt jetzt eure Daumen.",
+    "marksMakeDifference": true,
+    "textWithMarks": "Alle Spieler, die bereits eine Karte oder Marke vertauscht oder angesehen haben, hebt jetzt eure Daumen.",
+    "doppelganger": {}
+  },
+  {
     "name": "drunk",
     "text": "Vertausche deine Karte mit einer aus der Mitte."
   },
