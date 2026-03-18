@@ -227,7 +227,7 @@ button {
         margin-top: 30px;
         transform: scale(2);
 
-        #alien-settings {
+        .random-role-setting {
             border: 3px solid white;
             display: flex;
             justify-content: center;

@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
         saveLocalStorage();
     });
 
-    document.getElementById("alien-settings").addEventListener("click", () => {
+    document.querySelectorAll(".random-role-setting").forEach(div => div.addEventListener("click", () => {
+        storage.currentSettingRole = div.id.replace("-settings", "");
+        saveLocalStorage();
         window.location = "role_settings.html";
-    });
+    }));
 });

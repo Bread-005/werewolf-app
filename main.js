@@ -9,7 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             enabledEditions: ["Werewolves"],
             actionTime: 5,
             votingTime: 300,
-            alienRandomActionChances: {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0}
+            currentSettingRole: "",
+            alienRandomActionChances: {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0},
+            psychicRandomActionChances: {neighbor: 10, even_player: 10, odd_player: 10, not_neighbor: 10, any_player: 10, middle: 10},
+            morticianRandomActionChances: {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10}
         }
         localStorage.setItem("werewolf-app", JSON.stringify(storage1));
         window.location.reload();
@@ -22,6 +25,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!storage.alienRandomActionChances) {
         storage.alienRandomActionChances = {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0};
+        saveLocalStorage();
+    }
+
+    if (!storage.psychicRandomActionChances) {
+        storage.psychicRandomActionChances = {neighbor: 10, even_player: 10, odd_player: 10, not_neighbor: 10, any_player: 10, middle: 10};
+        saveLocalStorage();
+    }
+
+    if (!storage.morticianRandomActionChances) {
+        storage.morticianRandomActionChances = {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10};
         saveLocalStorage();
     }
 
@@ -58,7 +71,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         for (const phase of allPhases) {
             if (activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name) ||
                 phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up" ||
-                phase.name === "werewolf" && activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf")) {
+                phase.name === "werewolf" && activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf") ||
+                phase.name === "alien" && activatedRoles.find(role => role.name === "Sythetic Alien" || role.name === "Zerb" || role.name === "Groob")) {
                 phases.push(phase);
             }
         }
@@ -110,33 +124,35 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = phase.secondText;
                 await speak("./voices/" + phase.name + "/second_text.mp3");
             }
-            if (phase.alienRandomActions) {
+            if (phase.randomActions) {
                 const randomActions = [];
-                for (const action of phase.alienRandomActions) {
-                    for (let i = 0; i < storage.alienRandomActionChances[action.name] / 5; i++) {
+                for (const action of phase.randomActions) {
+                    for (let i = 0; i < storage[phase.name + "RandomActionChances"][action.name]; i++) {
                         randomActions.push(action);
                     }
                 }
-                const randomAlienAction = randomActions.sort(() => Math.random() - 0.5)[0];
-                if (randomAlienAction.name !== "stare" && randomAlienAction.name !== "view") {
-                    nightPhaseText.textContent = randomAlienAction.text;
-                    await speak("./voices/alien/random_actions/" + randomAlienAction.name + ".mp3");
+                if (phase.name === "alien") {
+                    const randomAlienAction = randomActions.sort(() => Math.random() - 0.5)[0] || {name: "stare", text: ""};
+                    if (randomAlienAction.name !== "stare" && randomAlienAction.name !== "view") {
+                        nightPhaseText.textContent = randomAlienAction.text;
+                        await speak("./voices/alien/random_actions/" + randomAlienAction.name + ".mp3");
+                    }
+                    if (randomAlienAction.name === "view") {
+                        nightPhaseText.textContent = "Seht euch zusammen eine Karte an von ";
+                        const randomView = randomActions.find(action => action.name === "view").viewOptions.sort(() => Math.random() - 0.5)[0];
+                        nightPhaseText.textContent += randomView;
+                        await speak("./voices/alien/random_actions/view_first_part.mp3");
+                        await speak("./voices/random_cards/" + randomView + ".mp3");
+                    }
+                    if (randomAlienAction.name === "timer") {
+                        storage.votingTime = Math.round(storage.votingTime / 2);
+                    }
                 }
-                if (randomAlienAction.name === "view") {
-                    nightPhaseText.textContent = "Seht euch zusammen eine Karte an von ";
-                    const randomView = randomActions.find(action => action.name === "view").viewOptions.sort(() => Math.random() - 0.5)[0];
-                    nightPhaseText.textContent += randomView;
-                    await speak("./voices/alien/random_actions/view_first_part.mp3");
-                    await speak("./voices/random_cards/" + randomView + ".mp3");
+                else {
+                    const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
+                    nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
+                    await speak("./voices/random_cards/" + randomAction.text + ".mp3");
                 }
-                if (randomAlienAction.name === "timer") {
-                    storage.votingTime = Math.round(storage.votingTime / 2);
-                }
-            }
-            if (phase.randomActions) {
-                const randomAction = phase.randomActions.sort(() => Math.random() - 0.5)[0];
-                nightPhaseText.textContent = nightPhaseText.textContent += randomAction;
-                await speak("./voices/random_cards/" + randomAction + ".mp3");
             }
             await waitCycle(phase);
             if (phase.name === "werewolf" && activatedRoles.find(role => role.name === "Dreamwolf")) {
@@ -161,10 +177,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                     nightPhaseText.textContent = phase.text;
                     await speak("./voices/" + phase.name + "/text.mp3");
                 }
-                if (phase.randomActions) {
-                    const randomAction = phase.randomActions.sort(() => Math.random() - 0.5)[0];
-                    nightPhaseText.textContent = nightPhaseText.textContent += randomAction;
-                    await speak("./voices/random_cards/" + randomAction + ".mp3");
+                if (phase.name !== "alien" && phase.randomActions) {
+                    const randomActions = [];
+                    for (const action of phase.randomActions) {
+                        for (let i = 0; i < storage[phase.name + "RandomActionChances"][action.name]; i++) {
+                            randomActions.push(action);
+                        }
+                    }
+                    const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
+                    nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
+                    await speak("./voices/random_cards/" + randomAction.text + ".mp3");
                 }
                 await waitCycle(phase);
                 nightPhaseText.textContent += "Doppelgängerin schließ deine Augen.";

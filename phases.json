@@ -60,7 +60,14 @@
   {
     "name": "psychic",
     "text": "Du darfst dir eine Karte ansehen von ",
-    "randomActions": ["einem Nachbarn", "einem geraden Spieler", "einem ungeraden Spieler", "einem Spieler mit einer niedrigeren Nummer als du", "einem Spieler mit einer höheren Nummer als du", "einem Spieler", "der Mitte"],
+    "randomActions": [
+      {"name": "neighbor", "text": "einem Nachbarn"},
+      {"name": "even_player", "text": "einem geraden Spieler"},
+      {"name": "odd_player", "text": "einem ungeraden Spieler"},
+      {"name": "not_neighbor", "text": "einem Spieler der nicht neben dir sitzt"},
+      {"name": "any_player", "text": "einem Spieler"},
+      {"name": "middle", "text": "der Mitte"}
+    ],
     "doppelganger": {}
   },
   {
@@ -98,7 +105,12 @@
   {
     "name": "mortician",
     "text": "Du darfst dir die Karte ansehen von ",
-    "randomActions": ["dir selbst", "deinem linken Nachbarn", "deinem rechten Nachbarn", "einem Nachbarn"],
+    "randomActions": [
+      {"name": "self", "text": "dir selbst"},
+      {"name": "left_neighbor", "text": "deinem linken Nachbarn"},
+      {"name": "right_neighbor", "text": "deinem rechten Nachbarn"},
+      {"name": "neighbor", "text": "einem Nachbarn"}
+    ],
     "doppelganger": {}
   },
   {
