@@ -50,6 +50,11 @@
     "edition": "Werewolves"
   },
   {
+    "name": "Apprentice Tanner",
+    "germanName": "Nachwuchs Gerber",
+    "edition": "Bonus Pack"
+  },
+  {
     "id": "mason1",
     "name": "Mason",
     "germanName": "Freimaurer",

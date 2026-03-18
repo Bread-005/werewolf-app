@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         }
         if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "minion");
+        if (!activatedRoles.find(role => role.name === "Tanner")) phases = phases.find(phase => phase.name === "apprentice_tanner");
 
         activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
 
@@ -173,7 +174,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await speak("./voices/doppelganger/later_action/first_part.mp3");
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
                 await speak("./voices/doppelganger/later_action/last_part.mp3");
-                if (phase.name !== "minion" && phase.name !== "auraseer") {
+                if (phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "auraseer") {
                     nightPhaseText.textContent = phase.text;
                     await speak("./voices/" + phase.name + "/text.mp3");
                 }
@@ -195,6 +196,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             if (phase.name === "minion") {
                 nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
+                await speak("./voices/" + phase.name + "/ending.mp3");
+            }
+            if (phase.name === "apprentice_tanner") {
+                nightPhaseText.textContent = "Gerber senk deinen Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
             if (phase.name === "auraseer") {

@@ -45,6 +45,11 @@
     "doppelganger": {}
   },
   {
+    "name": "apprentice_tanner",
+    "text": "Gerber heb deinen Daumen",
+    "doppelganger": {}
+  },
+  {
     "name": "mason",
     "text": "Freimaurer wacht auf und seht euch nach dem anderen Freimaurer um.",
     "isMultiple": true
