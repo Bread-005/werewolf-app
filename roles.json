@@ -11,6 +11,18 @@
     "verboseRoles": ["Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
   },
   {
+    "id": "alien1",
+    "name": "Alien",
+    "germanName": "Alien",
+    "edition": "Aliens"
+  },
+  {
+    "id": "alien2",
+    "name": "Alien",
+    "germanName": "Alien",
+    "edition": "Aliens"
+  },
+  {
     "id": "werewolf1",
     "name": "Werewolf",
     "germanName": "Werwolf",

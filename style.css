@@ -201,23 +201,23 @@ button {
     }
 }
 
+.back-button {
+    padding: 7px;
+    width: 100%;
+    margin: 20px;
+
+    button {
+        width: 40px;
+        height: 40px;
+        background: gray;
+    }
+}
+
 .settings-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    .back-button {
-        padding: 7px;
-        width: 100%;
-        margin: 20px;
-
-        button {
-            width: 40px;
-            height: 40px;
-            background: gray;
-        }
-    }
 
     .timer {
         display: flex;
@@ -226,5 +226,38 @@ button {
         gap: 10px;
         margin-top: 30px;
         transform: scale(2);
+
+        #alien-settings {
+            border: 3px solid white;
+            display: flex;
+            justify-content: center;
+            padding: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+}
+
+.role-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: royalblue;
+
+    .all-settings {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        font-size: 25px;
+        gap: 5px;
+
+        .single-setting {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid white;
+            padding: 4px;
+        }
     }
 }

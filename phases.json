@@ -12,6 +12,20 @@
     "text": "Schau dir die Karte eines anderen Spielers an. Du nimmst nun diese Rolle an."
   },
   {
+    "name": "alien",
+    "text": "Aliens wacht auf und seht euch nach anderen Aliens um.",
+    "alienRandomActions": [
+      {"name": "view", "viewOptions": ["einem Alien Nachbarn", "der Mitte", "einem Spieler der nicht neben einem Alien sitzt", "einem geraden Spieler", "einem ungeraden Spieler"]},
+      {"name": "stare", "text": ""},
+      {"name": "timer", "text": "Ihr habt den Timer halbiert."},
+      {"name": "left", "text": "Gebt eure Karte, eurem linken Alien."},
+      {"name": "right", "text": "Gebt eure Karte, eurem rechten Alien."},
+      {"name": "show", "text": "Zeigt eure Karte, den anderen Aliens."},
+      {"name": "new_alien", "text": "Streckt alle eure Faust raus. Aliens tippt eine der Fäuste an. Der angetippte Spieler ist nun auch ein Alien und behält seine Rollenfähigkeit."}
+    ],
+    "isMultiple": true
+  },
+  {
     "name": "werewolf",
     "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
     "secondText": "Du bist alleine Werwolf? Dann darfst du dir eine Karte aus der Mitte ansehen.",

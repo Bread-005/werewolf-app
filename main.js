@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const storage1 = {
             enabledEditions: ["Werewolves"],
             actionTime: 5,
-            votingTime: 300
+            votingTime: 300,
+            alienRandomActionChances: {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0}
         }
         localStorage.setItem("werewolf-app", JSON.stringify(storage1));
         window.location.reload();
@@ -16,6 +17,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!storage.enabledEditions) {
         storage.enabledEditions = ["Werewolves"];
+        saveLocalStorage();
+    }
+
+    if (!storage.alienRandomActionChances) {
+        storage.alienRandomActionChances = {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0};
         saveLocalStorage();
     }
 
@@ -103,6 +109,29 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await sleep(1.5);
                 nightPhaseText.textContent = phase.secondText;
                 await speak("./voices/" + phase.name + "/second_text.mp3");
+            }
+            if (phase.alienRandomActions) {
+                const randomActions = [];
+                for (const action of phase.alienRandomActions) {
+                    for (let i = 0; i < storage.alienRandomActionChances[action.name] / 5; i++) {
+                        randomActions.push(action);
+                    }
+                }
+                const randomAlienAction = randomActions.sort(() => Math.random() - 0.5)[0];
+                if (randomAlienAction.name !== "stare" && randomAlienAction.name !== "view") {
+                    nightPhaseText.textContent = randomAlienAction.text;
+                    await speak("./voices/alien/random_actions/" + randomAlienAction.name + ".mp3");
+                }
+                if (randomAlienAction.name === "view") {
+                    nightPhaseText.textContent = "Seht euch zusammen eine Karte an von ";
+                    const randomView = randomActions.find(action => action.name === "view").viewOptions.sort(() => Math.random() - 0.5)[0];
+                    nightPhaseText.textContent += randomView;
+                    await speak("./voices/alien/random_actions/view_first_part.mp3");
+                    await speak("./voices/random_cards/" + randomView + ".mp3");
+                }
+                if (randomAlienAction.name === "timer") {
+                    storage.votingTime = Math.round(storage.votingTime / 2);
+                }
             }
             if (phase.randomActions) {
                 const randomAction = phase.randomActions.sort(() => Math.random() - 0.5)[0];
@@ -250,6 +279,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         for (const role of allRoles) {
             if (englishName.toLowerCase() === role.name.toLowerCase().replaceAll(" ","_")) {
                 if (role.germanName === "Werwolf") return "Werwölfe";
+                if (role.germanName === "Alien") return "Aliens";
                 return role.germanName;
             }
         }

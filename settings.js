@@ -21,4 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
         storage.votingTime = Math.floor(Number(votingTimeInput.value));
         saveLocalStorage();
     });
+
+    document.getElementById("alien-settings").addEventListener("click", () => {
+        window.location = "role_settings.html";
+    });
 });
