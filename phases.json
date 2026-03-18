@@ -62,6 +62,10 @@
     "text": "Du darfst die Karten von zwei anderen Spielern vertauschen."
   },
   {
+    "name": "villageidiot",
+    "text": "Du darfst alle Karten, außer deiner eigenen, nach links oder rechts verschieben."
+  },
+  {
     "name": "auraseer",
     "text": "Alle Spieler, die bereits eine Karte vertauscht oder angesehen haben, hebt jetzt eure Daumen.",
     "marksMakeDifference": true,

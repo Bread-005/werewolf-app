@@ -8,7 +8,7 @@
     "name": "Doppelganger",
     "germanName": "Doppelgängerin",
     "edition": "Werewolves",
-    "verboseRoles": ["Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "Robber", "Witch", "Troublemaker", "Drunk"]
+    "verboseRoles": ["Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
   },
   {
     "id": "werewolf1",
@@ -78,6 +78,11 @@
     "name": "Troublemaker",
     "germanName": "Unruhestifterin",
     "edition": "Werewolves"
+  },
+  {
+    "name": "Villageidiot",
+    "germanName": "Dorftrottel",
+    "edition": "Daybreak"
   },
   {
     "name": "Auraseer",

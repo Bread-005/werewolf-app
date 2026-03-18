@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     async function waitCycle(phase) {
-        const pauseTime = (phase.name === "doppelganger" ? storage.actionTime * 2 : storage.actionTime);
+        const pauseTime = (phase.name === "doppelganger" || phase.name === "villageidiot" ? storage.actionTime * 2 : storage.actionTime);
         for (let i = pauseTime; i >= 0; i--) {
             nightPhaseText.textContent = "(Pause: " + pauseTime + " Sekunden)";
             const div = document.createElement("div");
