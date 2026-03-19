@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         }
         if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "minion");
-        if (!activatedRoles.find(role => role.name === "Tanner")) phases = phases.find(phase => phase.name === "apprentice_tanner");
+        if (!activatedRoles.find(role => role.name === "Tanner")) phases = phases.filter(phase => phase.name !== "apprentice_tanner");
 
         activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
 
@@ -174,9 +174,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await speak("./voices/doppelganger/later_action/first_part.mp3");
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
                 await speak("./voices/doppelganger/later_action/last_part.mp3");
-                if (phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "auraseer") {
+                if (phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "auraseer" &&
+                    phase.name !== "curator") {
                     nightPhaseText.textContent = phase.text;
                     await speak("./voices/" + phase.name + "/text.mp3");
+                }
+                if (phase.name === "curator") {
+                    nightPhaseText.textContent = phase.doppelganger.text;
+                    await speak("./voices/" + phase.name + "/doppelganger_text.mp3");
                 }
                 if (phase.name !== "alien" && phase.randomActions) {
                     const randomActions = [];

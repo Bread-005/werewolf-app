@@ -124,6 +124,13 @@
     "doppelganger": {}
   },
   {
+    "name": "curator",
+    "text": "Du darfst ein Artefakt auf die Karte eines Spielers legen.",
+    "doppelganger": {
+      "text": "Du darfst ein Artefakt auf die Karte eines Spielers legen, auf der noch keins liegt."
+    }
+  },
+  {
     "name": "move_card",
     "text": "Haltet eure Augen geschlossen und bewegt eure Karte ein wenig."
   },

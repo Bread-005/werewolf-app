@@ -127,6 +127,11 @@
     "edition": "Daybreak"
   },
   {
+    "name": "Curator",
+    "germanName": "Kurator",
+    "edition": "Daybreak"
+  },
+  {
     "id": "villager1",
     "name": "Villager",
     "germanName": "Dorfbewohner",
