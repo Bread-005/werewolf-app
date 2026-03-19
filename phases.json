@@ -63,6 +63,10 @@
     "text": "Du darfst dir eine Karte aus der Mitte ansehen."
   },
   {
+    "name": "pi",
+    "text": "Du darfst bis zu zwei Karten von deinen Mitspielern anschauen. Wenn du eine Karte anguckst die nicht im Dorfbewohnerteam ist, wirst du zu dieser Karte. Du darfst dir dann auch keine andere Karte mehr ansehen."
+  },
+  {
     "name": "psychic",
     "text": "Du darfst dir eine Karte ansehen von ",
     "randomActions": [
