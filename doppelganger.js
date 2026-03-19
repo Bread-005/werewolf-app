@@ -1,10 +1,10 @@
-import {sleep, speak} from "./main.js";
+import {sleep, speak, storage} from "./main.js";
 
-async function doppelgangerVerboseText(activatedRoles, nightPhaseText) {
+async function doppelgangerVerboseText(nightPhaseText) {
     await sleep(2);
     nightPhaseText.textContent = "Wenn du die ";
     await speak("./voices/doppelganger/verbose/first_part.mp3");
-    const nightRoles = activatedRoles.filter(role => activatedRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name));
+    const nightRoles = storage.activatedRoles.filter(role => storage.activatedRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name));
     for (let i = 0; i < nightRoles.length; i++) {
         if (i === nightRoles.length - 1 && nightRoles.length > 1) {
             nightPhaseText.textContent += " oder ";

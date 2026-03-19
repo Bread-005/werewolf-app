@@ -8,7 +8,7 @@
     "name": "Doppelganger",
     "germanName": "Doppelgängerin",
     "edition": "Werewolves",
-    "verboseRoles": ["Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "PI", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
+    "verboseRoles": ["Sentinel", "Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "PI", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
   },
   {
     "id": "alien1",

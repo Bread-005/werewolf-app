@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!storage) {
         const storage1 = {
+            activatedRoles: [],
             enabledEditions: ["Werewolves"],
             actionTime: 5,
             votingTime: 300,
@@ -38,6 +39,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         saveLocalStorage();
     }
 
+    if (!storage.activatedRoles) {
+        storage.activatedRoles = [];
+        saveLocalStorage();
+    }
+
     const editions = document.querySelector(".editions");
     for (const edition of editions.children) {
         showEdition(edition);
@@ -47,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else {
                 storage.enabledEditions.push(edition.className);
             }
-            activatedRoles = activatedRoles.filter(role => role.edition !== edition.className);
+            storage.activatedRoles = storage.activatedRoles.filter(role => role.edition !== edition.className);
             saveLocalStorage();
             showEdition(edition);
             showRolesSelection();
@@ -56,7 +62,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const roleGrid = document.querySelector(".roles-grid");
     const allRoles = await fetch("./roles.json").then(res => res.json());
-    let activatedRoles = [];
     showRolesSelection();
 
     window.scrollTo(0, 0);
@@ -65,21 +70,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nightPhaseText = document.getElementById("night-phase-text");
 
     document.querySelector(".start-button").addEventListener("click", async () => {
-        if (activatedRoles.length === 0) return;
         const allPhases = await fetch("./phases.json").then(res => res.json());
         let phases = [];
         for (const phase of allPhases) {
-            if (activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name) ||
+            if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name) ||
                 phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up" ||
-                phase.name === "werewolf" && activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf") ||
-                phase.name === "alien" && activatedRoles.find(role => role.name === "Sythetic Alien" || role.name === "Zerb" || role.name === "Groob")) {
+                phase.name === "werewolf" && storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf") ||
+                phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Sythetic Alien" || role.name === "Zerb" || role.name === "Groob")) {
                 phases.push(phase);
             }
         }
-        if (!activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "minion");
-        if (!activatedRoles.find(role => role.name === "Tanner")) phases = phases.filter(phase => phase.name !== "apprentice_tanner");
+        if (!storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "minion");
+        if (!storage.activatedRoles.find(role => role.name === "Tanner")) phases = phases.filter(phase => phase.name !== "apprentice_tanner");
 
-        activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
+        storage.activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
+        saveLocalStorage();
 
         document.querySelector(".editions").style.display = "none";
         roleGrid.style.display = "none";
@@ -98,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             nightPhaseImage.src = "./images/" + phase.name + ".png";
             nightPhaseText.textContent = getGermanName(phase.name) + " wach auf.";
             if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
-            if (phase.name === "werewolf" && activatedRoles.find(role => role.name === "Dreamwolf")) {
+            if (phase.name === "werewolf" && storage.activatedRoles.find(role => role.name === "Dreamwolf")) {
                 nightPhaseText.textContent = "Alle Werwölfe außer dem Traumwolf, wacht auf. Traumwolf heb deinen Daumen.";
                 await speak("./voices/werewolf/dreamwolf_text.mp3");
             } else {
@@ -109,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (phase.isMultiple) {
                     await speak("./voices/wake_up_multiple.mp3");
                 }
-                if (!phase.textWithMarks || !activatedRoles.find(role => role.mark)) {
+                if (!phase.textWithMarks || !storage.activatedRoles.find(role => role.mark)) {
                     nightPhaseText.textContent = phase.text;
                     await speak("./voices/" + phase.name + "/" + "text.mp3");
                 } else {
@@ -117,8 +122,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     await speak("./voices/" + phase.name + "/" + "textWithMarks.mp3");
                 }
             }
-            if (phase.name === "doppelganger" && activatedRoles.filter(role => allRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name)).length > 0) {
-                await doppelgangerVerboseText(activatedRoles, nightPhaseText);
+            if (phase.name === "doppelganger" && storage.activatedRoles.filter(role => allRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name)).length > 0) {
+                await doppelgangerVerboseText(nightPhaseText);
             }
             if (phase.secondText) {
                 await sleep(1.5);
@@ -156,7 +161,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             }
             await waitCycle(phase);
-            if (phase.name === "werewolf" && activatedRoles.find(role => role.name === "Dreamwolf")) {
+            if (phase.name === "werewolf" && storage.activatedRoles.find(role => role.name === "Dreamwolf")) {
                 nightPhaseText.textContent = "Traumwolf senk deinen Daumen.";
                 await speak("./voices/werewolf/dreamwolf_ending.mp3");
             }
@@ -168,7 +173,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.isMultiple) {
                 await speak("./voices/close_your_eyes_multiple.mp3");
             }
-            if (phase.doppelganger && activatedRoles.find(role => role.name === "Doppelganger")) {
+            if (phase.doppelganger && storage.activatedRoles.find(role => role.name === "Doppelganger")) {
                 nightPhaseImage.src = "./images/doppelganger.png";
                 nightPhaseText.textContent = "Doppelgängerin, wenn du die " + getGermanName(phase.name) + " Karte angesehen hast, wach auf.";
                 await speak("./voices/doppelganger/later_action/first_part.mp3");
@@ -280,7 +285,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         for (const role of enabledRoles) {
             const div = document.createElement("div");
             div.classList.add("role-card");
-            if (activatedRoles.find(role1 => role1.name === role.name)) {
+            if (storage.activatedRoles.find(role1 => role1.name === role.name)) {
                 div.style.border = "white 5px solid";
             }
             const span = document.createElement("span");
@@ -298,11 +303,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 // clickSound.play();
                 if (!div.style.border || div.style.border === "none") {
                     div.style.border = "white 5px solid";
-                    activatedRoles.push(role);
+                    storage.activatedRoles.push(role);
                 } else {
                     div.style.border = "none";
-                    activatedRoles = activatedRoles.filter(role1 => role1 !== role);
+                    storage.activatedRoles = storage.activatedRoles.filter(role1 => role1 !== role);
                 }
+                saveLocalStorage();
             });
         }
     }
