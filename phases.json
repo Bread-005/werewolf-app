@@ -14,7 +14,7 @@
   {
     "name": "alien",
     "text": "Aliens wacht auf und seht euch nach anderen Aliens um.",
-    "alienRandomActions": [
+    "randomActions": [
       {"name": "view", "viewOptions": ["einem Alien Nachbarn", "der Mitte", "einem Spieler der nicht neben einem Alien sitzt", "einem geraden Spieler", "einem ungeraden Spieler"]},
       {"name": "stare", "text": ""},
       {"name": "timer", "text": "Ihr habt den Timer halbiert."},
@@ -23,13 +23,29 @@
       {"name": "show", "text": "Zeigt eure Karte, den anderen Aliens."},
       {"name": "new_alien", "text": "Streckt alle eure Faust raus. Aliens tippt eine der Fäuste an. Der angetippte Spieler ist nun auch ein Alien und behält seine Rollenfähigkeit."}
     ],
-    "isMultiple": true
+    "isMultiple": true,
+    "cow": {
+      "text": "Kuh, streck deine Faust raus. Wenn ein Alien direkt neben der Kuh sitzt, muss ein Alien, die Faust der Kuh antippen.",
+      "ending": "Kuh, nimmt deine Faust zurück.",
+      "doppelganger": {
+        "text": "Doppelgängerin, wenn du die Kuh Karte angesehen hast, streck deine Faust raus. Wenn ein Alien direkt neben der Doppelgänger-Kuh sitzt, muss ein Alien, die Faust der Doppelgänger-Kuh antippen.",
+        "ending": "Doppelgängerin, nimm deine Faust zurück."
+      }
+    }
   },
   {
     "name": "werewolf",
     "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
     "secondText": "Du bist alleine Werwolf? Dann darfst du dir eine Karte aus der Mitte ansehen.",
-    "isMultiple": true
+    "isMultiple": true,
+    "cow": {
+      "text": "Kuh, streck deine Faust raus. Wenn ein Werwolf direkt neben der Kuh sitzt, muss dieser Werwolf, die Faust der Kuh antippen.",
+      "ending": "Kuh, nimmt deine Faust zurück.",
+      "doppelganger": {
+        "text": "Doppelgängerin, wenn du die Kuh Karte angesehen hast, streck deine Faust raus. Wenn ein Werwolf direkt neben der Doppelgänger-Kuh sitzt, muss dieser Werwolf, die Faust der Doppelgänger-Kuh antippen.",
+        "ending": "Doppelgängerin, nimm deine Faust zurück."
+      }
+    }
   },
   {
     "name": "alphawolf",

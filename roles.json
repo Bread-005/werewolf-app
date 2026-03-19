@@ -23,6 +23,11 @@
     "edition": "Aliens"
   },
   {
+    "name": "Cow",
+    "germanName": "Kuh",
+    "edition": "Aliens"
+  },
+  {
     "id": "werewolf1",
     "name": "Werewolf",
     "germanName": "Werwolf",

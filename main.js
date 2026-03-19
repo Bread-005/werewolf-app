@@ -1,4 +1,5 @@
 import {doppelgangerVerboseText} from "./doppelganger.js";
+import {cowAction} from "./cow.js";
 
 const storage = JSON.parse(localStorage.getItem("werewolf-app"));
 
@@ -160,11 +161,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                     await speak("./voices/random_cards/" + randomAction.text + ".mp3");
                 }
             }
-            await waitCycle(phase);
+            await waitCycle(phase, nightPhaseText);
+            if ((phase.name === "alien" || phase.name === "werewolf") && storage.activatedRoles.find(role => role.name === "Cow")) {
+                await cowAction(phase, nightPhaseImage, nightPhaseText);
+            }
             if (phase.name === "werewolf" && storage.activatedRoles.find(role => role.name === "Dreamwolf")) {
                 nightPhaseText.textContent = "Traumwolf senk deinen Daumen.";
                 await speak("./voices/werewolf/dreamwolf_ending.mp3");
             }
+            nightPhaseImage.src = "./images/" + phase.name + ".png";
             nightPhaseText.textContent = getGermanName(phase.name) + (phase.isMultiple ? " schließt eure" : " schließ deine") + " Augen.";
             await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
             if (!phase.isMultiple) {
@@ -199,7 +204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
                     await speak("./voices/random_cards/" + randomAction.text + ".mp3");
                 }
-                await waitCycle(phase);
+                await waitCycle(phase, nightPhaseText);
                 nightPhaseText.textContent += "Doppelgängerin schließ deine Augen.";
                 await speak("./voices/doppelganger/doppelganger.mp3");
                 await speak("./voices/close_your_eyes.mp3");
@@ -254,19 +259,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.reload();
     });
 
-    async function waitCycle(phase) {
-        const pauseTime = (phase.name === "doppelganger" || phase.name === "villageidiot" ? storage.actionTime * 2 : storage.actionTime);
-        for (let i = pauseTime; i >= 0; i--) {
-            nightPhaseText.textContent = "(Pause: " + pauseTime + " Sekunden)";
-            const div = document.createElement("div");
-            div.textContent = "00:" + (i < 10 ? "0" : "") + i.toString();
-            nightPhaseText.append(div);
-            await sleep(1);
-            nightPhaseText.removeChild(div);
-        }
-        nightPhaseText.textContent = "";
-    }
-
     function showEdition(edition) {
         if (storage.enabledEditions.includes(edition.className)) {
             edition.style.border = "blue solid 2px";
@@ -306,7 +298,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     storage.activatedRoles.push(role);
                 } else {
                     div.style.border = "none";
-                    storage.activatedRoles = storage.activatedRoles.filter(role1 => role1 !== role);
+                    storage.activatedRoles = storage.activatedRoles.filter(role1 => role1.id + role1.name !== role.id + role.name);
                 }
                 saveLocalStorage();
             });
@@ -341,4 +333,17 @@ function saveLocalStorage() {
     localStorage.setItem("werewolf-app", JSON.stringify(storage));
 }
 
-export {speak, sleep, storage, saveLocalStorage};
+async function waitCycle(phase, nightPhaseText) {
+    const pauseTime = (phase.name === "doppelganger" || phase.name === "villageidiot" ? storage.actionTime * 2 : storage.actionTime);
+    for (let i = pauseTime; i >= 0; i--) {
+        nightPhaseText.textContent = "(Pause: " + pauseTime + " Sekunden)";
+        const div = document.createElement("div");
+        div.textContent = "00:" + (i < 10 ? "0" : "") + i.toString();
+        nightPhaseText.append(div);
+        await sleep(1);
+        nightPhaseText.removeChild(div);
+    }
+    nightPhaseText.textContent = "";
+}
+
+export {speak, sleep, storage, saveLocalStorage, waitCycle};
