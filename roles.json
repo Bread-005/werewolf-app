@@ -43,6 +43,11 @@
     "edition": "Aliens"
   },
   {
+    "name": "Leader",
+    "germanName": "Boss",
+    "edition": "Aliens"
+  },
+  {
     "id": "werewolf1",
     "name": "Werewolf",
     "germanName": "Werwolf",

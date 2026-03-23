@@ -1,7 +1,8 @@
-import {doppelgangerVerboseText} from "./doppelganger.js";
+import {doppelgangerExtraWake, doppelgangerVerboseText} from "./doppelganger.js";
 import {cowAction} from "./cow.js";
 
 const storage = JSON.parse(localStorage.getItem("werewolf-app"));
+let allRoles = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -62,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const roleGrid = document.querySelector(".roles-grid");
-    const allRoles = await fetch("./roles.json").then(res => res.json());
+    allRoles = await fetch("./roles.json").then(res => res.json());
     showRolesSelection();
 
     window.scrollTo(0, 0);
@@ -103,16 +104,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             nightPhaseImage.src = "./images/" + phase.name + ".png";
-
-            if (phase.name === "groob") {
-                nightPhaseText.textContent = phase.text;
-                await speak("./voices/groob/text.mp3");
-                await waitCycle(phase, nightPhaseText);
-                nightPhaseText.textContent = phase.ending;
-                await speak("./voices/groob/ending.mp3");
-                continue;
-            }
-
             nightPhaseText.textContent = getGermanName(phase.name) + " wach auf.";
             if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
             if (phase.name === "werewolf" && storage.activatedRoles.find(role => role.name === "Dreamwolf")) {
@@ -189,37 +180,39 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.isMultiple) {
                 await speak("./voices/close_your_eyes_multiple.mp3");
             }
-            if (phase.doppelganger && storage.activatedRoles.find(role => role.name === "Doppelganger")) {
-                nightPhaseImage.src = "./images/doppelganger.png";
-                nightPhaseText.textContent = "Doppelgängerin, wenn du die " + getGermanName(phase.name) + " Karte angesehen hast, wach auf.";
-                await speak("./voices/doppelganger/later_action/first_part.mp3");
+            if (phase.name === "alien" && (storage.activatedRoles.find(role => role.name === "Groob") && storage.activatedRoles.find(role => role.name === "Zerb"))) {
+                nightPhaseImage.src = "./images/groob.png";
+                nightPhaseText.textContent = phase.groobAndZerb.text;
+                await speak("./voices/groob/text.mp3");
+                await waitCycle(phase, nightPhaseText);
+                nightPhaseText.textContent = phase.groobAndZerb.ending;
+                await speak("./voices/groob/ending.mp3");
+            }
+            if ((phase.name === "alien" || phase.name === "werewolf") && storage.activatedRoles.find(role => role.name === "Leader")) {
+                nightPhaseImage.src = "./images/leader.png";
+                nightPhaseText.textContent = "Boss wach auf. " + (phase.name === "alien" ? "Aliens" : "Werwölfe") + " hebt eure Daumen.";
+                await speak("./voices/leader/first_part.mp3");
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
-                await speak("./voices/doppelganger/later_action/last_part.mp3");
-                if (phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "auraseer" &&
-                    phase.name !== "curator") {
-                    nightPhaseText.textContent = phase.text;
-                    await speak("./voices/" + phase.name + "/text.mp3");
-                }
-                if (phase.name === "curator") {
-                    nightPhaseText.textContent = phase.doppelganger.text;
-                    await speak("./voices/" + phase.name + "/doppelganger_text.mp3");
-                }
-                if (phase.name !== "alien" && phase.randomActions) {
-                    const randomActions = [];
-                    for (const action of phase.randomActions) {
-                        for (let i = 0; i < storage[phase.name + "RandomActionChances"][action.name]; i++) {
-                            randomActions.push(action);
-                        }
+                await speak("./voices/leader/second_part.mp3");
+                if (phase.name === "alien") {
+                    if (storage.activatedRoles.find(role => role.name === "Synthetic Alien")) {
+                        nightPhaseText.textContent = "Synthetisches Alien neige deinen Daumen nach unten.";
+                        await speak("./voices/leader/synthetic_alien_text.mp3");
                     }
-                    const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
-                    nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
-                    await speak("./voices/random_cards/" + randomAction.text + ".mp3");
+                    if (storage.activatedRoles.find(role => role.name === "Groob") && storage.activatedRoles.find(role => role.name === "Zerb")) {
+                        nightPhaseText.textContent = "Groob und Zerb, wenn ihr euch angesehen habt, zeigt auf einander.";
+                        await speak("./voices/leader/groob_and_zerb_text.mp3");
+                    }
                 }
                 await waitCycle(phase, nightPhaseText);
-                nightPhaseText.textContent += "Doppelgängerin schließ deine Augen.";
-                await speak("./voices/doppelganger/doppelganger.mp3");
-                await speak("./voices/close_your_eyes.mp3");
+                nightPhaseText.textContent = "Boss schließt deine Augen.";
+                await speak("./voices/leader/ending.mp3");
+                await doppelgangerExtraWake(phase.leader, nightPhaseImage, nightPhaseText);
+                nightPhaseText.textContent = (phase.name === "alien" ? "Aliens" : "Werwölfe") + " senkt eure Daumen wieder.";
+                await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
+                await speak("./voices/leader/thumbs_away.mp3");
             }
+            await doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText);
             if (phase.name === "minion") {
                 nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
@@ -315,17 +308,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         }
     }
-
-    function getGermanName(englishName) {
-        for (const role of allRoles) {
-            if (englishName.toLowerCase() === role.name.toLowerCase().replaceAll(" ","_")) {
-                if (role.germanName === "Werwolf") return "Werwölfe";
-                if (role.germanName === "Alien") return "Aliens";
-                return role.germanName;
-            }
-        }
-        return "";
-    }
 });
 
 async function speak(filePath) {
@@ -357,4 +339,15 @@ async function waitCycle(phase, nightPhaseText) {
     nightPhaseText.textContent = "";
 }
 
-export {speak, sleep, storage, saveLocalStorage, waitCycle};
+function getGermanName(englishName) {
+    for (const role of allRoles) {
+        if (englishName.toLowerCase() === role.name.toLowerCase().replaceAll(" ","_")) {
+            if (role.germanName === "Werwolf") return "Werwölfe";
+            if (role.germanName === "Alien") return "Aliens";
+            return role.germanName;
+        }
+    }
+    return "";
+}
+
+export {speak, sleep, storage, saveLocalStorage, waitCycle, getGermanName};

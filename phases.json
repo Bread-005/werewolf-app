@@ -31,12 +31,15 @@
         "text": "Doppelgängerin, wenn du die Kuh Karte angesehen hast, streck deine Faust raus. Wenn ein Alien direkt neben der Doppelgänger-Kuh sitzt, muss ein Alien, die Faust der Doppelgänger-Kuh antippen.",
         "ending": "Doppelgängerin, nimm deine Faust zurück."
       }
+    },
+    "groobAndZerb": {
+      "text": "Groob und Zerb wacht auf und seht euch an.",
+      "ending": "Groob und Zerb schließt eure Augen."
+    },
+    "leader": {
+      "name": "leader",
+      "doppelganger": {}
     }
-  },
-  {
-    "name": "groob",
-    "text": "Groob und Zerb wacht auf und seht euch an.",
-    "ending": "Groob und Zerb schließt eure Augen."
   },
   {
     "name": "werewolf",
@@ -50,6 +53,10 @@
         "text": "Doppelgängerin, wenn du die Kuh Karte angesehen hast, streck deine Faust raus. Wenn ein Werwolf direkt neben der Doppelgänger-Kuh sitzt, muss dieser Werwolf, die Faust der Doppelgänger-Kuh antippen.",
         "ending": "Doppelgängerin, nimm deine Faust zurück."
       }
+    },
+    "leader": {
+      "name": "leader",
+      "doppelganger": {}
     }
   },
   {
