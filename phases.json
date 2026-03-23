@@ -65,13 +65,13 @@
     "doppelganger": {}
   },
   {
-    "name": "leader",
-    "text": "",
+    "name": "apprentice_tanner",
+    "text": "Gerber heb deinen Daumen",
     "doppelganger": {}
   },
   {
-    "name": "apprentice_tanner",
-    "text": "Gerber heb deinen Daumen",
+    "name": "leader",
+    "text": "",
     "doppelganger": {}
   },
   {
@@ -150,6 +150,11 @@
   {
     "name": "revealer",
     "text": "Du darfst die Karte eines anderen Spielers aufdecken. Wenn diese Karte nicht im Dorfbewohner Team ist, drehe sie wieder um.",
+    "doppelganger": {}
+  },
+  {
+    "name": "exposer",
+    "text": "Du darfst eine Karte aus der Mitte aufdecken.",
     "doppelganger": {}
   },
   {

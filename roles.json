@@ -70,14 +70,14 @@
     "edition": "Werewolves"
   },
   {
-    "name": "Leader",
-    "germanName": "Boss",
-    "edition": "Aliens"
-  },
-  {
     "name": "Apprentice Tanner",
     "germanName": "Nachwuchs Gerber",
     "edition": "Bonus Pack"
+  },
+  {
+    "name": "Leader",
+    "germanName": "Boss",
+    "edition": "Aliens"
   },
   {
     "id": "mason1",
@@ -155,6 +155,11 @@
     "name": "Revealer",
     "germanName": "Aufklärer",
     "edition": "Daybreak"
+  },
+  {
+    "name": "Exposer",
+    "germanName": "Enthüller",
+    "edition": "Aliens"
   },
   {
     "name": "Curator",
