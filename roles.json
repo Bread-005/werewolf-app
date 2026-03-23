@@ -43,11 +43,6 @@
     "edition": "Aliens"
   },
   {
-    "name": "Leader",
-    "germanName": "Boss",
-    "edition": "Aliens"
-  },
-  {
     "id": "werewolf1",
     "name": "Werewolf",
     "germanName": "Werwolf",
@@ -73,6 +68,11 @@
     "name": "Minion",
     "germanName": "Günstling",
     "edition": "Werewolves"
+  },
+  {
+    "name": "Leader",
+    "germanName": "Boss",
+    "edition": "Aliens"
   },
   {
     "name": "Apprentice Tanner",

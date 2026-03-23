@@ -1,5 +1,6 @@
 import {doppelgangerExtraWake, doppelgangerVerboseText} from "./doppelganger.js";
 import {cowAction} from "./cow.js";
+import {leaderAction} from "./leader.js";
 
 const storage = JSON.parse(localStorage.getItem("werewolf-app"));
 let allRoles = [];
@@ -117,16 +118,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (phase.isMultiple) {
                     await speak("./voices/wake_up_multiple.mp3");
                 }
-                if (!phase.textWithMarks || !storage.activatedRoles.find(role => role.mark)) {
-                    nightPhaseText.textContent = phase.text;
-                    await speak("./voices/" + phase.name + "/" + "text.mp3");
-                } else {
-                    nightPhaseText.textContent = phase.textWithMarks;
-                    await speak("./voices/" + phase.name + "/" + "textWithMarks.mp3");
+                if (phase.name !== "leader") {
+                    if (!phase.textWithMarks || !storage.activatedRoles.find(role => role.mark)) {
+                        nightPhaseText.textContent = phase.text;
+                        await speak("./voices/" + phase.name + "/" + "text.mp3");
+                    } else {
+                        nightPhaseText.textContent = phase.textWithMarks;
+                        await speak("./voices/" + phase.name + "/" + "textWithMarks.mp3");
+                    }
                 }
             }
             if (phase.name === "doppelganger" && storage.activatedRoles.filter(role => allRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name)).length > 0) {
                 await doppelgangerVerboseText(nightPhaseText);
+            }
+            if (phase.name === "leader") {
+                await leaderAction(nightPhaseText);
             }
             if (phase.secondText) {
                 await sleep(1.5);
@@ -188,33 +194,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = phase.groobAndZerb.ending;
                 await speak("./voices/groob/ending.mp3");
             }
-            if ((phase.name === "alien" || phase.name === "werewolf") && storage.activatedRoles.find(role => role.name === "Leader")) {
-                nightPhaseImage.src = "./images/leader.png";
-                nightPhaseText.textContent = "Boss wach auf. " + (phase.name === "alien" ? "Aliens" : "Werwölfe") + " hebt eure Daumen.";
-                await speak("./voices/leader/first_part.mp3");
-                await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
-                await speak("./voices/leader/second_part.mp3");
-                if (phase.name === "alien") {
-                    if (storage.activatedRoles.find(role => role.name === "Synthetic Alien")) {
-                        nightPhaseText.textContent = "Synthetisches Alien neige deinen Daumen nach unten.";
-                        await speak("./voices/leader/synthetic_alien_text.mp3");
-                    }
-                    if (storage.activatedRoles.find(role => role.name === "Groob") && storage.activatedRoles.find(role => role.name === "Zerb")) {
-                        nightPhaseText.textContent = "Groob und Zerb, wenn ihr euch angesehen habt, zeigt auf einander.";
-                        await speak("./voices/leader/groob_and_zerb_text.mp3");
-                    }
-                }
-                await waitCycle(phase, nightPhaseText);
-                nightPhaseText.textContent = "Boss schließt deine Augen.";
-                await speak("./voices/leader/ending.mp3");
-                await doppelgangerExtraWake(phase.leader, nightPhaseImage, nightPhaseText);
-                nightPhaseText.textContent = (phase.name === "alien" ? "Aliens" : "Werwölfe") + " senkt eure Daumen wieder.";
-                await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
-                await speak("./voices/leader/thumbs_away.mp3");
-            }
             await doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText);
             if (phase.name === "minion") {
                 nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
+                await speak("./voices/" + phase.name + "/ending.mp3");
+            }
+            if (phase.name === "leader") {
+                nightPhaseText.textContent = "Senkt alle eure Daumen und Hände wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
             if (phase.name === "apprentice_tanner") {

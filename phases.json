@@ -35,10 +35,6 @@
     "groobAndZerb": {
       "text": "Groob und Zerb wacht auf und seht euch an.",
       "ending": "Groob und Zerb schließt eure Augen."
-    },
-    "leader": {
-      "name": "leader",
-      "doppelganger": {}
     }
   },
   {
@@ -53,10 +49,6 @@
         "text": "Doppelgängerin, wenn du die Kuh Karte angesehen hast, streck deine Faust raus. Wenn ein Werwolf direkt neben der Doppelgänger-Kuh sitzt, muss dieser Werwolf, die Faust der Doppelgänger-Kuh antippen.",
         "ending": "Doppelgängerin, nimm deine Faust zurück."
       }
-    },
-    "leader": {
-      "name": "leader",
-      "doppelganger": {}
     }
   },
   {
@@ -70,6 +62,11 @@
   {
     "name": "minion",
     "text": "Werwölfe hebt eure Daumen.",
+    "doppelganger": {}
+  },
+  {
+    "name": "leader",
+    "text": "",
     "doppelganger": {}
   },
   {
