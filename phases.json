@@ -34,6 +34,11 @@
     }
   },
   {
+    "name": "groob",
+    "text": "Groob und Zerb wacht auf und seht euch an.",
+    "ending": "Groob und Zerb schließt eure Augen."
+  },
+  {
     "name": "werewolf",
     "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
     "secondText": "Du bist alleine Werwolf? Dann darfst du dir eine Karte aus der Mitte ansehen.",

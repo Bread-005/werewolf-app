@@ -77,12 +77,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name) ||
                 phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up" ||
                 phase.name === "werewolf" && storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf") ||
-                phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Sythetic Alien" || role.name === "Zerb" || role.name === "Groob")) {
+                phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Sythetic Alien" || role.name === "Groob" || role.name === "Zerb")) {
                 phases.push(phase);
             }
         }
         if (!storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "minion");
         if (!storage.activatedRoles.find(role => role.name === "Tanner")) phases = phases.filter(phase => phase.name !== "apprentice_tanner");
+        if (!storage.activatedRoles.find(role => role.name === "Groob") && !storage.activatedRoles.find(role => role.name === "Zerb")) phases = phases.filter(phase => phase.name !== "Groob");
 
         storage.activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
         saveLocalStorage();
@@ -102,6 +103,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             nightPhaseImage.src = "./images/" + phase.name + ".png";
+
+            if (phase.name === "groob") {
+                nightPhaseText.textContent = phase.text;
+                await speak("./voices/groob/text.mp3");
+                await waitCycle(phase, nightPhaseText);
+                nightPhaseText.textContent = phase.ending;
+                await speak("./voices/groob/ending.mp3");
+                continue;
+            }
+
             nightPhaseText.textContent = getGermanName(phase.name) + " wach auf.";
             if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
             if (phase.name === "werewolf" && storage.activatedRoles.find(role => role.name === "Dreamwolf")) {

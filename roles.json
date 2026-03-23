@@ -23,8 +23,23 @@
     "edition": "Aliens"
   },
   {
+    "name": "Synthetic Alien",
+    "germanName": "Synthetisches Alien",
+    "edition": "Aliens"
+  },
+  {
     "name": "Cow",
     "germanName": "Kuh",
+    "edition": "Aliens"
+  },
+  {
+    "name": "Groob",
+    "germanName": "Groob",
+    "edition": "Aliens"
+  },
+  {
+    "name": "Zerb",
+    "germanName": "Zerb",
     "edition": "Aliens"
   },
   {
