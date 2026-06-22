@@ -175,9 +175,8 @@ button {
 
 .back-button {
     position: fixed;
-    top: 5%;
+    top: 2.5%;
     left: 5%;
-    transform: translate(-50%, -50%);
 
     button {
         width: 40px;
@@ -198,8 +197,24 @@ button {
         flex-direction: column;
         align-items: flex-end;
         gap: 10px;
-        margin-top: 30px;
-        transform: scale(2);
+        margin-top: 20px;
+
+        input {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            color: white;
+            font-size: inherit;
+            padding: 5px 8px;
+            width: 50px;
+            text-align: center;
+            outline: none;
+
+            &:focus {
+                border-color: white;
+                background: rgba(255, 255, 255, 0.25);
+            }
+        }
 
         .random-role-setting {
             border: 3px solid white;
@@ -207,6 +222,7 @@ button {
             justify-content: center;
             padding: 5px;
             cursor: pointer;
+            width: 100%;
         }
     }
 }
@@ -217,11 +233,12 @@ button {
     align-items: center;
     justify-content: center;
     background: royalblue;
+    margin-top: 70px;
 
     .all-settings {
         display: flex;
         flex-direction: column;
-        width: 90vw;
+        width: 100%;
         font-size: 25px;
         gap: 5px;
 
@@ -231,6 +248,15 @@ button {
             align-items: center;
             border: 2px solid white;
             padding: 4px;
+
+            div {
+                display: flex;
+                align-items: center;
+            }
+
+            button {
+                font-size: 20px;
+            }
         }
     }
 }

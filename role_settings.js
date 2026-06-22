@@ -26,13 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
         downIcon.className = "fa-solid fa-arrow-down";
 
         up.append(upIcon);
-        change.append(up);
-        change.append(currentSetting);
         down.append(downIcon);
-        change.append(down);
+        change.append(up, currentSetting, down);
 
-        div.append(span);
-        div.append(change);
+        div.append(span, change);
         bigDiv.append(div);
 
         up.addEventListener("click", () => {
