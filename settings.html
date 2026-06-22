@@ -10,26 +10,26 @@
 </head>
 
 <body>
-<div class="settings-page">
     <div class="back-button">
         <a href="main.html">
             <button><i class="fa-solid fa-square-left"></i></button>
         </a>
     </div>
-    <div class="timer">
-        <div>
-            <label for="action-time-input">Action Time</label>
-            <input id="action-time-input" type="number" min="1" max="10">
+    <div class="settings-page">
+        <div class="timer">
+            <div>
+                <label for="action-time-input">Action Time</label>
+                <input id="action-time-input" type="number" min="1" max="10">
+            </div>
+            <div>
+                <label for="voting-time-input">Voting Time (in seconds)</label>
+                <input id="voting-time-input" type="number" min="5" max="600">
+            </div>
+            <div id="alien-settings" class="random-role-setting">Aliens...</div>
+            <div id="psychic-settings" class="random-role-setting">Hellseher...</div>
+            <div id="mortician-settings" class="random-role-setting">Bestatter...</div>
         </div>
-        <div>
-            <label for="voting-time-input">Voting Time (in seconds)</label>
-            <input id="voting-time-input" type="number" min="5" max="600">
-        </div>
-        <div id="alien-settings" class="random-role-setting">Aliens...</div>
-        <div id="psychic-settings" class="random-role-setting">Hellseher...</div>
-        <div id="mortician-settings" class="random-role-setting">Bestatter...</div>
     </div>
-</div>
-<script src="settings.js" type="module" defer></script>
+    <script src="settings.js" type="module" defer></script>
 </body>
 </html>

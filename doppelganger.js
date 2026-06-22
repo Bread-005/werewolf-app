@@ -14,7 +14,7 @@ async function doppelgangerVerboseText(nightPhaseText) {
         if (i < nightRoles.length - 2) nightPhaseText.textContent += ", ";
         await speak("./voices/" + nightRoles[i].name.toLowerCase().replaceAll(" ","_") + "/" + nightRoles[i].name.toLowerCase().replaceAll(" ","_") + ".mp3");
     }
-    nightPhaseText.textContent += " Karte angesehen hast führe die Aktion jetzt durch";
+    nightPhaseText.textContent += " Karte angesehen hast führe die Aktion jetzt durch.";
     await speak("./voices/doppelganger/verbose/last_part.mp3");
 }
 

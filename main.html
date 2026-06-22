@@ -10,37 +10,31 @@
 </head>
 
 <body>
-<div class="app">
-    <div class="editions">
-        <div class="Werewolves">Werwölfe</div>
-        <div class="Daybreak">Morgengrauen</div>
-        <div class="Aliens">Aliens</div>
-        <div class="Bonus Pack">Bonus Pack</div>
-    </div>
-
-    <div class="roles-grid"></div>
-
-    <div class="bottom-bar">
-        <div class="timer-box">
-            <div class="timer-label">Timer (Spiel)</div>
-            <div class="timer-time">05:00</div>
+    <div class="app">
+        <div class="editions">
+            <div class="Werewolves">Werwölfe</div>
+            <div class="Daybreak">Morgengrauen</div>
+            <div class="Aliens">Aliens</div>
+            <div class="Bonus Pack">Bonus Pack</div>
         </div>
+
+        <div class="roles-grid"></div>
+
         <button class="start-button">Start</button>
         <button class="settings-button">⚙️</button>
+
+        <div class="night-phase">
+            <div class="night-content">
+                <img class="image" alt="role image" src="./images/villager.png">
+                <div id="night-phase-text"></div>
+            </div>
+            <div class="buttons">
+                <button id="pause-button">Pause</button>
+                <button id="stop-button">Stop</button>
+            </div>
+        </div>
     </div>
 
-    <div class="night-phase">
-        <div class="night-content">
-            <img class="image" alt="role image" src="./images/villager.png">
-            <div id="night-phase-text"></div>
-        </div>
-        <div class="buttons">
-            <button id="pause-button">Pause</button>
-            <button id="stop-button">Stop</button>
-        </div>
-    </div>
-</div>
-
-<script src="main.js" type="module" defer></script>
+    <script src="main.js" type="module" defer></script>
 </body>
 </html>

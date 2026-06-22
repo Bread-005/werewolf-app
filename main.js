@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const allPhases = await fetch("./phases.json").then(res => res.json());
         let phases = [];
         for (const phase of allPhases) {
-            if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ","_") === phase.name) ||
+            if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ", "_") === phase.name) ||
                 phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up" ||
                 phase.name === "werewolf" && storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf") ||
                 phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Sythetic Alien" || role.name === "Groob" || role.name === "Zerb")) {
@@ -92,8 +92,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         document.querySelector(".editions").style.display = "none";
         roleGrid.style.display = "none";
-        document.querySelector(".bottom-bar").style.display = "none";
-        document.querySelector(".night-phase").style.visibility = "visible";
+        document.querySelector(".start-button").style.display = "none";
+        document.querySelector(".settings-button").style.display = "none";
+        document.querySelector(".night-phase").style.display = "flex";
 
         for (const phase of phases) {
             if (phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up") {
@@ -147,7 +148,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                     }
                 }
                 if (phase.name === "alien") {
-                    const randomAlienAction = randomActions.sort(() => Math.random() - 0.5)[0] || {name: "stare", text: ""};
+                    const randomAlienAction = randomActions.sort(() => Math.random() - 0.5)[0] || {
+                        name: "stare",
+                        text: ""
+                    };
                     if (randomAlienAction.name !== "stare" && randomAlienAction.name !== "view") {
                         nightPhaseText.textContent = randomAlienAction.text;
                         await speak("./voices/alien/random_actions/" + randomAlienAction.name + ".mp3");
@@ -162,8 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     if (randomAlienAction.name === "timer") {
                         storage.votingTime = Math.round(storage.votingTime / 2);
                     }
-                }
-                else {
+                } else {
                     const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
                     nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
                     await speak("./voices/random_cards/" + randomAction.text + ".mp3");
@@ -225,7 +228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             voteTimer.textContent = Math.floor(i / 60) + ":" + (i % 60 < 10 ? "0" : "") + (i % 60);
             await sleep(1);
             if (i === 0) {
-                const voting = ["ready_for_vote:Macht euch bereit für die Abstimmung", "three:3", "two:2", "one:1", "vote:abstimmen"];
+                const voting = ["ready_for_vote:Macht euch bereit für die Abstimmung.", "three:3", "two:2", "one:1", "vote:abstimmen"];
 
                 for (const vote of voting) {
                     voteTimer.textContent = vote.split(":")[1];
@@ -268,10 +271,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             const div = document.createElement("div");
             div.classList.add("role-card");
             if (storage.activatedRoles.find(role1 => role1.name === role.name)) {
-                div.style.border = "white 5px solid";
+                div.style.border = "4px solid white";
             }
             const span = document.createElement("span");
             span.textContent = role.germanName;
+            if (role.germanName.length < 12) {
+                span.style.fontSize = "12px";
+            }
+            if (role.germanName.length < 10) {
+                span.style.fontSize = "14px";
+            }
+            if (role.germanName.length < 8) {
+                span.style.fontSize = "16px";
+            }
+
             const img = document.createElement("img");
             img.src = "./images/" + role.name.toLowerCase().replaceAll(" ","_") + ".png";
             img.alt = role.name;
@@ -284,7 +297,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 // const clickSound = new Audio("./voices/click_sound.wav");
                 // clickSound.play();
                 if (!div.style.border || div.style.border === "none") {
-                    div.style.border = "white 5px solid";
+                    div.style.border = "4px solid white";
                     storage.activatedRoles.push(role);
                 } else {
                     div.style.border = "none";
