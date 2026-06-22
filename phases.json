@@ -4,6 +4,10 @@
     "text": "Schließt nun alle eure Augen."
   },
   {
+    "name": "copycat",
+    "text": "Schau dir eine Karte aus der Mitte an. Du übernimmst nun diese Rolle. Wenn die Rolle aufgerufen wird, wach auf und führ die entsprechende Aktion durch."
+  },
+  {
     "name": "sentinel",
     "text": "Du darfst ein Schild auf die Karte eines anderen Spielers platzieren."
   },
