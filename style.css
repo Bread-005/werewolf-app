@@ -18,13 +18,16 @@ button {
         grid-template-columns: repeat(3, 1fr);
         justify-content: center;
         gap: 10px;
-        margin: 10px;
 
-        * {
+        div {
             cursor: pointer;
             border: white solid 2px;
             padding: 4px;
-            font-size: 22px;
+
+            img {
+                display: block;
+                width: 100%;
+            }
         }
     }
 
