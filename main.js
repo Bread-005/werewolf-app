@@ -4,6 +4,8 @@ import {leaderAction} from "./leader.js";
 
 const storage = JSON.parse(localStorage.getItem("werewolf-app"));
 let allRoles = [];
+let paused = false;
+let currentAudio = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -245,7 +247,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     document.getElementById("pause-button").addEventListener("click", () => {
-        console.log("Hier passiert noch nichts");
+        paused = !paused;
+        const pauseButton = document.getElementById("pause-button");
+        if (paused) {
+            currentAudio?.pause();
+            pauseButton.textContent = "Weiter";
+        } else {
+            currentAudio?.play();
+            pauseButton.textContent = "Pause";
+        }
     });
 
     document.getElementById("stop-button").addEventListener("click", () => {
@@ -312,13 +322,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function speak(filePath) {
     return new Promise(resolve => {
         const audio = new Audio(filePath);
-        audio.onended = resolve;
+        currentAudio = audio;
+        audio.onended = () => {
+            currentAudio = null;
+            resolve();
+        };
         audio.play();
     });
 }
 
 async function sleep(seconds) {
-    return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+    let remaining = seconds * 1000;
+    while (remaining > 0) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        if (!paused) {
+            remaining -= 100;
+        }
+    }
 }
 
 function saveLocalStorage() {
@@ -349,4 +369,4 @@ function getGermanName(englishName) {
     return "";
 }
 
-export {speak, sleep, storage, saveLocalStorage, waitCycle, getGermanName};
+export {speak, sleep, storage, saveLocalStorage, waitCycle, getGermanName, paused};
