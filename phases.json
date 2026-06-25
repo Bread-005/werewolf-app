@@ -16,6 +16,19 @@
     "text": "Schau dir die Karte eines anderen Spielers an. Du nimmst nun diese Rolle an."
   },
   {
+    "name": "vampire",
+    "text": "Vampire wacht auf und seht euch nach anderen Vampiren um. Vertauscht die Vampir-Marke mit einem Spieler der kein Vampir ist.",
+    "isMultiple": true,
+    "cow": {
+      "text": "Kuh, streck deine Faust raus. Wenn ein Vampir direkt neben der Kuh sitzt, muss ein Vampir, die Faust der Kuh antippen.",
+      "ending": "Kuh, nimmt deine Faust zurück.",
+      "doppelganger": {
+        "text": "Doppelgängerin, wenn du die Kuh Karte angesehen hast, streck deine Faust raus. Wenn ein Vampir direkt neben der Doppelgänger-Kuh sitzt, muss ein Vampir, die Faust der Doppelgänger-Kuh antippen.",
+        "ending": "Doppelgängerin, nimm deine Faust zurück."
+      }
+    }
+  },
+  {
     "name": "alien",
     "text": "Aliens wacht auf und seht euch nach anderen Aliens um.",
     "randomActions": [

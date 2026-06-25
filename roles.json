@@ -16,6 +16,16 @@
     "verboseRoles": ["Sentinel", "Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "PI", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
   },
   {
+    "name": "Vampire",
+    "germanName": "Vampir",
+    "edition": "Vampires"
+  },
+  {
+    "name": "Master",
+    "germanName": "Meister",
+    "edition": "Vampires"
+  },
+  {
     "id": "alien1",
     "name": "Alien",
     "germanName": "Alien",

@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             }
             await waitCycle(phase, nightPhaseText);
-            if ((phase.name === "alien" || phase.name === "werewolf") && storage.activatedRoles.find(role => role.name === "Cow")) {
+            if ((phase.name === "alien" || phase.name === "werewolf" || phase.name === "vampire") && storage.activatedRoles.find(role => role.name === "Cow")) {
                 await cowAction(phase, nightPhaseImage, nightPhaseText);
             }
             if (phase.name === "werewolf" && storage.activatedRoles.find(role => role.name === "Dreamwolf")) {
@@ -363,6 +363,7 @@ function getGermanName(englishName) {
         if (englishName.toLowerCase() === role.name.toLowerCase().replaceAll(" ","_")) {
             if (role.germanName === "Werwolf") return "Werwölfe";
             if (role.germanName === "Alien") return "Aliens";
+            if (role.germanName === "Vampir") return "Vampire";
             return role.germanName;
         }
     }
