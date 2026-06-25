@@ -1,4 +1,4 @@
-import {saveLocalStorage, storage} from "./main.js";
+import {saveLocalStorage, storage} from "./storage.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const actionTimeInput = document.getElementById("action-time-input");

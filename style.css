@@ -36,7 +36,7 @@ button {
         grid-template-columns: repeat(4, 1fr);
         justify-content: center;
         gap: 10px;
-        margin: 30px 0 80px 0;
+        margin: 40px 0 80px 0;
 
         .role-card {
             position: relative;
@@ -250,7 +250,7 @@ button {
             justify-content: space-between;
             align-items: center;
             border: 2px solid white;
-            padding: 4px;
+            padding: 4px 5px 4px 10px;
 
             div {
                 display: flex;
@@ -259,6 +259,15 @@ button {
 
             button {
                 font-size: 20px;
+            }
+
+            input[type="checkbox"] {
+                padding: 5px;
+                margin: 10px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
             }
         }
     }

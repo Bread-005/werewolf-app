@@ -1,4 +1,4 @@
-import {saveLocalStorage, storage} from "./main.js";
+import {saveLocalStorage, storage} from "./storage.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (storage.currentSettingRole === "alien") settings = ["View", "Stare", "Timer", "Left", "Right", "Show", "New Alien"];
     if (storage.currentSettingRole === "psychic") settings = ["Neighbor", "Even Player", "Odd Player", "Not Neighbor", "Any Player", "Middle"];
     if (storage.currentSettingRole === "mortician") settings = ["Self", "Left Neighbor", "Right Neighbor", "Neighbor"];
+    if (storage.currentSettingRole === "leader") settings = ["All wissender Boss"];
     for (const setting of settings) {
         const div = document.createElement("div");
         div.setAttribute("class", "single-setting");
@@ -20,14 +21,31 @@ document.addEventListener("DOMContentLoaded", () => {
         const upIcon = document.createElement("i");
         upIcon.className = "fa-solid fa-arrow-up";
         const currentSetting = document.createElement("span");
-        currentSetting.textContent = storage[storage.currentSettingRole + "RandomActionChances"][setting.toLowerCase().replaceAll(" ","_")];
+        if (storage.currentSettingRole !== "leader") {
+            currentSetting.textContent = storage[storage.currentSettingRole + "RandomActionChances"][setting.toLowerCase().replaceAll(" ","_")];
+        } else {
+            currentSetting.textContent = setting;
+        }
         const down = document.createElement("button");
         const downIcon = document.createElement("i");
         downIcon.className = "fa-solid fa-arrow-down";
 
-        up.append(upIcon);
-        down.append(downIcon);
-        change.append(up, currentSetting, down);
+        if (storage.currentSettingRole !== "leader") {
+            up.append(upIcon);
+            down.append(downIcon);
+            change.append(up, currentSetting, down);
+        } else {
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = storage.leaderKnowsEverything;
+
+            checkbox.addEventListener("click", () => {
+                storage.leaderKnowsEverything = checkbox.checked;
+                saveLocalStorage();
+            });
+
+            change.append(checkbox);
+        }
 
         div.append(span, change);
         bigDiv.append(div);

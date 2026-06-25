@@ -1,8 +1,7 @@
 import {doppelgangerExtraWake, doppelgangerVerboseText} from "./doppelganger.js";
 import {cowAction} from "./cow.js";
 import {leaderAction} from "./leader.js";
-
-const storage = JSON.parse(localStorage.getItem("werewolf-app"));
+import {storage, saveLocalStorage} from "./storage.js";
 let allRoles = [];
 let paused = false;
 let currentAudio = null;
@@ -18,7 +17,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             currentSettingRole: "",
             alienRandomActionChances: {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0},
             psychicRandomActionChances: {neighbor: 10, even_player: 10, odd_player: 10, not_neighbor: 10, any_player: 10, middle: 10},
-            morticianRandomActionChances: {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10}
+            morticianRandomActionChances: {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10},
+            leaderKnowsEverything: false
         }
         localStorage.setItem("werewolf-app", JSON.stringify(storage1));
         window.location.reload();
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
-            if (phase.name === "leader") {
+            if (phase.name === "leader" && !storage.leaderKnowsEverything) {
                 nightPhaseText.textContent = "Senkt alle eure Daumen und Hände wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
@@ -352,12 +352,11 @@ async function sleep(seconds) {
     }
 }
 
-function saveLocalStorage() {
-    localStorage.setItem("werewolf-app", JSON.stringify(storage));
-}
 
 async function waitCycle(phase, nightPhaseText) {
-    const pauseTime = (phase.name === "doppelganger" || phase.name === "villageidiot" ? storage.actionTime * 2 : storage.actionTime);
+    let pauseTime = storage.actionTime;
+    if (phase.name === "doppelganger" || phase.name === "villageidiot") pauseTime *= 2;
+    if (phase.name === "leader" && storage.leaderKnowsEverything) pauseTime *= 3;
     for (let i = pauseTime; i >= 0; i--) {
         nightPhaseText.textContent = "(Pause: " + pauseTime + " Sekunden)";
         const div = document.createElement("div");
@@ -381,4 +380,4 @@ function getGermanName(englishName) {
     return "";
 }
 
-export {speak, sleep, storage, saveLocalStorage, waitCycle, getGermanName, paused};
+export {speak, sleep, waitCycle, getGermanName, paused};

@@ -1,4 +1,5 @@
-import {getGermanName, sleep, speak, storage, waitCycle} from "./main.js";
+import {getGermanName, sleep, speak, waitCycle} from "./main.js";
+import {storage} from "./storage.js";
 
 async function doppelgangerVerboseText(nightPhaseText) {
     await sleep(2);

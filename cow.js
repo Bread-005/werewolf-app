@@ -1,4 +1,5 @@
-import {speak, storage, waitCycle} from "./main.js";
+import {speak, waitCycle} from "./main.js";
+import {storage} from "./storage.js";
 
 async function cowAction(phase, nightPhaseImage, nightPhaseText) {
     nightPhaseImage.src = "./images/cow.png";
