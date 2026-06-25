@@ -17,7 +17,7 @@
   },
   {
     "name": "vampire",
-    "text": "Vampire wacht auf und seht euch nach anderen Vampiren um. Vertauscht die Vampir-Marke mit einem Spieler der kein Vampir ist.",
+    "text": "Vampire wacht auf und seht euch nach anderen Vampiren um. Vertauscht die Vampir-Marke mit einem Spieler, der kein Vampir ist.",
     "isMultiple": true,
     "cow": {
       "text": "Kuh, streck deine Faust raus. Wenn ein Vampir direkt neben der Kuh sitzt, muss ein Vampir, die Faust der Kuh antippen.",
@@ -27,6 +27,15 @@
         "ending": "Doppelgängerin, nimm deine Faust zurück."
       }
     }
+  },
+  {
+    "name": "count",
+    "text": "Vertausche die Panik-Marke mit einem Spieler, der kein Vampir ist."
+  },
+  {
+    "name": "all_view_mark",
+    "text": "Wacht alle auf und seht euch geheim eure Marke an.",
+    "ending": "Schließt nun alle wieder eure Augen."
   },
   {
     "name": "alien",

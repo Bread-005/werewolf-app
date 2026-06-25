@@ -81,7 +81,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ", "_") === phase.name) ||
                 phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up" ||
                 phase.name === "werewolf" && storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf") ||
-                phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Sythetic Alien" || role.name === "Groob" || role.name === "Zerb")) {
+                phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Sythetic Alien" || role.name === "Groob" || role.name === "Zerb") ||
+                phase.name === "vampire" && storage.activatedRoles.find(role => role.name === "Vampire" || role.name === "Master" || role.name === "Count") ||
+                phase.name === "all_view_mark" && storage.activatedRoles.find(role => role.mark)) {
                 phases.push(phase);
             }
         }
@@ -104,6 +106,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = phase.text;
                 await speak("./voices/" + phase.name + ".mp3");
                 await sleep(2);
+                continue;
+            }
+            if (phase.name === "all_view_mark") {
+                nightPhaseImage.src = "./images/marks/mark_of_clarity.png";
+                nightPhaseText.textContent = phase.text;
+                await speak("./voices/all_view_mark/text.mp3");
+                await waitCycle(phase, nightPhaseText);
+                nightPhaseText.textContent = phase.ending;
+                await speak("./voices/all_view_mark/ending.mp3");
                 continue;
             }
 

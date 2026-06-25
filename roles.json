@@ -18,12 +18,20 @@
   {
     "name": "Vampire",
     "germanName": "Vampir",
-    "edition": "Vampires"
+    "edition": "Vampires",
+    "mark": true
   },
   {
     "name": "Master",
     "germanName": "Meister",
-    "edition": "Vampires"
+    "edition": "Vampires",
+    "mark": true
+  },
+  {
+    "name": "Count",
+    "germanName": "Graf",
+    "edition": "Vampires",
+    "mark": true
   },
   {
     "id": "alien1",
