@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     actionTimeInput.value = storage.actionTime;
 
     actionTimeInput.addEventListener("input", () => {
-        if (actionTimeInput.value < 1) actionTimeInput.value = 1;
+        if (actionTimeInput.value < 0) actionTimeInput.value = 0;
         if (actionTimeInput.value > 10) actionTimeInput.value = 10;
         storage.actionTime = Math.floor(Number(actionTimeInput.value));
         saveLocalStorage();

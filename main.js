@@ -357,6 +357,9 @@ async function waitCycle(phase, nightPhaseText) {
     let pauseTime = storage.actionTime;
     if (phase.name === "doppelganger" || phase.name === "villageidiot") pauseTime *= 2;
     if (phase.name === "leader" && storage.leaderKnowsEverything) pauseTime *= 3;
+    if (pauseTime === 0) {
+        return;
+    }
     for (let i = pauseTime; i >= 0; i--) {
         nightPhaseText.textContent = "(Pause: " + pauseTime + " Sekunden)";
         const div = document.createElement("div");
