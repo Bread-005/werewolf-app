@@ -16,20 +16,30 @@
         </a>
     </div>
     <div class="settings-page">
-        <div class="timer">
-            <div>
-                <label for="action-time-input">Action Time</label>
-                <input id="action-time-input" type="number" min="1" max="10">
+        <div class="stepper-setting">
+            <label>Sekunden pro Rolle</label>
+            <div class="stepper">
+                <button id="action-time-down"><i class="fa-solid fa-arrow-down"></i></button>
+                <span id="action-time-display"></span>
+                <button id="action-time-up"><i class="fa-solid fa-arrow-up"></i></button>
             </div>
-            <div>
-                <label for="voting-time-input">Voting Time (in seconds)</label>
-                <input id="voting-time-input" type="number" min="5" max="600">
-            </div>
-            <div id="alien-settings" class="random-role-setting">Aliens...</div>
-            <div id="psychic-settings" class="random-role-setting">Hellseher...</div>
-            <div id="mortician-settings" class="random-role-setting">Bestatter...</div>
-            <div id="leader-settings" class="random-role-setting">Leader...</div>
         </div>
+        <div class="stepper-setting">
+            <label>Abstimmungszeit (in Sekunden)</label>
+            <div class="stepper">
+                <button id="voting-time-down"><i class="fa-solid fa-arrow-down"></i></button>
+                <span id="voting-time-display"></span>
+                <button id="voting-time-up"><i class="fa-solid fa-arrow-up"></i></button>
+            </div>
+        </div>
+        <div class="move-card-setting">
+            <label for="move-card-input">Karte bewegen am Ende</label>
+            <input id="move-card-input" type="checkbox">
+        </div>
+        <div id="alien-settings" class="random-role-setting">Aliens...</div>
+        <div id="psychic-settings" class="random-role-setting">Hellseher...</div>
+        <div id="mortician-settings" class="random-role-setting">Bestatter...</div>
+        <div id="leader-settings" class="random-role-setting">Leader...</div>
     </div>
     <script src="settings.js" type="module" defer></script>
 </body>

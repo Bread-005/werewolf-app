@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             alienRandomActionChances: {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0},
             psychicRandomActionChances: {neighbor: 10, even_player: 10, odd_player: 10, not_neighbor: 10, any_player: 10, middle: 10},
             morticianRandomActionChances: {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10},
-            leaderKnowsEverything: false
+            leaderKnowsEverything: false,
+            moveCard: true
         }
         localStorage.setItem("werewolf-app", JSON.stringify(storage1));
         window.location.reload();
@@ -79,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let phases = [];
         for (const phase of allPhases) {
             if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ", "") === phase.name.replaceAll("_","")) ||
-                phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up" ||
+                phase.name === "all_sleep" || phase.name === "move_card" && storage.moveCard || phase.name === "all_wake_up" ||
                 phase.name === "werewolf" && storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf") ||
                 phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Synthetic Alien" || role.name === "Groob" || role.name === "Zerb") ||
                 phase.name === "vampire" && storage.activatedRoles.find(role => role.name === "Vampire" || role.name === "Master" || role.name === "Count") ||

@@ -1,24 +1,44 @@
 import {saveLocalStorage, storage} from "./storage.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const actionTimeInput = document.getElementById("action-time-input");
-    const votingTimeInput = document.getElementById("voting-time-input");
+    const actionTimeDisplay = document.getElementById("action-time-display");
+    const votingTimeDisplay = document.getElementById("voting-time-display");
 
-    actionTimeInput.value = storage.actionTime;
+    actionTimeDisplay.textContent = storage.actionTime;
+    votingTimeDisplay.textContent = storage.votingTime;
 
-    actionTimeInput.addEventListener("input", () => {
-        if (actionTimeInput.value < 0) actionTimeInput.value = 0;
-        if (actionTimeInput.value > 10) actionTimeInput.value = 10;
-        storage.actionTime = Math.floor(Number(actionTimeInput.value));
+    document.getElementById("action-time-up").addEventListener("click", () => {
+        if (storage.actionTime >= 10) return;
+        storage.actionTime++;
+        actionTimeDisplay.textContent = storage.actionTime;
         saveLocalStorage();
     });
 
-    votingTimeInput.value = storage.votingTime;
+    document.getElementById("action-time-down").addEventListener("click", () => {
+        if (storage.actionTime <= 0) return;
+        storage.actionTime--;
+        actionTimeDisplay.textContent = storage.actionTime;
+        saveLocalStorage();
+    });
 
-    votingTimeInput.addEventListener("input", () => {
-        if (votingTimeInput.value < 1) votingTimeInput.value = 1;
-        if (votingTimeInput.value > 600) votingTimeInput.value = 600;
-        storage.votingTime = Math.floor(Number(votingTimeInput.value));
+    document.getElementById("voting-time-up").addEventListener("click", () => {
+        if (storage.votingTime >= 600) return;
+        storage.votingTime += 10;
+        votingTimeDisplay.textContent = storage.votingTime;
+        saveLocalStorage();
+    });
+
+    document.getElementById("voting-time-down").addEventListener("click", () => {
+        if (storage.votingTime <= 10) return;
+        storage.votingTime -= 10;
+        votingTimeDisplay.textContent = storage.votingTime;
+        saveLocalStorage();
+    });
+
+    const moveCardInput = document.getElementById("move-card-input");
+    moveCardInput.checked = storage.moveCard;
+    moveCardInput.addEventListener("change", () => {
+        storage.moveCard = moveCardInput.checked;
         saveLocalStorage();
     });
 
