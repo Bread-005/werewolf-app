@@ -13,7 +13,7 @@
     "name": "Doppelganger",
     "germanName": "Doppelgängerin",
     "edition": "Werewolves",
-    "verboseRoles": ["Sentinel", "Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "Paranormal Investigator", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
+    "verboseRoles": ["Sentinel", "Cupid", "Instigator", "Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "Paranormal Investigator", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
   },
   {
     "name": "Vampire",
@@ -30,6 +30,12 @@
   {
     "name": "Count",
     "germanName": "Graf",
+    "edition": "Vampires",
+    "mark": true
+  },
+  {
+    "name": "Cupid",
+    "germanName": "Venus",
     "edition": "Vampires",
     "mark": true
   },

@@ -33,6 +33,10 @@
     "text": "Vertausche die Panik-Marke mit einem Spieler, der kein Vampir ist."
   },
   {
+    "name": "cupid",
+    "text": "Du darfst die Liebes-Marken mit den Marken von zwei Spielern vertauschen."
+  },
+  {
     "name": "instigator",
     "text": "Vertausche die Verräter-Marke mit der Marke eines anderen Spielers."
   },
