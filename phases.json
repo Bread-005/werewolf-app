@@ -33,6 +33,10 @@
     "text": "Vertausche die Panik-Marke mit einem Spieler, der kein Vampir ist."
   },
   {
+    "name": "diseased",
+    "text": "Vertausche die Seuche-Marke mit der Marke eines Spielers neben dir aus."
+  },
+  {
     "name": "cupid",
     "text": "Du darfst die Liebes-Marken mit den Marken von zwei Spielern vertauschen."
   },
