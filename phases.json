@@ -118,7 +118,7 @@
     "text": "Du darfst dir eine Karte aus der Mitte ansehen."
   },
   {
-    "name": "pi",
+    "name": "paranormal_investigator",
     "text": "Du darfst bis zu zwei Karten von deinen Mitspielern anschauen. Wenn du eine Karte anguckst die nicht im Dorfbewohnerteam ist, wirst du zu dieser Karte. Du darfst dir dann auch keine andere Karte mehr ansehen."
   },
   {
@@ -147,11 +147,11 @@
     "text": "Du darfst die Karten von zwei anderen Spielern vertauschen."
   },
   {
-    "name": "villageidiot",
+    "name": "village_idiot",
     "text": "Du darfst alle Karten, außer deiner eigenen, nach links oder rechts verschieben."
   },
   {
-    "name": "auraseer",
+    "name": "aura_seer",
     "text": "Alle Spieler, die bereits eine Karte vertauscht oder angesehen haben, hebt jetzt eure Daumen.",
     "marksMakeDifference": true,
     "textWithMarks": "Alle Spieler, die bereits eine Karte oder Marke vertauscht oder angesehen haben, hebt jetzt eure Daumen.",

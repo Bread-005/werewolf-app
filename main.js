@@ -78,10 +78,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const allPhases = await fetch("./phases.json").then(res => res.json());
         let phases = [];
         for (const phase of allPhases) {
-            if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ", "_") === phase.name) ||
+            if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ", "") === phase.name.replaceAll("_","")) ||
                 phase.name === "all_sleep" || phase.name === "move_card" || phase.name === "all_wake_up" ||
                 phase.name === "werewolf" && storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf") ||
-                phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Sythetic Alien" || role.name === "Groob" || role.name === "Zerb") ||
+                phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Synthetic Alien" || role.name === "Groob" || role.name === "Zerb") ||
                 phase.name === "vampire" && storage.activatedRoles.find(role => role.name === "Vampire" || role.name === "Master" || role.name === "Count") ||
                 phase.name === "all_view_mark" && storage.activatedRoles.find(role => role.mark)) {
                 phases.push(phase);
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = "Gerber senk deinen Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
-            if (phase.name === "auraseer") {
+            if (phase.name === "aura_seer") {
                 nightPhaseText.textContent = "Senkt alle eure Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
@@ -373,7 +373,7 @@ async function waitCycle(phase, nightPhaseText) {
 
 function getGermanName(englishName) {
     for (const role of allRoles) {
-        if (englishName.toLowerCase() === role.name.toLowerCase().replaceAll(" ","_")) {
+        if (englishName.replaceAll("_", "").toLowerCase() === role.name.toLowerCase().replaceAll(" ","")) {
             if (role.germanName === "Werwolf") return "Werwölfe";
             if (role.germanName === "Alien") return "Aliens";
             if (role.germanName === "Vampir") return "Vampire";

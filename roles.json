@@ -13,7 +13,7 @@
     "name": "Doppelganger",
     "germanName": "Doppelgängerin",
     "edition": "Werewolves",
-    "verboseRoles": ["Sentinel", "Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "PI", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
+    "verboseRoles": ["Sentinel", "Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "Paranormal Investigator", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
   },
   {
     "name": "Vampire",
@@ -131,7 +131,7 @@
     "edition": "Daybreak"
   },
   {
-    "name": "PI",
+    "name": "Paranormal Investigator",
     "germanName": "Geisterjäger",
     "edition": "Daybreak"
   },
@@ -156,12 +156,12 @@
     "edition": "Werewolves"
   },
   {
-    "name": "Villageidiot",
+    "name": "Village Idiot",
     "germanName": "Dorftrottel",
     "edition": "Daybreak"
   },
   {
-    "name": "Auraseer",
+    "name": "Aura Seer",
     "germanName": "Wahrsagerin",
     "edition": "Daybreak"
   },
