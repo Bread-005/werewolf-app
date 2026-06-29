@@ -34,6 +34,12 @@
     "mark": true
   },
   {
+    "name": "Instigator",
+    "germanName": "Anstifterin",
+    "edition": "Vampires",
+    "mark": true
+  },
+  {
     "id": "alien1",
     "name": "Alien",
     "germanName": "Alien",

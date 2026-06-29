@@ -33,6 +33,10 @@
     "text": "Vertausche die Panik-Marke mit einem Spieler, der kein Vampir ist."
   },
   {
+    "name": "instigator",
+    "text": "Vertausche die Verräter-Marke mit der Marke eines anderen Spielers."
+  },
+  {
     "name": "all_view_mark",
     "text": "Wacht alle auf und seht euch geheim eure Marke an.",
     "ending": "Schließt nun alle wieder eure Augen."
