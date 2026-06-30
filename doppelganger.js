@@ -28,7 +28,7 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     await speak("./voices/doppelganger/later_action/first_part.mp3");
     await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
     await speak("./voices/doppelganger/later_action/last_part.mp3");
-    if (phase.name !== "leader" && phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "auraseer" &&
+    if (phase.name !== "leader" && phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "aura_seer" &&
         phase.name !== "curator") {
         nightPhaseText.textContent = phase.text;
         await speak("./voices/" + phase.name + "/text.mp3");
@@ -49,7 +49,7 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
         await speak("./voices/random_cards/" + randomAction.text + ".mp3");
     }
     await waitCycle(phase, nightPhaseText);
-    nightPhaseText.textContent += "Doppelgängerin schließ deine Augen.";
+    nightPhaseText.textContent = "Doppelgängerin schließ deine Augen.";
     await speak("./voices/doppelganger/doppelganger.mp3");
     await speak("./voices/close_your_eyes.mp3");
 }

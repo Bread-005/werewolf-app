@@ -30,7 +30,8 @@
   },
   {
     "name": "count",
-    "text": "Vertausche die Panik-Marke mit einem Spieler, der kein Vampir ist."
+    "text": "Vertausche die Panik-Marke mit einem Spieler, der kein Vampir ist.",
+    "doppelganger": {}
   },
   {
     "name": "diseased",
@@ -116,6 +117,10 @@
     "name": "mason",
     "text": "Freimaurer wacht auf und seht euch nach dem anderen Freimaurer um.",
     "isMultiple": true
+  },
+  {
+    "name": "thing",
+    "text": "Berühre die Schulter eines Spielers neben dir."
   },
   {
     "name": "seer",

@@ -13,7 +13,7 @@
     "name": "Doppelganger",
     "germanName": "Doppelgängerin",
     "edition": "Werewolves",
-    "verboseRoles": ["Sentinel", "Diseased", "Cupid", "Instigator", "Alphawolf", "Mystic Wolf", "Seer", "Apprentice Seer", "Paranormal Investigator", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
+    "verboseRoles": ["Sentinel", "Diseased", "Cupid", "Instigator", "Alphawolf", "Mystic Wolf", "Thing", "Seer", "Apprentice Seer", "Paranormal Investigator", "Robber", "Witch", "Troublemaker", "Villageidiot", "Drunk"]
   },
   {
     "name": "Vampire",
@@ -131,6 +131,11 @@
     "name": "Mason",
     "germanName": "Freimaurer",
     "edition": "Werewolves"
+  },
+  {
+    "name": "Thing",
+    "germanName": "Ding",
+    "edition": "Vampires"
   },
   {
     "name": "Seer",
