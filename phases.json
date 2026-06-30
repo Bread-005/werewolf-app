@@ -34,6 +34,13 @@
     "doppelganger": {}
   },
   {
+    "name": "renfield",
+    "text": "Vampire zeigt auf den Spieler mit der Vampir-Marke. Renfield vertausche die Fledermaus-Marke mit deiner Marke aus.",
+    "doppelganger": {
+      "text": "Vertausche die Fledermaus-Marke mit deiner Marke aus."
+    }
+  },
+  {
     "name": "diseased",
     "text": "Vertausche die Seuche-Marke mit der Marke eines Spielers neben dir aus."
   },

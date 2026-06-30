@@ -1,5 +1,5 @@
 import {getGermanName, sleep, speak, waitCycle} from "./main.js";
-import {storage} from "./storage.js";
+import {storage, buildWeightedActionPool} from "./storage.js";
 
 async function doppelgangerVerboseText(nightPhaseText) {
     await sleep(2);
@@ -28,22 +28,21 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     await speak("./voices/doppelganger/later_action/first_part.mp3");
     await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
     await speak("./voices/doppelganger/later_action/last_part.mp3");
-    if (phase.name !== "leader" && phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "aura_seer" &&
+    if (phase.name !== "renfield" && phase.name !== "leader" && phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "aura_seer" &&
         phase.name !== "curator") {
         nightPhaseText.textContent = phase.text;
         await speak("./voices/" + phase.name + "/text.mp3");
+    }
+    if (phase.name === "renfield") {
+        nightPhaseText.textContent = phase.doppelganger.text;
+        await speak("./voices/" + phase.name + "/doppelganger_text.mp3");
     }
     if (phase.name === "curator") {
         nightPhaseText.textContent = phase.doppelganger.text;
         await speak("./voices/" + phase.name + "/doppelganger_text.mp3");
     }
     if (phase.randomActions) {
-        const randomActions = [];
-        for (const action of phase.randomActions) {
-            for (let i = 0; i < storage[phase.name + "RandomActionChances"][action.name]; i++) {
-                randomActions.push(action);
-            }
-        }
+        const randomActions = buildWeightedActionPool(phase);
         const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
         nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
         await speak("./voices/random_cards/" + randomAction.text + ".mp3");

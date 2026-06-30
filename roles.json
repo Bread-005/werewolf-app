@@ -34,6 +34,12 @@
     "mark": true
   },
   {
+    "name": "Renfield",
+    "germanName": "Renfield",
+    "edition": "Vampires",
+    "mark": "true"
+  },
+  {
     "name": "Diseased",
     "germanName": "Infizierte",
     "edition": "Vampires",
