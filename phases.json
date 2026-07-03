@@ -142,6 +142,11 @@
     "text": "Du darfst bis zu zwei Karten von deinen Mitspielern anschauen. Wenn du eine Karte anguckst die nicht im Dorfbewohnerteam ist, wirst du zu dieser Karte. Du darfst dir dann auch keine andere Karte mehr ansehen."
   },
   {
+    "name": "marksman",
+    "text": "Du darfst die Karte eines Spielers ansehen.",
+    "textWithMarks": "Du darfst die Karte eines Spielers und die Marke eines anderen Spielers ansehen."
+  },
+  {
     "name": "psychic",
     "text": "Du darfst dir eine Karte ansehen von ",
     "randomActions": [
@@ -173,7 +178,6 @@
   {
     "name": "aura_seer",
     "text": "Alle Spieler, die bereits eine Karte vertauscht oder angesehen haben, hebt jetzt eure Daumen.",
-    "marksMakeDifference": true,
     "textWithMarks": "Alle Spieler, die bereits eine Karte oder Marke vertauscht oder angesehen haben, hebt jetzt eure Daumen.",
     "doppelganger": {}
   },

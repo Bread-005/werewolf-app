@@ -159,6 +159,11 @@
     "edition": "Daybreak"
   },
   {
+    "name": "Marksman",
+    "germanName": "Spurenleser",
+    "edition": "Vampires"
+  },
+  {
     "name": "Psychic",
     "germanName": "Hellseher",
     "edition": "Aliens"
