@@ -144,7 +144,8 @@
   {
     "name": "marksman",
     "text": "Du darfst die Karte eines Spielers ansehen.",
-    "textWithMarks": "Du darfst die Karte eines Spielers und die Marke eines anderen Spielers ansehen."
+    "textWithMarks": "Du darfst die Karte eines Spielers und die Marke eines anderen Spielers ansehen.",
+    "doppelganger": {}
   },
   {
     "name": "psychic",
@@ -179,6 +180,12 @@
     "name": "aura_seer",
     "text": "Alle Spieler, die bereits eine Karte vertauscht oder angesehen haben, hebt jetzt eure Daumen.",
     "textWithMarks": "Alle Spieler, die bereits eine Karte oder Marke vertauscht oder angesehen haben, hebt jetzt eure Daumen.",
+    "doppelganger": {}
+  },
+  {
+    "name": "gremlin",
+    "text": "Du darfst die Karten von zwei beliebigen Spielern vertauschen.",
+    "textWithMarks": "Du darfst die Karten oder Marken von zwei beliebigen Spielern vertauschen.",
     "doppelganger": {}
   },
   {

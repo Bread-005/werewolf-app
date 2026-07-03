@@ -2,10 +2,22 @@ import {getGermanName, sleep, speak, waitCycle} from "./main.js";
 import {storage, buildWeightedActionPool} from "./storage.js";
 
 async function doppelgangerVerboseText(nightPhaseText) {
+    const nightRoles = storage.activatedRoles.filter(role => storage.activatedRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name));
+
+    if (!storage.activatedRoles.find(role => role.mark)) {
+        if (storage.activatedRoles.find(role => role.name === "Marksman")) {
+            nightRoles.push(storage.activatedRoles.find(role => role.name === "Marksman"));
+        }
+        if (storage.activatedRoles.find(role => role.name === "Gremlin")) {
+            nightRoles.push(storage.activatedRoles.find(role => role.name === "Gremlin"));
+        }
+    }
+    if (nightRoles.length === 0) return;
+
     await sleep(2);
     nightPhaseText.textContent = "Wenn du die ";
     await speak("./voices/doppelganger/verbose/first_part.mp3");
-    const nightRoles = storage.activatedRoles.filter(role => storage.activatedRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name));
+
     for (let i = 0; i < nightRoles.length; i++) {
         if (i === nightRoles.length - 1 && nightRoles.length > 1) {
             nightPhaseText.textContent += " oder ";
@@ -22,6 +34,11 @@ async function doppelgangerVerboseText(nightPhaseText) {
 async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     if (!phase.doppelganger) return;
     if (!storage.activatedRoles.find(role => role.name === "Doppelganger")) return;
+    if (!storage.activatedRoles.find(role => role.mark)) {
+        if (phase.name === "Marksman" || phase.name === "Gremlin") {
+            return;
+        }
+    }
 
     nightPhaseImage.src = "./images/doppelganger.png";
     nightPhaseText.textContent = "Doppelgängerin, wenn du die " + getGermanName(phase.name) + " Karte angesehen hast, wach auf.";

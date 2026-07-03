@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     }
                 }
             }
-            if (phase.name === "doppelganger" && storage.activatedRoles.filter(role => allRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name)).length > 0) {
+            if (phase.name === "doppelganger") {
                 await doppelgangerVerboseText(nightPhaseText);
             }
             if (phase.name === "leader") {

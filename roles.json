@@ -194,6 +194,11 @@
     "edition": "Daybreak"
   },
   {
+    "name": "Gremlin",
+    "germanName": "Kobold",
+    "edition": "Vampires"
+  },
+  {
     "name": "Drunk",
     "germanName": "Betrunkener",
     "edition": "Werewolves"
