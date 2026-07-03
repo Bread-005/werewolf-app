@@ -118,6 +118,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await speak("./voices/all_view_mark/ending.mp3");
                 continue;
             }
+            if (phase.name === "pickpocket" && !storage.activatedRoles.find(role => role.mark)) {
+                continue;
+            }
 
             nightPhaseImage.src = "./images/" + phase.name + ".png";
             nightPhaseText.textContent = getGermanName(phase.name) + " wach auf.";
@@ -349,7 +352,7 @@ async function sleep(seconds) {
 
 async function waitCycle(phase, nightPhaseText) {
     let pauseTime = storage.actionTime;
-    if (phase.name === "doppelganger" || phase.name === "villageidiot") pauseTime *= 2;
+    if (phase.name === "doppelganger" || phase.name === "villageidiot" || phase.name === "cupid") pauseTime *= 2;
     if (phase.name === "leader" && storage.leaderKnowsEverything) pauseTime *= 3;
     if (pauseTime === 0) {
         return;

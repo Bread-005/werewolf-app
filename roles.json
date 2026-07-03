@@ -179,6 +179,11 @@
     "edition": "Daybreak"
   },
   {
+    "name": "Pickpocket",
+    "germanName": "Taschendieb",
+    "edition": "Vampires"
+  },
+  {
     "name": "Troublemaker",
     "germanName": "Unruhestifterin",
     "edition": "Werewolves"

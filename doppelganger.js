@@ -35,7 +35,7 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     if (!phase.doppelganger) return;
     if (!storage.activatedRoles.find(role => role.name === "Doppelganger")) return;
     if (!storage.activatedRoles.find(role => role.mark)) {
-        if (phase.name === "Marksman" || phase.name === "Gremlin") {
+        if (phase.name === "marksman" || phase.name === "gremlin") {
             return;
         }
     }

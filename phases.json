@@ -169,6 +169,10 @@
     "text": "Du darfst eine Karte aus der Mitte ansehen. Wenn du das tust musst du diese Karte mit einem Spieler vertauschen."
   },
   {
+    "name": "pickpocket",
+    "textWithMarks": "Du darfst deine Marke mit der eines anderen Spielers vertauschen. Sehe dir dann deine neue Marke an."
+  },
+  {
     "name": "troublemaker",
     "text": "Du darfst die Karten von zwei anderen Spielern vertauschen."
   },
