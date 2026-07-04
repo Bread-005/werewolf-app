@@ -91,6 +91,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "minion");
         if (!storage.activatedRoles.find(role => role.name === "Tanner")) phases = phases.filter(phase => phase.name !== "apprentice_tanner");
         if (!storage.activatedRoles.find(role => role.name === "Groob") && !storage.activatedRoles.find(role => role.name === "Zerb")) phases = phases.filter(phase => phase.name !== "Groob");
+        if (!storage.activatedRoles.find(role => role.mark)) {
+            phases = phases.filter(phase => phase.name !== "pickpocket" && phase.name !== "priest");
+        }
+        if (storage.activatedRoles.filter(role => role.mark).length === 1 && storage.activatedRoles.find(role => role.name === "Assassin" || role.name === "Apprentice Assassin")) {
+            phases = phases.filter(phase => phase.name !== "priest");
+        }
 
         storage.activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
         saveLocalStorage();
@@ -116,9 +122,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await waitCycle(phase, nightPhaseText);
                 nightPhaseText.textContent = phase.ending;
                 await speak("./voices/all_view_mark/ending.mp3");
-                continue;
-            }
-            if (phase.name === "pickpocket" && !storage.activatedRoles.find(role => role.mark)) {
                 continue;
             }
 
@@ -352,7 +355,10 @@ async function sleep(seconds) {
 
 async function waitCycle(phase, nightPhaseText) {
     let pauseTime = storage.actionTime;
-    if (phase.name === "doppelganger" || phase.name === "villageidiot" || phase.name === "cupid") pauseTime *= 2;
+    if (phase.name === "doppelganger" || phase.name === "villageidiot" || phase.name === "cupid" ||
+        phase.name === "priest") {
+        pauseTime *= 2;
+    }
     if (phase.name === "leader" && storage.leaderKnowsEverything) pauseTime *= 3;
     if (pauseTime === 0) {
         return;

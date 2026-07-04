@@ -53,6 +53,11 @@
     "text": "Vertausche die Verräter-Marke mit der Marke eines anderen Spielers."
   },
   {
+    "name": "priest",
+    "text": "Vertausche die Marken von zwei beliebigen Spielern mit Gewissheits-Marken aus.",
+    "doppelganger": {}
+  },
+  {
     "name": "all_view_mark",
     "text": "Wacht alle auf und seht euch geheim eure Marke an.",
     "ending": "Schließt nun alle wieder eure Augen."

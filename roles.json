@@ -58,6 +58,11 @@
     "mark": true
   },
   {
+    "name": "Priest",
+    "germanName": "Priester",
+    "edition": "Vampires"
+  },
+  {
     "id": "alien1",
     "name": "Alien",
     "germanName": "Alien",
