@@ -58,6 +58,11 @@
     "doppelganger": {}
   },
   {
+    "name": "assassin",
+    "text": "Vertausche die Marke von einem anderen Spieler mit der Meuchler-Marke aus.",
+    "doppelganger": {}
+  },
+  {
     "name": "all_view_mark",
     "text": "Wacht alle auf und seht euch geheim eure Marke an.",
     "ending": "Schließt nun alle wieder eure Augen."

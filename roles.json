@@ -63,6 +63,12 @@
     "edition": "Vampires"
   },
   {
+    "name": "Assassin",
+    "germanName": "Meuchler",
+    "edition": "Vampires",
+    "mark": true
+  },
+  {
     "id": "alien1",
     "name": "Alien",
     "germanName": "Alien",
