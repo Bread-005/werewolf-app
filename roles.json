@@ -69,6 +69,12 @@
     "mark": true
   },
   {
+    "name": "Apprentice Assassin",
+    "germanName": "Nachwuchs Meuchlerin",
+    "edition": "Vampires",
+    "mark": true
+  },
+  {
     "id": "alien1",
     "name": "Alien",
     "germanName": "Alien",

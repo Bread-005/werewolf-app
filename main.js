@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!storage.activatedRoles.find(role => role.mark)) {
             phases = phases.filter(phase => phase.name !== "pickpocket" && phase.name !== "priest");
         }
-        if (storage.activatedRoles.filter(role => role.mark).length === 1 && storage.activatedRoles.find(role => role.name === "Assassin" || role.name === "Apprentice Assassin")) {
+        if (storage.activatedRoles.filter(role => role.mark && role.name !== "Assassin" && role.name !== "Apprentice Assassin").length === 0) {
             phases = phases.filter(phase => phase.name !== "priest");
         }
 
@@ -123,6 +123,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = phase.ending;
                 await speak("./voices/all_view_mark/ending.mp3");
                 continue;
+            }
+
+            if (storage.activatedRoles.find(role => role.name === "Assassin") && phase.name === "apprentice_assassin" && storage.activatedRoles.find(role => role.name === "Doppelganger")) {
+                nightPhaseImage.src = "./images/assassin.png";
+                nightPhaseText.textContent = "Meuchler wach auf.";
+                await speak("./voices/assassin/assassin.mp3");
+                await speakSingularOrPlural(false, "./voices/wake_up.mp3", "./voices/wake_up_multiple.mp3");
             }
 
             nightPhaseImage.src = "./images/" + phase.name + ".png";
@@ -190,10 +197,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = "Traumwolf senk deinen Daumen.";
                 await speak("./voices/werewolf/dreamwolf_ending.mp3");
             }
-            nightPhaseImage.src = "./images/" + phase.name + ".png";
-            nightPhaseText.textContent = getGermanName(phase.name) + (phase.isMultiple ? " schließt eure" : " schließ deine") + " Augen.";
-            await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
-            await speakSingularOrPlural(phase.isMultiple, "./voices/close_your_eyes.mp3", "./voices/close_your_eyes_multiple.mp3");
+            if (phase.name !== "assassin" || storage.activatedRoles.find(role => role.name === "Doppelganger")) {
+                nightPhaseImage.src = "./images/" + phase.name + ".png";
+                nightPhaseText.textContent = getGermanName(phase.name) + (phase.isMultiple ? " schließt eure" : " schließ deine") + " Augen.";
+                await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
+                await speakSingularOrPlural(phase.isMultiple, "./voices/close_your_eyes.mp3", "./voices/close_your_eyes_multiple.mp3");
+            }
             if (phase.name === "alien" && (storage.activatedRoles.find(role => role.name === "Groob") && storage.activatedRoles.find(role => role.name === "Zerb"))) {
                 nightPhaseImage.src = "./images/groob.png";
                 nightPhaseText.textContent = phase.groobAndZerb.text;
@@ -222,6 +231,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.name === "aura_seer") {
                 nightPhaseText.textContent = "Senkt alle eure Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
+            }
+            if (storage.activatedRoles.find(role => role.name === "Assassin") && phase.name === "apprentice_assassin") {
+                nightPhaseImage.src = "./images/assassin.png";
+                nightPhaseText.textContent = "Meuchler schließ deine Augen.";
+                await speak("./voices/assassin/assassin.mp3");
+                await speakSingularOrPlural(false, "./voices/close_your_eyes.mp3", "./voices/close_your_eyes_multiple.mp3");
             }
         }
 
