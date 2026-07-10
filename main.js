@@ -135,6 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             nightPhaseImage.src = "./images/" + phase.name + ".png";
             if (phase.name === "blob") {
                 const playerCount = storage.activatedRoles.length - 3;
+                if (playerCount <= 3) continue;
                 const neighborCount = Math.ceil(playerCount / 2) - 1;
                 nightPhaseText.textContent = buildBlobInstruction(playerCount, neighborCount);
                 await sleep(1);
