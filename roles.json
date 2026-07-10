@@ -231,6 +231,11 @@
     "edition": "Werewolves"
   },
   {
+    "name": "Blob",
+    "germanName": "Klecks",
+    "edition": "Aliens"
+  },
+  {
     "name": "Mortician",
     "germanName": "Bestatter",
     "edition": "Aliens"

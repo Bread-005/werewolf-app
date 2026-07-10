@@ -133,6 +133,31 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             nightPhaseImage.src = "./images/" + phase.name + ".png";
+            if (phase.name === "blob") {
+                const playerCount = storage.activatedRoles.length - 3;
+                const neighborCount = Math.ceil(playerCount / 2) - 1;
+                nightPhaseText.textContent = buildBlobInstruction(playerCount, neighborCount);
+                await sleep(1);
+                await speak("./voices/blob/first_part.mp3");
+
+                if (nightPhaseText.textContent.includes("linken") && nightPhaseText.textContent.includes("rechten")) {
+                    await speak("./voices/blob/" + neighborCount + ".mp3");
+                    await speak("./voices/blob/second_part_both.mp3");
+                    await speak("./voices/blob/" + neighborCount + ".mp3");
+                    await speak("./voices/blob/third_part_both.mp3");
+                } else {
+                    await speak("./voices/blob/" + neighborCount + ".mp3");
+                    if (nightPhaseText.textContent.includes("linken")) {
+                        await speak("./voices/blob/second_part_left.mp3");
+                    }
+                    if (nightPhaseText.textContent.includes("rechten")) {
+                        await speak("./voices/blob/second_part_right.mp3");
+                    }
+                }
+                await sleep(1);
+                continue;
+            }
+
             nightPhaseText.textContent = getGermanName(phase.name) + " wach auf.";
             if (phase.isMultiple) nightPhaseText.textContent = nightPhaseText.textContent.replace("wach", "wacht");
             if (phase.name === "werewolf" && storage.activatedRoles.find(role => role.name === "Dreamwolf")) {
@@ -399,6 +424,19 @@ function getGermanName(englishName) {
         }
     }
     return "";
+}
+
+function buildBlobInstruction(playerCount, neighborCount) {
+    const options = [];
+    if (playerCount > 3) {
+        options.push(`Klecks, halte dich selbst und ${neighborCount} Spieler zu deiner linken Seite am Leben.`);
+        options.push(`Klecks, halte dich selbst und ${neighborCount} Spieler zu deiner rechten Seite am Leben.`);
+        if (playerCount % 2 !== 0 && neighborCount % 2 === 0) {
+            const halfCount = neighborCount / 2;
+            options.push(`Klecks, halte dich selbst und ${halfCount} Spieler zu deiner linken und ${halfCount} Spieler zu deiner rechten Seite am Leben.`);
+        }
+    }
+    return options[Math.floor(Math.random() * options.length)];
 }
 
 export {speak, sleep, waitCycle, getGermanName, paused};

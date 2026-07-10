@@ -217,6 +217,10 @@
     "doppelganger": {}
   },
   {
+    "name": "blob",
+    "text": ""
+  },
+  {
     "name": "mortician",
     "text": "Du darfst dir die Karte ansehen von ",
     "randomActions": [
