@@ -331,23 +331,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (storage.activatedRoles.find(role1 => role1.name === role.name)) {
                 div.style.border = "4px solid white";
             }
-            const span = document.createElement("span");
-            span.textContent = role.germanName;
-            if (role.germanName.length < 12) {
-                span.style.fontSize = "12px";
-            }
-            if (role.germanName.length < 10) {
-                span.style.fontSize = "14px";
-            }
-            if (role.germanName.length < 8) {
-                span.style.fontSize = "16px";
-            }
 
             const img = document.createElement("img");
             img.src = "./images/" + role.name.toLowerCase().replaceAll(" ","_") + ".png";
             img.alt = role.name;
 
-            div.append(span);
             div.append(img);
             roleGrid.append(div);
 
