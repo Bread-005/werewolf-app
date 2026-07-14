@@ -97,6 +97,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (storage.activatedRoles.filter(role => role.mark && role.name !== "Assassin" && role.name !== "Apprentice Assassin").length === 0) {
             phases = phases.filter(phase => phase.name !== "priest");
         }
+        if (!storage.activatedRoles.find(role => role.name === "Seer" || role.name === "Apprentice Seer")) {
+            phases = phases.filter(phase => phase.name !== "beholder");
+        }
 
         storage.activatedRoles.sort((a, b) => allRoles.indexOf(a) - allRoles.indexOf(b));
         saveLocalStorage();
@@ -167,7 +170,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else {
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
                 await speakSingularOrPlural(phase.isMultiple, "./voices/wake_up.mp3", "./voices/wake_up_multiple.mp3");
-                if (phase.name !== "leader") {
+                if (phase.name !== "leader" && phase.name !== "beholder") {
                     if (!phase.textWithMarks || !storage.activatedRoles.find(role => role.mark)) {
                         nightPhaseText.textContent = phase.text;
                         await speak("./voices/" + phase.name + "/" + "text.mp3");
@@ -215,6 +218,33 @@ document.addEventListener("DOMContentLoaded", async () => {
                     await speak("./voices/random_cards/" + randomAction.text + ".mp3");
                 }
             }
+            if (phase.name === "beholder") {
+                const seerArray = ["Seer", "Apprentice Seer"].filter(seer => storage.activatedRoles.find(role => role.name === seer));
+                if (seerArray.length === 1) {
+                    nightPhaseText.textContent = " " + storage.activatedRoles.find(role => role.name === seerArray[0])?.germanName + " heb deinen Daumen.";
+                    nightPhaseText.textContent += " Betrachterin du darfst die Karte von dem Spieler angucken, der den Daumen hebt.";
+                    await speak("./voices/" + seerArray[0].toLowerCase().replaceAll(" ", "_") + "/" + seerArray[0].toLowerCase().replaceAll(" ", "_") + ".mp3");
+                    await speak("./voices/beholder/thumb_up.mp3");
+                    await speak("./voices/beholder/beholder.mp3");
+                    await speak("./voices/beholder/look_at_one.mp3");
+                }
+                if (seerArray.length > 1) {
+                    for (const seer of seerArray) {
+                        const index = seerArray.indexOf(seer);
+                        nightPhaseText.textContent += " " + storage.activatedRoles.find(role => role.name === seer)?.germanName;
+                        await speak("./voices/" + seer.toLowerCase().replaceAll(" ", "_") + "/" + seer.toLowerCase().replaceAll(" ", "_") + ".mp3");
+                        if (index + 1 < seerArray.length) {
+                            nightPhaseText.textContent += " und";
+                            await speak("./voices/beholder/and.mp3");
+                        }
+                    }
+                    nightPhaseText.textContent += " hebt eure Daumen.";
+                    await speak("./voices/beholder/thumbs_up.mp3");
+                    nightPhaseText.textContent += " Betrachterin du darfst die Karten, von den Spielern angucken, der ihre Daumen heben.";
+                    await speak("./voices/beholder/beholder.mp3");
+                    await speak("./voices/beholder/look_at_multiple.mp3");
+                }
+            }
             await waitCycle(phase, nightPhaseText);
             if ((phase.name === "alien" || phase.name === "werewolf" || phase.name === "vampire") && storage.activatedRoles.find(role => role.name === "Cow")) {
                 await cowAction(phase, nightPhaseImage, nightPhaseText);
@@ -254,9 +284,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = "Gerber senk deinen Daumen wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
-            if (phase.name === "aura_seer") {
+            if (phase.name === "aura_seer" || phase.name === "beholder") {
                 nightPhaseText.textContent = "Senkt alle eure Daumen wieder.";
-                await speak("./voices/" + phase.name + "/ending.mp3");
+                await speak("./voices/aura_seer/ending.mp3");
             }
             if (storage.activatedRoles.find(role => role.name === "Assassin") && phase.name === "apprentice_assassin") {
                 nightPhaseImage.src = "./images/assassin.png";
@@ -329,7 +359,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const div = document.createElement("div");
             div.classList.add("role-card");
             if (storage.activatedRoles.find(role1 => role1.name === role.name)) {
-                div.style.border = "4px solid white";
+                div.style.borderColor = "white";
             }
 
             const img = document.createElement("img");
@@ -342,11 +372,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             div.addEventListener("click", () => {
                 // const clickSound = new Audio("./voices/click_sound.wav");
                 // clickSound.play();
-                if (!div.style.border || div.style.border === "none") {
-                    div.style.border = "4px solid white";
+                if (div.style.borderColor !== "white") {
+                    div.style.borderColor = "white";
                     storage.activatedRoles.push(role);
                 } else {
-                    div.style.border = "none";
+                    div.style.borderColor = "transparent";
                     storage.activatedRoles = storage.activatedRoles.filter(role1 => role1.id + role1.name !== role.id + role.name);
                 }
                 saveLocalStorage();

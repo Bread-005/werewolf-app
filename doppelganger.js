@@ -46,7 +46,7 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
     await speak("./voices/doppelganger/later_action/last_part.mp3");
     if (phase.name !== "renfield" && phase.name !== "leader" && phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "aura_seer" &&
-        phase.name !== "curator") {
+        phase.name !== "curator" && phase.name !== "beholder") {
         nightPhaseText.textContent = phase.text;
         await speak("./voices/" + phase.name + "/text.mp3");
     }
@@ -57,6 +57,10 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     if (phase.name === "curator") {
         nightPhaseText.textContent = phase.doppelganger.text;
         await speak("./voices/" + phase.name + "/doppelganger_text.mp3");
+    }
+    if (phase.name === "beholder") {
+        nightPhaseText.textContent = "Du darfst die Karten von den Spielern angucken, die ihre Daumen heben.";
+        await speak("./voices/beholder/look_at_multiple.mp3");
     }
     if (phase.randomActions) {
         const randomActions = buildWeightedActionPool(phase);
