@@ -217,6 +217,11 @@
     "doppelganger": {}
   },
   {
+    "name": "squire",
+    "text": "Werwölfe hebt eure Daumen. Knappe du darfst dir die Karten der Werwölfe ansehen.",
+    "doppelganger": {}
+  },
+  {
     "name": "beholder",
     "text": "",
     "doppelganger": {}

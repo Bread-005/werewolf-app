@@ -88,7 +88,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 phases.push(phase);
             }
         }
-        if (!storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) phases = phases.filter(phase => phase.name !== "minion");
+        if (!storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf"))) {
+            phases = phases.filter(phase => phase.name !== "minion" && phase.name !== "squire");
+        }
         if (!storage.activatedRoles.find(role => role.name === "Tanner")) phases = phases.filter(phase => phase.name !== "apprentice_tanner");
         if (!storage.activatedRoles.find(role => role.name === "Groob") && !storage.activatedRoles.find(role => role.name === "Zerb")) phases = phases.filter(phase => phase.name !== "Groob");
         if (!storage.activatedRoles.find(role => role.mark)) {
@@ -173,6 +175,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (phase.name !== "leader" && phase.name !== "beholder") {
                     if (!phase.textWithMarks || !storage.activatedRoles.find(role => role.mark)) {
                         nightPhaseText.textContent = phase.text;
+                        if (phase.name === "squire") {
+                            await speak("./voices/minion/text.mp3");
+                            await speak("./voices/squire/squire.mp3");
+                        }
                         await speak("./voices/" + phase.name + "/" + "text.mp3");
                     } else {
                         nightPhaseText.textContent = phase.textWithMarks;
@@ -272,9 +278,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = "Vampire senkt eure Arme wieder.";
                 await speak("./voices/" + phase.name + "/ending.mp3");
             }
-            if (phase.name === "minion") {
+            if (phase.name === "minion" || phase.name === "squire") {
                 nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
-                await speak("./voices/" + phase.name + "/ending.mp3");
+                await speak("./voices/minion/ending.mp3");
             }
             if (phase.name === "leader" && !storage.leaderKnowsEverything) {
                 nightPhaseText.textContent = "Senkt alle eure Daumen und Hände wieder.";
