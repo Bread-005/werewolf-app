@@ -18,8 +18,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             alienRandomActionChances: {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0},
             psychicRandomActionChances: {neighbor: 10, even_player: 10, odd_player: 10, not_neighbor: 10, any_player: 10, middle: 10},
             morticianRandomActionChances: {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10},
+            body_snatcherRandomActionChances: {neighbor: 10, middle1: 5, middle2: 5, middle3: 5, even_player: 10, odd_player: 10, middle: 10},
             leaderKnowsEverything: false,
-            moveCard: true
+            moveCard: true,
+            bodySnatcherViewsCard: true
         }
         localStorage.setItem("werewolf-app", JSON.stringify(storage1));
         window.location.reload();
@@ -42,6 +44,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!storage.morticianRandomActionChances) {
         storage.morticianRandomActionChances = {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10};
+        saveLocalStorage();
+    }
+
+    if (!storage.body_snatcherRandomActionChances) {
+        storage.body_snatcherRandomActionChances = {neighbor: 10, middle1: 5, middle2: 5, middle3: 5, even_player: 10, odd_player: 10, middle: 10};
         saveLocalStorage();
     }
 
@@ -82,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ", "") === phase.name.replaceAll("_","")) ||
                 phase.name === "all_sleep" || phase.name === "move_card" && storage.moveCard || phase.name === "all_wake_up" ||
                 phase.name === "werewolf" && storage.activatedRoles.find(role => role.name.toLowerCase().includes("wolf") && role.name !== "Dreamwolf") ||
-                phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Synthetic Alien" || role.name === "Groob" || role.name === "Zerb") ||
+                phase.name === "alien" && storage.activatedRoles.find(role => role.name === "Synthetic Alien" || role.name === "Groob" || role.name === "Zerb" || role.name === "Body Snatcher") ||
                 phase.name === "vampire" && storage.activatedRoles.find(role => role.name === "Vampire" || role.name === "Master" || role.name === "Count") ||
                 phase.name === "all_view_mark" && storage.activatedRoles.find(role => role.mark)) {
                 phases.push(phase);
@@ -250,6 +257,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                     await speak("./voices/beholder/beholder.mp3");
                     await speak("./voices/beholder/look_at_multiple.mp3");
                 }
+            }
+            if (phase.name === "body_snatcher") {
+                if (storage.bodySnatcherViewsCard) {
+                    nightPhaseText.textContent = "Sehe dir dann deine Karte an.";
+                    await speak("./voices/body_snatcher/view_card_text.mp3");
+                }
+                nightPhaseText.textContent = "Deine neue Karte ist nun ein Alien.";
+                await speak("./voices/body_snatcher/ending_text.mp3");
             }
             await waitCycle(phase, nightPhaseText);
             if ((phase.name === "alien" || phase.name === "werewolf" || phase.name === "vampire") && storage.activatedRoles.find(role => role.name === "Cow")) {

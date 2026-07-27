@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (storage.currentSettingRole === "psychic") settings = ["Neighbor", "Even Player", "Odd Player", "Not Neighbor", "Any Player", "Middle"];
     if (storage.currentSettingRole === "mortician") settings = ["Self", "Left Neighbor", "Right Neighbor", "Neighbor"];
     if (storage.currentSettingRole === "leader") settings = ["All wissender Boss"];
+    if (storage.currentSettingRole === "body_snatcher") settings = ["Neighbor", "Middle1", "Middle2", "Middle3", "Even Player", "Odd Player", "Middle", "Karte ansehen"];
     for (const setting of settings) {
         const div = document.createElement("div");
         div.setAttribute("class", "single-setting");
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const upIcon = document.createElement("i");
         upIcon.className = "fa-solid fa-arrow-up";
         const currentSetting = document.createElement("span");
-        if (storage.currentSettingRole !== "leader") {
+        if (storage.currentSettingRole !== "leader" && setting !== "Karte ansehen") {
             currentSetting.textContent = storage[storage.currentSettingRole + "RandomActionChances"][setting.toLowerCase().replaceAll(" ","_")];
         } else {
             currentSetting.textContent = setting;
@@ -30,17 +31,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const downIcon = document.createElement("i");
         downIcon.className = "fa-solid fa-arrow-down";
 
-        if (storage.currentSettingRole !== "leader") {
+        if (storage.currentSettingRole !== "leader" && setting !== "Karte ansehen") {
             up.append(upIcon);
             down.append(downIcon);
             change.append(up, currentSetting, down);
         } else {
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
-            checkbox.checked = storage.leaderKnowsEverything;
+            if (storage.currentSettingRole === "leader") checkbox.checked = storage.leaderKnowsEverything;
+            if (setting === "Karte ansehen") checkbox.checked = storage.bodySnatcherViewsCard;
 
             checkbox.addEventListener("click", () => {
-                storage.leaderKnowsEverything = checkbox.checked;
+                if (storage.currentSettingRole === "leader") storage.leaderKnowsEverything = checkbox.checked;
+                if (setting === "Karte ansehen") storage.bodySnatcherViewsCard = checkbox.checked;
                 saveLocalStorage();
             });
 

@@ -99,6 +99,21 @@
     }
   },
   {
+    "name": "body_snatcher",
+    "text": "Du darfst deine Karte vertauschen mit ",
+    "randomActions": [
+      {"name": "neighbor", "text": "einem Nachbarn"},
+      {"name": "middle1", "text": "Mittelkarte 1"},
+      {"name": "middle2", "text": "Mittelkarte 2"},
+      {"name": "middle3", "text": "Mittelkarte 3"},
+      {"name": "even_player", "text": "einem geraden Spieler"},
+      {"name": "odd_player", "text": "einem ungeraden Spieler"},
+      {"name": "middle", "text": "der Mitte"}
+    ],
+    "view_card_text": "Sehe dir dann deine Karte an.",
+    "ending_text": "Deine neue Karte ist nun ein Alien."
+  },
+  {
     "name": "werewolf",
     "text": "Werwölfe wacht auf und seht euch nach anderen Werwölfen um.",
     "secondText": "Du bist alleine Werwolf? Dann darfst du dir eine Karte aus der Mitte ansehen.",

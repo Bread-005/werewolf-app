@@ -107,6 +107,11 @@
     "edition": "Aliens"
   },
   {
+    "name": "Body Snatcher",
+    "germanName": "Körperdieb",
+    "edition": "Bonus Pack"
+  },
+  {
     "id": "werewolf1",
     "name": "Werewolf",
     "germanName": "Werwolf",
