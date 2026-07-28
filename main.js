@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             psychicRandomActionChances: {neighbor: 10, even_player: 10, odd_player: 10, not_neighbor: 10, any_player: 10, middle: 10},
             morticianRandomActionChances: {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10},
             body_snatcherRandomActionChances: {neighbor: 10, middle1: 5, middle2: 5, middle3: 5, even_player: 10, odd_player: 10, middle: 10},
+            rascalRandomActionChances: {robber: 10, witch: 10, troublemaker: 10, drunk: 10},
             leaderKnowsEverything: false,
             moveCard: true,
             bodySnatcherViewsCard: true
@@ -49,6 +50,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!storage.body_snatcherRandomActionChances) {
         storage.body_snatcherRandomActionChances = {neighbor: 10, middle1: 5, middle2: 5, middle3: 5, even_player: 10, odd_player: 10, middle: 10};
+        saveLocalStorage();
+    }
+
+    if (!storage.rascalRandomActionChances) {
+        storage.rascalRandomActionChances = {robber: 10, witch: 10, troublemaker: 10, drunk: 10};
         saveLocalStorage();
     }
 
@@ -179,7 +185,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else {
                 await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
                 await speakSingularOrPlural(phase.isMultiple, "./voices/wake_up.mp3", "./voices/wake_up_multiple.mp3");
-                if (phase.name !== "leader" && phase.name !== "beholder") {
+                if (phase.name !== "leader" && phase.name !== "beholder" && phase.name !== "rascal") {
                     if (!phase.textWithMarks || !storage.activatedRoles.find(role => role.mark)) {
                         nightPhaseText.textContent = phase.text;
                         if (phase.name === "squire") {
@@ -226,9 +232,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                         storage.votingTime = Math.round(storage.votingTime / 2);
                     }
                 } else {
-                    const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
-                    nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
-                    await speak("./voices/random_cards/" + randomAction.text + ".mp3");
+                    if (phase.name !== "rascal") {
+                        const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
+                        nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
+                        await speak("./voices/random_cards/" + randomAction.text + ".mp3");
+                    }
+                    if (phase.name === "rascal") {
+                        const randomRole = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomText[0];
+                        nightPhaseText.textContent = allPhases.find(role => role.name === randomRole.name).text;
+                        await speak("./voices/" + randomRole.name + "/text.mp3");
+                    }
                 }
             }
             if (phase.name === "beholder") {

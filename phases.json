@@ -196,7 +196,7 @@
   },
   {
     "name": "witch",
-    "text": "Du darfst eine Karte aus der Mitte ansehen. Wenn du das tust musst du diese Karte mit einem Spieler vertauschen."
+    "text": "Du darfst eine Karte aus der Mitte ansehen. Wenn du das tust, musst du diese Karte mit einem Spieler vertauschen."
   },
   {
     "name": "pickpocket",
@@ -209,6 +209,16 @@
   {
     "name": "village_idiot",
     "text": "Du darfst alle Karten, außer deiner eigenen, nach links oder rechts verschieben."
+  },
+  {
+    "name": "rascal",
+    "text": "",
+    "randomActions": [
+      {"name": "robber", "text": "Du darfst deine Karte mit der eines anderen Spielers vertauschen. Sehe dir dann deine Karte an."},
+      {"name": "witch", "text": "Du darfst eine Karte aus der Mitte ansehen. Wenn du das tust musst du diese Karte mit einem Spieler vertauschen."},
+      {"name": "troublemaker", "text": "Du darfst die Karten von zwei anderen Spielern vertauschen."},
+      {"name": "drunk", "text": "Vertausche deine Karte mit einer aus der Mitte."}
+    ]
   },
   {
     "name": "aura_seer",
