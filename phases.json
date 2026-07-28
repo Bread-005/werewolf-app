@@ -178,6 +178,10 @@
     "doppelganger": {}
   },
   {
+    "name": "nostradamus",
+    "text": "Du darfst dir bis zu drei Karten deiner Mitspieler ansehen. Wenn du dir eine Karte ansiehst, die nicht im Dorf team ist, darfst du keine Karte mehr ansehen. Wähle die Karte aus, die du dir zuletzt angesehen hast."
+  },
+  {
     "name": "psychic",
     "text": "Du darfst dir eine Karte ansehen von ",
     "randomActions": [
@@ -218,7 +222,8 @@
       {"name": "witch", "text": "Du darfst eine Karte aus der Mitte ansehen. Wenn du das tust musst du diese Karte mit einem Spieler vertauschen."},
       {"name": "troublemaker", "text": "Du darfst die Karten von zwei anderen Spielern vertauschen."},
       {"name": "drunk", "text": "Vertausche deine Karte mit einer aus der Mitte."}
-    ]
+    ],
+    "doppelganger": {}
   },
   {
     "name": "aura_seer",

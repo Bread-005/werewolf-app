@@ -19,25 +19,29 @@
     "name": "Vampire",
     "germanName": "Vampir",
     "edition": "Vampires",
-    "mark": true
+    "mark": true,
+    "team": "Vampire"
   },
   {
     "name": "Master",
     "germanName": "Meister",
     "edition": "Vampires",
-    "mark": true
+    "mark": true,
+    "team": "Vampire"
   },
   {
     "name": "Count",
     "germanName": "Graf",
     "edition": "Vampires",
-    "mark": true
+    "mark": true,
+    "team": "Vampire"
   },
   {
     "name": "Renfield",
     "germanName": "Renfield",
     "edition": "Vampires",
-    "mark": "true"
+    "mark": "true",
+    "team": "Vampire"
   },
   {
     "name": "Diseased",
@@ -66,30 +70,35 @@
     "name": "Assassin",
     "germanName": "Meuchler",
     "edition": "Vampires",
-    "mark": true
+    "mark": true,
+    "team": "Assassin"
   },
   {
     "name": "Apprentice Assassin",
     "germanName": "Nachwuchs Meuchlerin",
     "edition": "Vampires",
-    "mark": true
+    "mark": true,
+    "team": "Apprentice Assassin"
   },
   {
     "id": "alien1",
     "name": "Alien",
     "germanName": "Alien",
-    "edition": "Aliens"
+    "edition": "Aliens",
+    "team": "Alien"
   },
   {
     "id": "alien2",
     "name": "Alien",
     "germanName": "Alien",
-    "edition": "Aliens"
+    "edition": "Aliens",
+    "team": "Alien"
   },
   {
     "name": "Synthetic Alien",
     "germanName": "Synthetisches Alien",
-    "edition": "Aliens"
+    "edition": "Aliens",
+    "team": "Synthetic Alien"
   },
   {
     "name": "Cow",
@@ -99,49 +108,58 @@
   {
     "name": "Groob",
     "germanName": "Groob",
-    "edition": "Aliens"
+    "edition": "Aliens",
+    "team": "Groob"
   },
   {
     "name": "Zerb",
     "germanName": "Zerb",
-    "edition": "Aliens"
+    "edition": "Aliens",
+    "team": "Zerb"
   },
   {
     "name": "Body Snatcher",
     "germanName": "Körperdieb",
-    "edition": "Bonus Pack"
+    "edition": "Bonus Pack",
+    "team": "Alien"
   },
   {
     "id": "werewolf1",
     "name": "Werewolf",
     "germanName": "Werwolf",
-    "edition": "Werewolves"
+    "edition": "Werewolves",
+    "team": "Werewolf"
   },
   {
     "id": "werewolf2",
     "name": "Werewolf",
     "germanName": "Werwolf",
-    "edition": "Werewolves"
+    "edition": "Werewolves",
+    "team": "Werewolf"
   },
   {
     "name": "Alphawolf",
     "germanName": "Alphawolf",
-    "edition": "Daybreak"
+    "edition": "Daybreak",
+    "team": "Werewolf"
   },
   {
     "name": "Mystic Wolf",
     "germanName": "Sehender Wolf",
-    "edition": "Daybreak"
+    "edition": "Daybreak",
+    "team": "Werewolf"
   },
   {
     "name": "Minion",
     "germanName": "Günstling",
-    "edition": "Werewolves"
+    "edition": "Werewolves",
+    "team": "Werewolf"
   },
   {
     "name": "Apprentice Tanner",
     "germanName": "Nachwuchs Gerber",
-    "edition": "Bonus Pack"
+    "edition": "Bonus Pack",
+    "team": "Tanner"
   },
   {
     "name": "Leader",
@@ -184,6 +202,11 @@
     "name": "Marksman",
     "germanName": "Spurenleser",
     "edition": "Vampires"
+  },
+  {
+    "name": "Nostradamus",
+    "germanName": "Nostradamus",
+    "edition": "Bonus Pack"
   },
   {
     "name": "Psychic",
@@ -241,6 +264,12 @@
     "edition": "Werewolves"
   },
   {
+    "name": "Squire",
+    "germanName": "Knappe",
+    "edition": "Bonus Pack",
+    "team": "Werewolf"
+  },
+  {
     "name": "Beholder",
     "germanName": "Betrachterin",
     "edition": "Bonus Pack"
@@ -248,12 +277,14 @@
   {
     "name": "Blob",
     "germanName": "Klecks",
-    "edition": "Aliens"
+    "edition": "Aliens",
+    "team": "Blob"
   },
   {
     "name": "Mortician",
     "germanName": "Bestatter",
-    "edition": "Aliens"
+    "edition": "Aliens",
+    "team": "Mortician"
   },
   {
     "name": "Revealer",
@@ -296,7 +327,8 @@
   {
     "name": "Tanner",
     "germanName": "Gerber",
-    "edition": "Werewolves"
+    "edition": "Werewolves",
+    "team": "Tanner"
   },
   {
     "name": "Dreamwolf",
@@ -316,11 +348,6 @@
   {
     "name": "Cursed",
     "germanName": "Verfluchter",
-    "edition": "Bonus Pack"
-  },
-  {
-    "name": "Squire",
-    "germanName": "Knappe",
     "edition": "Bonus Pack"
   }
 ]

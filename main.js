@@ -2,9 +2,11 @@ import {doppelgangerExtraWake, doppelgangerVerboseText} from "./doppelganger.js"
 import {cowAction} from "./cow.js";
 import {leaderAction} from "./leader.js";
 import {storage, saveLocalStorage, buildWeightedActionPool} from "./storage.js";
+import {nostradamusAction, renderNostradamusPicker} from "./nostradamus.js";
 let allRoles = [];
 let paused = false;
 let currentAudio = null;
+let allPhases = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -81,15 +83,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const roleGrid = document.querySelector(".roles-grid");
     allRoles = await fetch("./roles.json").then(res => res.json());
+    allPhases = await fetch("./phases.json").then(res => res.json());
     showRolesSelection();
 
     window.scrollTo(0, 0);
 
     const nightPhaseImage = document.querySelector(".image");
     const nightPhaseText = document.getElementById("night-phase-text");
+    const nostradamusPicker = document.querySelector(".nostradamus-picker");
 
     document.querySelector(".start-button").addEventListener("click", async () => {
-        const allPhases = await fetch("./phases.json").then(res => res.json());
         let phases = [];
         for (const phase of allPhases) {
             if (storage.activatedRoles.find(role => role.name.toLowerCase().replaceAll(" ", "") === phase.name.replaceAll("_","")) ||
@@ -199,6 +202,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     }
                 }
             }
+            if (phase.name === "nostradamus") {
+                renderNostradamusPicker(nostradamusPicker);
+            }
             if (phase.name === "doppelganger") {
                 await doppelgangerVerboseText(nightPhaseText);
             }
@@ -286,6 +292,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.name === "werewolf" && storage.activatedRoles.find(role => role.name === "Dreamwolf")) {
                 nightPhaseText.textContent = "Traumwolf senk deinen Daumen.";
                 await speak("./voices/werewolf/dreamwolf_ending.mp3");
+            }
+            if (phase.name === "nostradamus") {
+                await nostradamusAction(nightPhaseText, nostradamusPicker);
             }
             if (phase.name !== "assassin" || storage.activatedRoles.find(role => role.name === "Doppelganger")) {
                 nightPhaseImage.src = "./images/" + phase.name + ".png";
@@ -452,7 +461,9 @@ async function waitCycle(phase, nightPhaseText) {
         phase.name === "priest") {
         pauseTime *= 2;
     }
-    if (phase.name === "leader" && storage.leaderKnowsEverything) pauseTime *= 3;
+    if (phase.name === "leader" && storage.leaderKnowsEverything || phase.name === "nostradamus") {
+        pauseTime *= 3;
+    }
     if (pauseTime === 0) {
         return;
     }
@@ -492,4 +503,4 @@ function buildBlobInstruction(playerCount, neighborCount) {
     return options[Math.floor(Math.random() * options.length)];
 }
 
-export {speak, sleep, waitCycle, getGermanName, paused};
+export {speak, sleep, waitCycle, getGermanName, paused, allPhases};

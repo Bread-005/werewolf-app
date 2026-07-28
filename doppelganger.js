@@ -1,4 +1,4 @@
-import {getGermanName, sleep, speak, waitCycle} from "./main.js";
+import {allPhases, getGermanName, sleep, speak, waitCycle} from "./main.js";
 import {storage, buildWeightedActionPool} from "./storage.js";
 
 async function doppelgangerVerboseText(nightPhaseText) {
@@ -46,7 +46,7 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
     await speak("./voices/doppelganger/later_action/last_part.mp3");
     if (phase.name !== "renfield" && phase.name !== "leader" && phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "aura_seer" &&
-        phase.name !== "curator" && phase.name !== "beholder") {
+        phase.name !== "curator" && phase.name !== "beholder" && phase.name !== "rascal") {
         nightPhaseText.textContent = phase.text;
         await speak("./voices/" + phase.name + "/text.mp3");
     }
@@ -64,9 +64,16 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     }
     if (phase.randomActions) {
         const randomActions = buildWeightedActionPool(phase);
-        const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
-        nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
-        await speak("./voices/random_cards/" + randomAction.text + ".mp3");
+        if (phase.name !== "rascal") {
+            const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
+            nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
+            await speak("./voices/random_cards/" + randomAction.text + ".mp3");
+        }
+        if (phase.name === "rascal") {
+            const randomRole = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomText[0];
+            nightPhaseText.textContent = allPhases.find(role => role.name === randomRole.name).text;
+            await speak("./voices/" + randomRole.name + "/text.mp3");
+        }
     }
     await waitCycle(phase, nightPhaseText);
     nightPhaseText.textContent = "Doppelgängerin schließ deine Augen.";
