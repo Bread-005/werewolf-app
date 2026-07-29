@@ -70,7 +70,7 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
             await speak("./voices/random_cards/" + randomAction.text + ".mp3");
         }
         if (phase.name === "rascal") {
-            const randomRole = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomText[0];
+            const randomRole = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
             nightPhaseText.textContent = allPhases.find(role => role.name === randomRole.name).text;
             await speak("./voices/" + randomRole.name + "/text.mp3");
         }

@@ -4,6 +4,28 @@
     "text": "Schließt nun alle eure Augen."
   },
   {
+    "name": "oracle",
+    "text": "Beantworte die folgende Frage.",
+    "randomActions": [
+      {
+        "name": "join_evil_team",
+        "question": "Möchtest du ein x werden?",
+        "answers": [
+          "Die Orakel-Karte ist nun ein x.",
+          "Das Orakel bleibt Orakel."
+        ]
+      },
+      {
+        "name": "alien_exchange",
+        "question": "Möchtest du das die Aliens, ihre Karten untereinander tauschen?",
+        "answers": [
+          "Die Aliens werden gleich gezwungen, ihre Karten, untereinander zu tauschen.",
+          "Die Aliens behalten gleich ihre Karten."
+        ]
+      }
+    ]
+  },
+  {
     "name": "copycat",
     "text": "Schau dir eine Karte aus der Mitte an. Du übernimmst nun diese Rolle. Wenn die Rolle aufgerufen wird, wach auf und führ die entsprechende Aktion durch."
   },

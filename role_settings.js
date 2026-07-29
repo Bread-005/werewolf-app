@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (storage.currentSettingRole === "leader") settings = ["All wissender Boss"];
     if (storage.currentSettingRole === "body_snatcher") settings = ["Neighbor", "Middle1", "Middle2", "Middle3", "Even Player", "Odd Player", "Middle", "Karte ansehen"];
     if (storage.currentSettingRole === "rascal") settings = ["Robber", "Witch", "Troublemaker", "Drunk"];
+    if (storage.currentSettingRole === "oracle") settings = ["join_evil_team", "alien_exchange"];
     for (const setting of settings) {
         const div = document.createElement("div");
         div.setAttribute("class", "single-setting");

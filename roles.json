@@ -1,5 +1,10 @@
 [
   {
+    "name": "Oracle",
+    "germanName": "Orakel",
+    "edition": "Aliens"
+  },
+  {
     "name": "Copycat",
     "germanName": "Nachahmer",
     "edition": "Vampires"
