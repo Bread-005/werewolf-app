@@ -4,6 +4,7 @@ import {storage, buildWeightedActionPool} from "./storage.js";
 let selectedAnswer = null;
 let selectedEvilTeam = "";
 let selectedQuestion = null;
+let alienExchangeDecision = null;
 
 /**
  * Determines the evil team to substitute into the "join_evil_team" question, based on which
@@ -86,6 +87,7 @@ async function oracleQuestionEvaluation(nightPhaseText, oraclePicker) {
     }
     if (selectedQuestion.name === "alien_exchange") {
         await speak("./voices/oracle/answers/" + (answeredYes ? "alien_swap_yes" : "alien_swap_no") + ".mp3");
+        alienExchangeDecision = answeredYes;
     }
     await sleep(0.5);
 
@@ -94,4 +96,14 @@ async function oracleQuestionEvaluation(nightPhaseText, oraclePicker) {
     selectedQuestion = null;
 }
 
-export {oracleQuestionEvaluation, renderOraclePicker};
+/**
+ * Returns the Oracle's alien_exchange decision (true = forced swap, false = no swap,
+ * null = question was not asked) and resets it so it only applies to the next Alien phase.
+ */
+function consumeAlienExchangeDecision() {
+    const decision = alienExchangeDecision;
+    alienExchangeDecision = null;
+    return decision;
+}
+
+export {oracleQuestionEvaluation, renderOraclePicker, consumeAlienExchangeDecision};

@@ -3,7 +3,7 @@ import {cowAction} from "./cow.js";
 import {leaderAction} from "./leader.js";
 import {storage, saveLocalStorage, buildWeightedActionPool} from "./storage.js";
 import {nostradamusAction, renderNostradamusPicker} from "./nostradamus.js";
-import {oracleQuestionEvaluation, renderOraclePicker} from "./oracle.js";
+import {oracleQuestionEvaluation, renderOraclePicker, consumeAlienExchangeDecision} from "./oracle.js";
 let allRoles = [];
 let paused = false;
 let currentAudio = null;
@@ -227,10 +227,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.randomActions) {
                 const randomActions = buildWeightedActionPool(phase);
                 if (phase.name === "alien") {
-                    const randomAlienAction = randomActions.sort(() => Math.random() - 0.5)[0] || {
-                        name: "stare",
-                        text: ""
-                    };
+                    const alienExchangeDecision = consumeAlienExchangeDecision();
+                    let alienActionPool = randomActions;
+                    if (alienExchangeDecision === false) {
+                        alienActionPool = alienActionPool.filter(action => action.name !== "left" && action.name !== "right");
+                    }
+                    const randomAlienAction = alienExchangeDecision === true
+                        ? phase.randomActions.find(action => action.name === (Math.random() < 0.5 ? "left" : "right"))
+                        : alienActionPool.sort(() => Math.random() - 0.5)[0] || {
+                            name: "stare",
+                            text: ""
+                        };
                     if (randomAlienAction.name !== "stare" && randomAlienAction.name !== "view") {
                         nightPhaseText.textContent = randomAlienAction.text;
                         await speak("./voices/alien/random_actions/" + randomAlienAction.name + ".mp3");
