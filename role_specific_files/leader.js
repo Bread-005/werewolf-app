@@ -1,5 +1,5 @@
-import {speak} from "./main.js";
-import {storage} from "./storage.js";
+import {speak} from "../main.js";
+import {storage} from "../storage.js";
 
 async function leaderAction(nightPhaseText) {
 

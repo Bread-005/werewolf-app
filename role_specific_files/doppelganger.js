@@ -1,5 +1,5 @@
-import {allPhases, getGermanName, sleep, speak, waitCycle} from "./main.js";
-import {storage, buildWeightedActionPool} from "./storage.js";
+import {allPhases, getGermanName, sleep, speak, waitCycle, voicePath, roleVoiceName, speakText} from "../main.js";
+import {storage, buildWeightedActionPool} from "../storage.js";
 import {oracleQuestionEvaluation, renderOraclePicker} from "./oracle.js";
 
 async function doppelgangerVerboseText(nightPhaseText) {
@@ -26,7 +26,7 @@ async function doppelgangerVerboseText(nightPhaseText) {
         }
         nightPhaseText.textContent += nightRoles[i].germanName;
         if (i < nightRoles.length - 2) nightPhaseText.textContent += ", ";
-        await speak("./voices/" + nightRoles[i].name.toLowerCase().replaceAll(" ","_") + "/" + nightRoles[i].name.toLowerCase().replaceAll(" ","_") + ".mp3");
+        await speak(voicePath(roleVoiceName(nightRoles[i].name), roleVoiceName(nightRoles[i].name) + ".mp3"));
     }
     nightPhaseText.textContent += " Karte angesehen hast führe die Aktion jetzt durch.";
     await speak("./voices/doppelganger/verbose/last_part.mp3");
@@ -44,20 +44,20 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     nightPhaseImage.src = "./images/doppelganger.png";
     nightPhaseText.textContent = "Doppelgängerin, wenn du die " + getGermanName(phase.name) + " Karte angesehen hast, wach auf.";
     await speak("./voices/doppelganger/later_action/first_part.mp3");
-    await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
+    await speak(voicePath(phase.name, phase.name + ".mp3"));
     await speak("./voices/doppelganger/later_action/last_part.mp3");
     if (phase.name !== "renfield" && phase.name !== "leader" && phase.name !== "minion" && phase.name !== "apprentice_tanner" && phase.name !== "aura_seer" &&
         phase.name !== "curator" && phase.name !== "beholder" && phase.name !== "rascal") {
         nightPhaseText.textContent = phase.text;
-        await speak("./voices/" + phase.name + "/text.mp3");
+        await speakText(phase.name);
     }
     if (phase.name === "renfield") {
         nightPhaseText.textContent = phase.doppelganger.text;
-        await speak("./voices/" + phase.name + "/doppelganger_text.mp3");
+        await speak(voicePath(phase.name, "doppelganger_text.mp3"));
     }
     if (phase.name === "curator") {
         nightPhaseText.textContent = phase.doppelganger.text;
-        await speak("./voices/" + phase.name + "/doppelganger_text.mp3");
+        await speak(voicePath(phase.name, "doppelganger_text.mp3"));
     }
     if (phase.name === "beholder") {
         nightPhaseText.textContent = "Du darfst die Karten von den Spielern angucken, die ihre Daumen heben.";
@@ -68,7 +68,7 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
         if (phase.name === "rascal") {
             const randomRole = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
             nightPhaseText.textContent = allPhases.find(role => role.name === randomRole.name).text;
-            await speak("./voices/" + randomRole.name + "/text.mp3");
+            await speakText(randomRole.name);
         } else if (phase.name === "oracle") {
             await renderOraclePicker(phase);
         } else {

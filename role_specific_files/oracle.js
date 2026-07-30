@@ -1,5 +1,5 @@
-import {sleep, speak, waitCycle} from "./main.js";
-import {storage, buildWeightedActionPool} from "./storage.js";
+import {sleep, speak, waitCycle} from "../main.js";
+import {storage, buildWeightedActionPool} from "../storage.js";
 
 let selectedAnswer = null;
 let selectedEvilTeam = "";

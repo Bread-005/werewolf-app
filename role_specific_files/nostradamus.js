@@ -1,5 +1,5 @@
-import {getGermanName, sleep, speak} from "./main.js";
-import {storage} from "./storage.js";
+import {getGermanName, sleep, speak, voicePath, roleVoiceName} from "../main.js";
+import {storage} from "../storage.js";
 
 let selectedRole = null;
 
@@ -58,7 +58,7 @@ async function announceTeam(team, nightPhaseText) {
     nightPhaseText.textContent = "Nostradamus ist nun im " + teamGermanName + " Team.";
     await speak("./voices/nostradamus/nostradamus.mp3");
     await speak("./voices/nostradamus/first_part.mp3");
-    await speak("./voices/" + team.toLowerCase().replaceAll(" ", "_") + "/" + team.toLowerCase().replaceAll(" ", "_") + ".mp3");
+    await speak(voicePath(roleVoiceName(team), roleVoiceName(team) + ".mp3"));
     await speak("./voices/nostradamus/team.mp3");
     await sleep(0.5);
 }

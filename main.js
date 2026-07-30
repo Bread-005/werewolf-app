@@ -1,9 +1,10 @@
-import {doppelgangerExtraWake, doppelgangerVerboseText} from "./doppelganger.js";
-import {cowAction} from "./cow.js";
-import {leaderAction} from "./leader.js";
-import {storage, saveLocalStorage, buildWeightedActionPool} from "./storage.js";
-import {nostradamusAction, renderNostradamusPicker} from "./nostradamus.js";
-import {oracleQuestionEvaluation, renderOraclePicker, consumeAlienExchangeDecision} from "./oracle.js";
+import {doppelgangerExtraWake, doppelgangerVerboseText} from "./role_specific_files/doppelganger.js";
+import {cowAction} from "./role_specific_files/cow.js";
+import {leaderAction} from "./role_specific_files/leader.js";
+import {storage, saveLocalStorage, buildWeightedActionPool, defaultStorage, applyStorageDefaults} from "./storage.js";
+import {nostradamusAction, renderNostradamusPicker} from "./role_specific_files/nostradamus.js";
+import {oracleQuestionEvaluation, renderOraclePicker} from "./role_specific_files/oracle.js";
+import {alienRandomAction, alienGroobAndZerbAction} from "./role_specific_files/alien.js";
 let allRoles = [];
 let paused = false;
 let currentAudio = null;
@@ -12,64 +13,10 @@ let allPhases = [];
 document.addEventListener("DOMContentLoaded", async () => {
 
     if (!storage) {
-        const storage1 = {
-            activatedRoles: [],
-            enabledEditions: ["Werewolves"],
-            actionTime: 5,
-            votingTime: 300,
-            currentSettingRole: "",
-            alienRandomActionChances: {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0},
-            psychicRandomActionChances: {neighbor: 10, even_player: 10, odd_player: 10, not_neighbor: 10, any_player: 10, middle: 10},
-            morticianRandomActionChances: {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10},
-            body_snatcherRandomActionChances: {neighbor: 10, middle1: 5, middle2: 5, middle3: 5, even_player: 10, odd_player: 10, middle: 10},
-            rascalRandomActionChances: {robber: 10, witch: 10, troublemaker: 10, drunk: 10},
-            oracleRandomActionChances: {join_evil_team: 10, alien_exchange: 10, center_exchange: 10},
-            leaderKnowsEverything: false,
-            moveCard: true,
-            bodySnatcherViewsCard: true
-        }
-        localStorage.setItem("werewolf-app", JSON.stringify(storage1));
+        localStorage.setItem("werewolf-app", JSON.stringify(defaultStorage));
         window.location.reload();
-    }
-
-    if (!storage.enabledEditions) {
-        storage.enabledEditions = ["Werewolves"];
-        saveLocalStorage();
-    }
-
-    if (!storage.alienRandomActionChances) {
-        storage.alienRandomActionChances = {view: 10, stare: 10, timer: 10, left: 10, right: 10, show: 10, new_alien: 0};
-        saveLocalStorage();
-    }
-
-    if (!storage.psychicRandomActionChances) {
-        storage.psychicRandomActionChances = {neighbor: 10, even_player: 10, odd_player: 10, not_neighbor: 10, any_player: 10, middle: 10};
-        saveLocalStorage();
-    }
-
-    if (!storage.morticianRandomActionChances) {
-        storage.morticianRandomActionChances = {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10};
-        saveLocalStorage();
-    }
-
-    if (!storage.body_snatcherRandomActionChances) {
-        storage.body_snatcherRandomActionChances = {neighbor: 10, middle1: 5, middle2: 5, middle3: 5, even_player: 10, odd_player: 10, middle: 10};
-        saveLocalStorage();
-    }
-
-    if (!storage.rascalRandomActionChances) {
-        storage.rascalRandomActionChances = {robber: 10, witch: 10, troublemaker: 10, drunk: 10};
-        saveLocalStorage();
-    }
-
-    if (!storage.oracleRandomActionChances) {
-        storage.oracleRandomActionChances = {join_evil_team: 10, alien_exchange: 10, center_exchange: 10};
-        saveLocalStorage();
-    }
-
-    if (!storage.activatedRoles) {
-        storage.activatedRoles = [];
-        saveLocalStorage();
+    } else {
+        applyStorageDefaults();
     }
 
     const editions = document.querySelector(".editions");
@@ -193,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 nightPhaseText.textContent = "Alle Werwölfe außer dem Traumwolf, wacht auf. Traumwolf heb deinen Daumen.";
                 await speak("./voices/werewolf/dreamwolf_text.mp3");
             } else {
-                await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
+                await speak(voicePath(phase.name, phase.name + ".mp3"));
                 await speakSingularOrPlural(phase.isMultiple, "./voices/wake_up.mp3", "./voices/wake_up_multiple.mp3");
                 if (phase.name !== "leader" && phase.name !== "beholder" && phase.name !== "rascal") {
                     if (!phase.textWithMarks || !storage.activatedRoles.find(role => role.mark)) {
@@ -202,10 +149,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                             await speak("./voices/minion/text.mp3");
                             await speak("./voices/squire/squire.mp3");
                         }
-                        await speak("./voices/" + phase.name + "/" + "text.mp3");
+                        await speakText(phase.name);
                     } else {
                         nightPhaseText.textContent = phase.textWithMarks;
-                        await speak("./voices/" + phase.name + "/" + "textWithMarks.mp3");
+                        await speak(voicePath(phase.name, "textWithMarks.mp3"));
                     }
                 }
             }
@@ -221,36 +168,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.secondText) {
                 await sleep(1.5);
                 nightPhaseText.textContent = phase.secondText;
-                await speak("./voices/" + phase.name + "/second_text.mp3");
+                await speak(voicePath(phase.name, "second_text.mp3"));
             }
             if (phase.randomActions) {
                 const randomActions = buildWeightedActionPool(phase);
                 if (phase.name === "alien") {
-                    const alienExchangeDecision = consumeAlienExchangeDecision();
-                    let alienActionPool = randomActions;
-                    if (alienExchangeDecision === false) {
-                        alienActionPool = alienActionPool.filter(action => action.name !== "left" && action.name !== "right");
-                    }
-                    const randomAlienAction = alienExchangeDecision === true
-                        ? phase.randomActions.find(action => action.name === (Math.random() < 0.5 ? "left" : "right"))
-                        : alienActionPool.sort(() => Math.random() - 0.5)[0] || {
-                            name: "stare",
-                            text: ""
-                        };
-                    if (randomAlienAction.name !== "stare" && randomAlienAction.name !== "view") {
-                        nightPhaseText.textContent = randomAlienAction.text;
-                        await speak("./voices/alien/random_actions/" + randomAlienAction.name + ".mp3");
-                    }
-                    if (randomAlienAction.name === "view") {
-                        nightPhaseText.textContent = "Seht euch zusammen eine Karte an von ";
-                        const randomView = randomActions.find(action => action.name === "view").viewOptions.sort(() => Math.random() - 0.5)[0];
-                        nightPhaseText.textContent += randomView;
-                        await speak("./voices/alien/random_actions/view_first_part.mp3");
-                        await speak("./voices/random_cards/" + randomView + ".mp3");
-                    }
-                    if (randomAlienAction.name === "timer") {
-                        storage.votingTime = Math.round(storage.votingTime / 2);
-                    }
+                    await alienRandomAction(phase, nightPhaseText, randomActions);
                 } else if (phase.name === "oracle") {
                     await renderOraclePicker(phase);
                 } else {
@@ -262,7 +185,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     if (phase.name === "rascal") {
                         const randomRole = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
                         nightPhaseText.textContent = allPhases.find(role => role.name === randomRole.name).text;
-                        await speak("./voices/" + randomRole.name + "/text.mp3");
+                        await speakText(randomRole.name);
                     }
                 }
             }
@@ -271,7 +194,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (seerArray.length === 1) {
                     nightPhaseText.textContent = " " + storage.activatedRoles.find(role => role.name === seerArray[0])?.germanName + " heb deinen Daumen.";
                     nightPhaseText.textContent += " Betrachterin du darfst die Karte von dem Spieler angucken, der den Daumen hebt.";
-                    await speak("./voices/" + seerArray[0].toLowerCase().replaceAll(" ", "_") + "/" + seerArray[0].toLowerCase().replaceAll(" ", "_") + ".mp3");
+                    await speak(voicePath(roleVoiceName(seerArray[0]), roleVoiceName(seerArray[0]) + ".mp3"));
                     await speak("./voices/beholder/thumb_up.mp3");
                     await speak("./voices/beholder/beholder.mp3");
                     await speak("./voices/beholder/look_at_one.mp3");
@@ -280,7 +203,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     for (const seer of seerArray) {
                         const index = seerArray.indexOf(seer);
                         nightPhaseText.textContent += " " + storage.activatedRoles.find(role => role.name === seer)?.germanName;
-                        await speak("./voices/" + seer.toLowerCase().replaceAll(" ", "_") + "/" + seer.toLowerCase().replaceAll(" ", "_") + ".mp3");
+                        await speak(voicePath(roleVoiceName(seer), roleVoiceName(seer) + ".mp3"));
                         if (index + 1 < seerArray.length) {
                             nightPhaseText.textContent += " und";
                             await speak("./voices/beholder/and.mp3");
@@ -318,21 +241,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.name !== "assassin" || storage.activatedRoles.find(role => role.name === "Doppelganger")) {
                 nightPhaseImage.src = "./images/" + phase.name + ".png";
                 nightPhaseText.textContent = getGermanName(phase.name) + (phase.isMultiple ? " schließt eure" : " schließ deine") + " Augen.";
-                await speak("./voices/" + phase.name + "/" + phase.name + ".mp3");
+                await speak(voicePath(phase.name, phase.name + ".mp3"));
                 await speakSingularOrPlural(phase.isMultiple, "./voices/close_your_eyes.mp3", "./voices/close_your_eyes_multiple.mp3");
             }
             if (phase.name === "alien" && (storage.activatedRoles.find(role => role.name === "Groob") && storage.activatedRoles.find(role => role.name === "Zerb"))) {
-                nightPhaseImage.src = "./images/groob.png";
-                nightPhaseText.textContent = phase.groobAndZerb.text;
-                await speak("./voices/groob/text.mp3");
-                await waitCycle(phase, nightPhaseText);
-                nightPhaseText.textContent = phase.groobAndZerb.ending;
-                await speak("./voices/groob/ending.mp3");
+                await alienGroobAndZerbAction(phase, nightPhaseImage, nightPhaseText);
             }
             await doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText);
             if (phase.name === "renfield") {
                 nightPhaseText.textContent = "Vampire senkt eure Arme wieder.";
-                await speak("./voices/" + phase.name + "/ending.mp3");
+                await speak(voicePath(phase.name, "ending.mp3"));
             }
             if (phase.name === "minion" || phase.name === "squire") {
                 nightPhaseText.textContent = "Werwölfe senkt eure Daumen wieder.";
@@ -340,11 +258,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             if (phase.name === "leader" && !storage.leaderKnowsEverything) {
                 nightPhaseText.textContent = "Senkt alle eure Daumen und Hände wieder.";
-                await speak("./voices/" + phase.name + "/ending.mp3");
+                await speak(voicePath(phase.name, "ending.mp3"));
             }
             if (phase.name === "apprentice_tanner") {
                 nightPhaseText.textContent = "Gerber senk deinen Daumen wieder.";
-                await speak("./voices/" + phase.name + "/ending.mp3");
+                await speak(voicePath(phase.name, "ending.mp3"));
             }
             if (phase.name === "aura_seer" || phase.name === "beholder") {
                 nightPhaseText.textContent = "Senkt alle eure Daumen wieder.";
@@ -447,6 +365,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+function voicePath(folder, file) {
+    return "./voices/" + folder + "/" + file;
+}
+
+async function speakText(roleName) {
+    await speak(voicePath(roleName, "text.mp3"));
+}
+
+function roleVoiceName(displayName) {
+    return displayName.toLowerCase().replaceAll(" ", "_");
+}
+
 async function speak(filePath) {
     return new Promise(resolve => {
         const audio = new Audio(filePath);
@@ -522,4 +452,4 @@ function buildBlobInstruction(playerCount, neighborCount) {
     return options[Math.floor(Math.random() * options.length)];
 }
 
-export {speak, sleep, waitCycle, getGermanName, paused, allPhases};
+export {speak, sleep, waitCycle, getGermanName, paused, allPhases, voicePath, roleVoiceName, speakText};
