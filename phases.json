@@ -4,6 +4,18 @@
     "text": "Schließt nun alle eure Augen."
   },
   {
+    "name": "copycat",
+    "text": "Schau dir eine Karte aus der Mitte an. Du übernimmst nun diese Rolle. Wenn die Rolle aufgerufen wird, wach auf und führ die entsprechende Aktion durch."
+  },
+  {
+    "name": "sentinel",
+    "text": "Du darfst ein Schild auf die Karte eines anderen Spielers platzieren."
+  },
+  {
+    "name": "doppelganger",
+    "text": "Schau dir die Karte eines anderen Spielers an. Du nimmst nun diese Rolle an."
+  },
+  {
     "name": "oracle",
     "text": "Beantworte die folgende Frage.",
     "randomActions": [
@@ -23,19 +35,8 @@
           "Die Aliens behalten gleich ihre Karten."
         ]
       }
-    ]
-  },
-  {
-    "name": "copycat",
-    "text": "Schau dir eine Karte aus der Mitte an. Du übernimmst nun diese Rolle. Wenn die Rolle aufgerufen wird, wach auf und führ die entsprechende Aktion durch."
-  },
-  {
-    "name": "sentinel",
-    "text": "Du darfst ein Schild auf die Karte eines anderen Spielers platzieren."
-  },
-  {
-    "name": "doppelganger",
-    "text": "Schau dir die Karte eines anderen Spielers an. Du nimmst nun diese Rolle an."
+    ],
+    "doppelganger": {}
   },
   {
     "name": "vampire",
@@ -133,7 +134,8 @@
       {"name": "middle", "text": "der Mitte"}
     ],
     "view_card_text": "Sehe dir dann deine Karte an.",
-    "ending_text": "Deine neue Karte ist nun ein Alien."
+    "ending_text": "Deine neue Karte ist nun ein Alien.",
+    "doppelganger": {}
   },
   {
     "name": "werewolf",
@@ -226,7 +228,8 @@
   },
   {
     "name": "pickpocket",
-    "textWithMarks": "Du darfst deine Marke mit der eines anderen Spielers vertauschen. Sehe dir dann deine neue Marke an."
+    "textWithMarks": "Du darfst deine Marke mit der eines anderen Spielers vertauschen. Sehe dir dann deine neue Marke an.",
+    "doppelganger": {}
   },
   {
     "name": "troublemaker",

@@ -5,6 +5,8 @@ let selectedAnswer = null;
 let selectedEvilTeam = "";
 let selectedQuestion = null;
 let alienExchangeDecision = null;
+let alienExchangeAlreadyAsked = false;
+let doppelgangerOracleIsAnswering = false;
 
 /**
  * Determines the evil team to substitute into the "join_evil_team" question, based on which
@@ -30,7 +32,7 @@ function pickEvilTeam() {
 /**
  * Renders the Ja/Nein answer picker for a randomly, weight-based selected Oracle question.
  */
-async function renderOraclePicker(oraclePicker, phase) {
+async function renderOraclePicker(phase) {
     await sleep(0.5);
 
     selectedAnswer = null;
@@ -39,18 +41,24 @@ async function renderOraclePicker(oraclePicker, phase) {
     if (!storage.activatedRoles.find(role => role.name === "Synthetic Alien" || role.name === "Zerb" || role.name === "Groob" || role.name === "Body Snatcher")) {
         randomActions = randomActions.filter(action => action.name !== "alien_exchange");
     }
+    if (alienExchangeAlreadyAsked) {
+        randomActions = randomActions.filter(action => action.name !== "alien_exchange");
+    }
     selectedQuestion = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
+    if (selectedQuestion.name === "alien_exchange") {
+        alienExchangeAlreadyAsked = true;
+    }
 
-    oraclePicker.innerHTML = "";
+    document.querySelector(".oracle-picker").innerHTML = "";
 
     const questionText = document.createElement("div");
     questionText.classList.add("oracle-picker-question");
     questionText.textContent = selectedQuestion.question.replace("x", selectedEvilTeam);
-    oraclePicker.append(questionText);
+    document.querySelector(".oracle-picker").append(questionText);
 
     const answerContainer = document.createElement("div");
     answerContainer.classList.add("oracle-picker-answers");
-    oraclePicker.append(answerContainer);
+    document.querySelector(".oracle-picker").append(answerContainer);
 
     for (const answer of ["Ja", "Nein"]) {
         const button = document.createElement("button");
@@ -78,12 +86,19 @@ async function renderOraclePicker(oraclePicker, phase) {
 /**
  * Evaluates the Oracle's selected answer and announces the matching result text.
  */
-async function oracleQuestionEvaluation(nightPhaseText, oraclePicker) {
+async function oracleQuestionEvaluation(nightPhaseText) {
+    document.querySelector(".oracle-picker").innerHTML = "";
+
+    if (!selectedAnswer) {
+        if (Math.random() < 0.5) selectedAnswer = "Ja";
+        else selectedAnswer = "Nein";
+    }
+
     const answeredYes = selectedAnswer === "Ja";
     nightPhaseText.textContent = (answeredYes ? selectedQuestion.answers[0] : selectedQuestion.answers[1]).replace("x", selectedEvilTeam);
 
     if (selectedQuestion.name === "join_evil_team") {
-        await speak("./voices/oracle/answers/" + (answeredYes ? "werde " + selectedEvilTeam : "stay Oracle") + ".mp3");
+        await speak("./voices/oracle/answers/" + (answeredYes ? "werde " + selectedEvilTeam + (doppelgangerOracleIsAnswering ? " Doppelganger" : "") : (!doppelgangerOracleIsAnswering ? "stay Oracle" : "stay Doppelganger Oracle")) + ".mp3");
     }
     if (selectedQuestion.name === "alien_exchange") {
         await speak("./voices/oracle/answers/" + (answeredYes ? "alien_swap_yes" : "alien_swap_no") + ".mp3");
@@ -91,9 +106,9 @@ async function oracleQuestionEvaluation(nightPhaseText, oraclePicker) {
     }
     await sleep(0.5);
 
-    oraclePicker.innerHTML = "";
     selectedAnswer = null;
     selectedQuestion = null;
+    doppelgangerOracleIsAnswering = true;
 }
 
 /**

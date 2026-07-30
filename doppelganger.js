@@ -1,5 +1,6 @@
 import {allPhases, getGermanName, sleep, speak, waitCycle} from "./main.js";
 import {storage, buildWeightedActionPool} from "./storage.js";
+import {oracleQuestionEvaluation, renderOraclePicker} from "./oracle.js";
 
 async function doppelgangerVerboseText(nightPhaseText) {
     const nightRoles = storage.activatedRoles.filter(role => storage.activatedRoles.find(role1 => role1.name === "Doppelganger").verboseRoles.includes(role.name));
@@ -64,18 +65,22 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
     }
     if (phase.randomActions) {
         const randomActions = buildWeightedActionPool(phase);
-        if (phase.name !== "rascal") {
-            const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
-            nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
-            await speak("./voices/random_cards/" + randomAction.text + ".mp3");
-        }
         if (phase.name === "rascal") {
             const randomRole = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
             nightPhaseText.textContent = allPhases.find(role => role.name === randomRole.name).text;
             await speak("./voices/" + randomRole.name + "/text.mp3");
+        } else if (phase.name === "oracle") {
+            await renderOraclePicker(phase);
+        } else {
+            const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
+            nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
+            await speak("./voices/random_cards/" + randomAction.text + ".mp3");
         }
     }
     await waitCycle(phase, nightPhaseText);
+    if (phase.name === "oracle") {
+        await oracleQuestionEvaluation(nightPhaseText);
+    }
     nightPhaseText.textContent = "Doppelgängerin schließ deine Augen.";
     await speak("./voices/doppelganger/doppelganger.mp3");
     await speak("./voices/close_your_eyes.mp3");

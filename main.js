@@ -98,7 +98,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nightPhaseImage = document.querySelector(".image");
     const nightPhaseText = document.getElementById("night-phase-text");
     const nostradamusPicker = document.querySelector(".nostradamus-picker");
-    const oraclePicker = document.querySelector(".oracle-picker");
 
     document.querySelector(".start-button").addEventListener("click", async () => {
         let phases = [];
@@ -253,7 +252,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         storage.votingTime = Math.round(storage.votingTime / 2);
                     }
                 } else if (phase.name === "oracle") {
-                    await renderOraclePicker(oraclePicker, phase);
+                    await renderOraclePicker(phase);
                 } else {
                     if (phase.name !== "rascal") {
                         const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
@@ -314,7 +313,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await nostradamusAction(nightPhaseText, nostradamusPicker);
             }
             if (phase.name === "oracle") {
-                await oracleQuestionEvaluation(nightPhaseText, oraclePicker, phase);
+                await oracleQuestionEvaluation(nightPhaseText);
             }
             if (phase.name !== "assassin" || storage.activatedRoles.find(role => role.name === "Doppelganger")) {
                 nightPhaseImage.src = "./images/" + phase.name + ".png";
