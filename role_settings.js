@@ -25,7 +25,8 @@ const GERMAN_LABELS = {
     troublemaker: "Unruhestifter",
     drunk: "Betrunkener",
     join_evil_team: "Böses Team beitreten",
-    alien_exchange: "Alien-Austausch"
+    alien_exchange: "Alien-Kartentausch",
+    center_exchange: "Mitteltausch"
 };
 
 document.addEventListener("DOMContentLoaded", () => {

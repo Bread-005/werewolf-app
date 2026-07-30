@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             morticianRandomActionChances: {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10},
             body_snatcherRandomActionChances: {neighbor: 10, middle1: 5, middle2: 5, middle3: 5, even_player: 10, odd_player: 10, middle: 10},
             rascalRandomActionChances: {robber: 10, witch: 10, troublemaker: 10, drunk: 10},
-            oracleRandomActionChances: {join_evil_team: 10, alien_exchange: 10},
+            oracleRandomActionChances: {join_evil_team: 10, alien_exchange: 10, center_exchange: 10},
             leaderKnowsEverything: false,
             moveCard: true,
             bodySnatcherViewsCard: true
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     if (!storage.oracleRandomActionChances) {
-        storage.oracleRandomActionChances = {join_evil_team: 10, alien_exchange: 10};
+        storage.oracleRandomActionChances = {join_evil_team: 10, alien_exchange: 10, center_exchange: 10};
         saveLocalStorage();
     }
 

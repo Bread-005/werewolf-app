@@ -34,6 +34,14 @@
           "Die Aliens werden gleich gezwungen, ihre Karten, untereinander zu tauschen.",
           "Die Aliens behalten gleich ihre Karten."
         ]
+      },
+      {
+        "name": "center_exchange",
+        "question": "Möchtest du deine Karte mit einer aus der Mitte vertauschen?",
+        "answers": [
+          "Ok nur zu. Vertausche deine Karte mit einer aus der Mitte.",
+          "Du möchtest deine Karte behalten. Das kann ich verstehen."
+        ]
       }
     ],
     "doppelganger": {}

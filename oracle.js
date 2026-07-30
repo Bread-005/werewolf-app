@@ -1,4 +1,4 @@
-import {sleep, speak} from "./main.js";
+import {sleep, speak, waitCycle} from "./main.js";
 import {storage, buildWeightedActionPool} from "./storage.js";
 
 let selectedAnswer = null;
@@ -44,7 +44,7 @@ async function renderOraclePicker(phase) {
     if (alienExchangeAlreadyAsked) {
         randomActions = randomActions.filter(action => action.name !== "alien_exchange");
     }
-    selectedQuestion = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
+    selectedQuestion = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[2];
     if (selectedQuestion.name === "alien_exchange") {
         alienExchangeAlreadyAsked = true;
     }
@@ -81,6 +81,9 @@ async function renderOraclePicker(phase) {
     if (selectedQuestion.name === "alien_exchange") {
         await speak("./voices/oracle/questions/aliens_exchange_cards.mp3");
     }
+    if (selectedQuestion.name === "center_exchange") {
+        await speak("./voices/oracle/questions/center_exchange.mp3");
+    }
 }
 
 /**
@@ -101,8 +104,15 @@ async function oracleQuestionEvaluation(nightPhaseText) {
         await speak("./voices/oracle/answers/" + (answeredYes ? "werde " + selectedEvilTeam + (doppelgangerOracleIsAnswering ? " Doppelganger" : "") : (!doppelgangerOracleIsAnswering ? "stay Oracle" : "stay Doppelganger Oracle")) + ".mp3");
     }
     if (selectedQuestion.name === "alien_exchange") {
-        await speak("./voices/oracle/answers/" + (answeredYes ? "alien_swap_yes" : "alien_swap_no") + ".mp3");
+        await speak("./voices/oracle/answers/alien_swap_" + (answeredYes ? "yes" : "no") + ".mp3");
         alienExchangeDecision = answeredYes;
+    }
+    if (selectedQuestion.name === "center_exchange") {
+        await speak("./voices/oracle/answers/center_exchange_" + (answeredYes ? "yes" : "no") + ".mp3");
+
+        if (answeredYes) {
+            await waitCycle({name: "oracle"}, nightPhaseText);
+        }
     }
     await sleep(0.5);
 
