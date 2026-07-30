@@ -12,6 +12,7 @@ const defaultStorage = {
     body_snatcherRandomActionChances: {neighbor: 10, middle1: 5, middle2: 5, middle3: 5, even_player: 10, odd_player: 10, middle: 10},
     rascalRandomActionChances: {robber: 10, witch: 10, troublemaker: 10, drunk: 10},
     oracleRandomActionChances: {join_evil_team: 10, alien_exchange: 10, center_exchange: 10},
+    empathRandomActionChances: {winner: 10, trust: 10},
     leaderKnowsEverything: false,
     moveCard: true,
     bodySnatcherViewsCard: true

@@ -26,14 +26,16 @@ const GERMAN_LABELS = {
     drunk: "Betrunkener",
     join_evil_team: "Böses Team beitreten",
     alien_exchange: "Alien-Kartentausch",
-    center_exchange: "Mitteltausch"
+    center_exchange: "Mitteltausch",
+    winner: "Gewinner",
+    trust: "Vertrauen",
 };
 
 document.addEventListener("DOMContentLoaded", () => {
 
     const bigDiv = document.createElement("div");
     bigDiv.setAttribute("class","all-settings");
-    const randomActionRoles = ["alien", "psychic", "mortician", "body_snatcher", "rascal", "oracle"];
+    const randomActionRoles = ["alien", "psychic", "mortician", "body_snatcher", "rascal", "oracle", "empath"];
 
     let settings = [];
     if (randomActionRoles.includes(storage.currentSettingRole)) {

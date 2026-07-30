@@ -315,6 +315,15 @@
     "doppelganger": {}
   },
   {
+    "name": "empath",
+    "text": "Alle anderen Spieler zeigen nun, mit weiterhin geschlossenen Augen, auf einen Mitspieler.",
+    "randomActions": [
+      {"name": "winner", "text": "Zeigt alle auf einen Spieler, von dem ihr denkt, dass er dieses Spiel gewinnt."},
+      {"name": "trust", "text": "Zeigt alle auf einen Spieler, dem ihr vertraut."}
+    ],
+    "doppelganger": {}
+  },
+  {
     "name": "curator",
     "text": "Du darfst ein Artefakt auf die Karte eines Spielers legen.",
     "doppelganger": {

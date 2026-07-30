@@ -176,6 +176,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                     await alienRandomAction(phase, nightPhaseText, randomActions);
                 } else if (phase.name === "oracle") {
                     await renderOraclePicker(phase);
+                } else if (phase.name === "empath") {
+                    await sleep(0.5);
+                    const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
+                    nightPhaseText.textContent = nightPhaseText.textContent = randomAction.text;
+                    await speak("./voices/empath/" + randomAction.name + ".mp3");
                 } else {
                     if (phase.name !== "rascal") {
                         const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
@@ -267,6 +272,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (phase.name === "aura_seer" || phase.name === "beholder") {
                 nightPhaseText.textContent = "Senkt alle eure Daumen wieder.";
                 await speak("./voices/aura_seer/ending.mp3");
+            }
+            if (phase.name === "empath") {
+                nightPhaseText.textContent = "Senkt alle eure Hände wieder.";
+                await speak("./voices/empath/ending.mp3");
             }
             if (storage.activatedRoles.find(role => role.name === "Assassin") && phase.name === "apprentice_assassin") {
                 nightPhaseImage.src = "./images/assassin.png";

@@ -71,6 +71,10 @@ async function doppelgangerExtraWake(phase, nightPhaseImage, nightPhaseText) {
             await speakText(randomRole.name);
         } else if (phase.name === "oracle") {
             await renderOraclePicker(phase);
+        } else if (phase.name === "empath") {
+            const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
+            nightPhaseText.textContent = randomAction.text;
+            await speak("./voices/empath/" + randomAction.name + ".mp3");
         } else {
             const randomAction = randomActions.sort(() => Math.random() - 0.5)[0] || phase.randomActions[0];
             nightPhaseText.textContent = nightPhaseText.textContent += randomAction.text;
