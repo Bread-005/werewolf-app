@@ -169,6 +169,12 @@ button {
                     &.selected {
                         border-color: white;
                     }
+
+                    &.oracle-picker-button-number {
+                        font-size: 20px;
+                        padding: 15px 10px;
+                        width: 60px;
+                    }
                 }
             }
         }

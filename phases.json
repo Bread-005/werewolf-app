@@ -42,6 +42,14 @@
           "Ok nur zu. Vertausche deine Karte mit einer aus der Mitte.",
           "Du möchtest deine Karte behalten. Das kann ich verstehen."
         ]
+      },
+      {
+        "name": "guess_number",
+        "question": "An welche Nummer denke ich gerade?",
+        "answers": [
+          "Richtig! Du darfst dir eine Karte aus der Mitte und eine Karte von einem Spieler ansehen.",
+          "Falsch! Du bist eindeutig ein schreckliches Orakel. Für alle anderen haben sich die Siegbedingungen geändert: Ihr gewinnt, wenn das Orakel stirbt. Orakel, du gewinnst nur, wenn du nicht stirbst."
+        ]
       }
     ],
     "doppelganger": {}

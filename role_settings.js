@@ -27,6 +27,7 @@ const GERMAN_LABELS = {
     join_evil_team: "Böses Team beitreten",
     alien_exchange: "Alien-Kartentausch",
     center_exchange: "Mitteltausch",
+    guess_number: "Zahl erraten",
     winner: "Gewinner",
     trust: "Vertrauen",
     suspicious: "Verdächtig",
