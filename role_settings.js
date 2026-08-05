@@ -29,6 +29,17 @@ const GERMAN_LABELS = {
     center_exchange: "Mitteltausch",
     winner: "Gewinner",
     trust: "Vertrauen",
+    suspicious: "Verdächtig",
+    best_looking: "Bestes Aussehen",
+    best_smell: "Riecht am besten",
+    best_dressed: "Am schicksten gekleidet",
+    smartest: "Am schlausten",
+    funniest: "Am lustigsten",
+    friendliest: "Am freundlichsten",
+    most_liked: "Am beliebtesten",
+    most_pointed: "Meiste Zeigefinger",
+    least_pointed: "Wenigste Zeigefinger",
+    suspected_empath: "Vermuteter Empath"
 };
 
 document.addEventListener("DOMContentLoaded", () => {

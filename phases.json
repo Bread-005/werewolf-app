@@ -319,7 +319,18 @@
     "text": "Alle anderen Spieler zeigen nun, mit weiterhin geschlossenen Augen, auf einen Mitspieler.",
     "randomActions": [
       {"name": "winner", "text": "Zeigt alle auf einen Spieler, von dem ihr denkt, dass er dieses Spiel gewinnt."},
-      {"name": "trust", "text": "Zeigt alle auf einen Spieler, dem ihr vertraut."}
+      {"name": "trust", "text": "Zeigt alle auf einen Spieler, dem ihr vertraut."},
+      {"name": "suspicious", "text": "Zeigt alle auf einen Spieler, den ihr für am verdächtigsten haltet."},
+      {"name": "best_looking", "text": "Zeigt alle auf einen Spieler, der eurer Meinung nach am besten aussieht."},
+      {"name": "best_smell", "text": "Zeigt alle auf einen Spieler, der eurer Meinung nach am besten riecht."},
+      {"name": "best_dressed", "text": "Zeigt alle auf einen Spieler, der eurer Meinung nach am schicksten gekleidet ist."},
+      {"name": "smartest", "text": "Zeigt alle auf einen Spieler, den ihr für am schlausten haltet."},
+      {"name": "funniest", "text": "Zeigt alle auf einen Spieler, den ihr für am lustigsten haltet."},
+      {"name": "friendliest", "text": "Zeigt alle auf einen Spieler, den ihr für am freundlichsten haltet."},
+      {"name": "most_liked", "text": "Zeigt alle auf einen Spieler, den ihr am meisten mögt."},
+      {"name": "most_pointed", "text": "Zeigt alle auf einen Spieler, auf den eurer Meinung nach die meisten anderen zeigen werden."},
+      {"name": "least_pointed", "text": "Zeigt alle auf einen Spieler, auf den eurer Meinung nach sonst niemand zeigen wird."},
+      {"name": "suspected_empath", "text": "Zeigt alle auf einen Spieler, von dem ihr denkt, dass er der Empath ist."}
     ],
     "doppelganger": {}
   },
