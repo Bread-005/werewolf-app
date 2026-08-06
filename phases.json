@@ -50,6 +50,14 @@
           "Richtig! Du darfst dir eine Karte aus der Mitte und eine Karte von einem Spieler ansehen.",
           "Falsch! Du bist eindeutig ein schreckliches Orakel. Für alle anderen haben sich die Siegbedingungen geändert: Ihr gewinnt, wenn das Orakel stirbt. Orakel, du gewinnst nur, wenn du nicht stirbst."
         ]
+      },
+      {
+        "name": "even_or_odd",
+        "question": "Hast du eine gerade Nummer vor dir?",
+        "answers": [
+          "Das Orakel hat eine gerade Nummer vor sich.",
+          "Das Orakel hat eine ungerade Nummer vor sich."
+        ]
       }
     ],
     "doppelganger": {}

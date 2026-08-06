@@ -28,6 +28,7 @@ const GERMAN_LABELS = {
     alien_exchange: "Alien-Kartentausch",
     center_exchange: "Mitteltausch",
     guess_number: "Zahl erraten",
+    even_or_odd: "Gerade oder Ungerade",
     winner: "Gewinner",
     trust: "Vertrauen",
     suspicious: "Verdächtig",

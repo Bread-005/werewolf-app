@@ -11,7 +11,7 @@ const defaultStorage = {
     morticianRandomActionChances: {self: 10, left_neighbor: 10, right_neighbor: 10, neighbor: 10},
     body_snatcherRandomActionChances: {neighbor: 10, middle1: 5, middle2: 5, middle3: 5, even_player: 10, odd_player: 10, middle: 10},
     rascalRandomActionChances: {robber: 10, witch: 10, troublemaker: 10, drunk: 10},
-    oracleRandomActionChances: {join_evil_team: 10, alien_exchange: 10, center_exchange: 10, guess_number: 10},
+    oracleRandomActionChances: {join_evil_team: 10, alien_exchange: 10, center_exchange: 10, guess_number: 10, even_or_odd: 10},
     empathRandomActionChances: {
         winner: 10, trust: 10, suspicious: 10, best_looking: 10, best_smell: 10, best_dressed: 10,
         smartest: 10, funniest: 10, friendliest: 10, most_liked: 10, most_pointed: 10, least_pointed: 10,

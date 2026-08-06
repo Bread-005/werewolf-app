@@ -107,6 +107,9 @@ async function renderOraclePicker(phase) {
     if (selectedQuestion.name === "guess_number") {
         await speak("./voices/oracle/questions/guess_number.mp3");
     }
+    if (selectedQuestion.name === "even_or_odd") {
+        await speak("./voices/oracle/questions/even_or_odd.mp3");
+    }
 }
 
 /**
@@ -149,6 +152,9 @@ async function oracleQuestionEvaluation(nightPhaseText) {
             if (answeredYes) {
                 await waitCycle({name: "oracle"}, nightPhaseText);
             }
+        }
+        if (selectedQuestion.name === "even_or_odd") {
+            await speak("./voices/oracle/answers/" + (doppelgangerOracleIsAnswering ? "doppelganger_": "") + (answeredYes ? "even": "odd") + ".mp3");
         }
     }
     await sleep(0.5);
